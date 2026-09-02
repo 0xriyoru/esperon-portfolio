@@ -53,18 +53,19 @@ ALTER TABLE public.projects ENABLE ROW LEVEL SECURITY;
 CREATE POLICY "Allow public read access" ON public.projects
   FOR SELECT USING (true);
 
--- Insert dummy data matching product.md
+-- Insert real projects
 INSERT INTO public.projects (title, description, type, tags, status, domain, link) VALUES 
-('VINCULUM', 'Capstone Research Project.', 'RESEARCH', ARRAY['NEXT.JS', 'SUPABASE', 'TYPESCRIPT'], 'DEPLOYED', 'VINCULUM.APP', 'https://example.com'),
-('NETWORK TRAFFIC ANALYZER', 'Real-time packet inspection and anomaly detection.', 'CYBERSECURITY', ARRAY['PYTHON', 'AI', 'DASHBOARD'], 'TESTING', 'LOCAL_NETWORK', NULL),
-('AUTOMATED PEN-TESTING AGENT', 'LLM-driven agent for automated vulnerability scanning.', 'AI + CYBER', ARRAY['LLM', 'AGENT', 'SECURITY'], 'DEVELOPMENT', 'SANDBOX', NULL);
+('MEKAI', 'Manga and comic reading web platform with scanlation feeds and modern reader UI.', 'FULL-STACK / WEB APP', ARRAY['NEXT.JS', 'TYPESCRIPT', 'TAILWIND', 'VERCEL'], 'DEPLOYED', 'MEKAISCANS.VERCEL.APP', 'https://mekaiscans.vercel.app'),
+('SBMA-JO', 'Internal job order and property management system built for SBMA.', 'INTERNAL SYSTEM', ARRAY['REACT', 'NEXT.JS', 'SUPABASE', 'MANAGEMENT'], 'DEPLOYED', 'SBMA-JO.VERCEL.APP', 'https://sbma-jo.vercel.app'),
+('MAULAM', 'Smart meal planning and dish suggestion app based on available ingredients.', 'AI & MOBILE', ARRAY['AI', 'PYTHON', 'MOBILE', 'FOOD-TECH'], 'DEVELOPMENT', 'GITHUB.COM/0XRIYORU/MAULAM', 'https://github.com/0xriyoru/MaUlam'),
+('ARTNEST', 'Art showcase and creative community platform for digital artists and illustrators.', 'COMMUNITY PLATFORM', ARRAY['REACT', 'NEXT.JS', 'PORTFOLIO', 'VERCEL'], 'DEPLOYED', 'ART-NEST-UMBER.VERCEL.APP', 'https://art-nest-umber.vercel.app');
 
--- Create credentials table (Experience + Certifications)
+-- Create credentials table (Experience + Events)
 CREATE TABLE public.credentials (
   id uuid DEFAULT gen_random_uuid() PRIMARY KEY,
   title text NOT NULL,
   organization text NOT NULL,
-  type text NOT NULL, -- 'WORK', 'CERTIFICATION', 'EVENT'
+  type text NOT NULL, -- 'WORK', 'EVENT'
   date_range text NOT NULL,
   description text,
   created_at timestamp with time zone DEFAULT timezone('utc'::text, now()) NOT NULL
@@ -77,14 +78,12 @@ ALTER TABLE public.credentials ENABLE ROW LEVEL SECURITY;
 CREATE POLICY "Allow public read access" ON public.credentials
   FOR SELECT USING (true);
 
--- Insert dummy data matching product.md
+-- Insert real credentials (Experience & Hackathons)
 INSERT INTO public.credentials (title, organization, type, date_range, description) VALUES
 ('IT Intern (Procurement and Property Management)', 'Subic Bay Metropolitan Authority (SBMA)', 'WORK', 'May 2026 - Sep 2026', 'Inventory management and cycle counting.'),
 ('Participant', 'AWS Community Day Philippines - Metro Manila', 'EVENT', 'Aug 2026', 'Attended cloud architecture and deployment sessions.'),
 ('Participant', 'Voices of AI - Angeles City', 'EVENT', 'Aug 2026', 'Explored agentic AI and LLM integrations.'),
-('Participant', 'eGovHackathon 2026 - SMX Convention Center', 'EVENT', 'Jul 2026', 'Developed a civic-tech AI solution.'),
-('ISC2 Candidate', 'ISC2', 'CERTIFICATION', 'Current', 'Pursuing official cybersecurity certification.'),
-('Google Cyber Cert', 'Google', 'CERTIFICATION', 'Completed', 'Foundational cybersecurity principles and tools.');
+('Participant', 'eGovHackathon 2026 - SMX Convention Center', 'EVENT', 'Jul 2026', 'Developed a civic-tech AI solution.');
 
 -- Create skills table
 CREATE TABLE public.skills (
@@ -101,7 +100,7 @@ ALTER TABLE public.skills ENABLE ROW LEVEL SECURITY;
 CREATE POLICY "Allow public read access" ON public.skills
   FOR SELECT USING (true);
 
--- Insert dummy data matching the screenshot style and product.md vibe
+-- Insert skills data
 INSERT INTO public.skills (category, skill_list) VALUES
 ('DEVELOPER TOOLS', ARRAY['GitHub', 'Docker', 'VS Code', 'Postman']),
 ('AI & AUTOMATION', ARRAY['OpenAI API', 'LangChain', 'n8n', 'Codex']),

@@ -40,15 +40,18 @@ export default function Home() {
           BSIT Student at Lyceum of Subic Bay. Building intelligent systems and securing them.
           Transitioning into advanced cybersecurity and agentic AI.
         </p>
-        <div className="flex flex-wrap gap-4 font-mono text-sm">
-          <div className="px-3 py-1 bg-secondary border border-border-subtle rounded-md text-accent-yellow shadow-[0_0_10px_rgba(252,238,9,0.1)]">
+        <div className="flex flex-wrap gap-3 font-mono text-xs">
+          <div className="px-3 py-1 bg-secondary border border-border-subtle rounded-md text-accent-yellow shadow-[0_0_10px_rgba(252,238,9,0.1)] flex items-center gap-2">
+            <span className="w-1.5 h-1.5 rounded-full bg-accent-yellow" />
             Hackathons: 3+
           </div>
-          <div className="px-3 py-1 bg-secondary border border-border-subtle rounded-md text-accent-cyan shadow-[0_0_10px_rgba(0,240,255,0.1)]">
-            ISC2 Candidate
+          <div className="px-3 py-1 bg-secondary border border-border-subtle rounded-md text-accent-cyan shadow-[0_0_10px_rgba(0,240,255,0.1)] flex items-center gap-2">
+            <span className="w-1.5 h-1.5 rounded-full bg-accent-cyan" />
+            Full-Stack & Systems
           </div>
-          <div className="px-3 py-1 bg-secondary border border-border-subtle rounded-md text-accent-pink shadow-[0_0_10px_rgba(255,0,60,0.1)]">
-            Google Cyber Cert
+          <div className="px-3 py-1 bg-secondary border border-border-subtle rounded-md text-accent-pink shadow-[0_0_10px_rgba(255,0,60,0.1)] flex items-center gap-2">
+            <span className="w-1.5 h-1.5 rounded-full bg-accent-pink" />
+            Agentic AI & Cybersecurity
           </div>
         </div>
       </section>
