@@ -65,11 +65,11 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Action Buttons */}
-            <div className="flex flex-wrap items-center gap-4 font-mono">
+            {/* Action Buttons Trio */}
+            <div className="flex flex-wrap sm:flex-nowrap items-center gap-3 font-mono pt-1 w-full max-w-xl">
               <a
                 href="#projects"
-                className="bg-accent-cyan text-main font-bold px-6 py-3 text-xs md:text-sm hover:bg-accent-yellow transition-colors cyber-button flex items-center gap-2 active:scale-95 shadow-[0_0_15px_rgba(0,240,255,0.2)]"
+                className="flex-1 min-w-[140px] bg-accent-cyan text-main font-bold px-4 py-3 text-xs md:text-sm hover:bg-accent-yellow transition-all cyber-button flex items-center justify-center gap-1.5 active:scale-95 shadow-[0_0_15px_rgba(0,240,255,0.25)] whitespace-nowrap"
               >
                 <span>EXPLORE PROJECTS</span>
                 <span>↗</span>
@@ -78,34 +78,56 @@ export default function Home() {
                 href="/cv.html"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="border border-accent-cyan/50 bg-secondary text-accent-cyan px-6 py-3 text-xs md:text-sm hover:border-accent-yellow hover:text-accent-yellow transition-colors cyber-button active:scale-95 flex items-center gap-2"
+                className="flex-1 min-w-[140px] border border-accent-cyan/50 bg-secondary text-accent-cyan px-4 py-3 text-xs md:text-sm hover:border-accent-yellow hover:text-accent-yellow transition-all cyber-button active:scale-95 flex items-center justify-center gap-1.5 whitespace-nowrap"
               >
                 <span>VIEW CV / RESUME</span>
                 <span>↗</span>
               </a>
               <a
                 href="#contact"
-                className="border border-border-subtle bg-secondary text-primary px-6 py-3 text-xs md:text-sm hover:border-accent-cyan hover:text-accent-cyan transition-colors cyber-button active:scale-95"
+                className="flex-1 min-w-[130px] border border-border-subtle bg-secondary text-primary px-4 py-3 text-xs md:text-sm hover:border-accent-pink hover:text-accent-pink transition-all cyber-button active:scale-95 flex items-center justify-center whitespace-nowrap"
               >
-                TRANSMIT MESSAGE
+                <span>TRANSMIT MESSAGE</span>
               </a>
             </div>
           </div>
 
-          {/* Right Column: Floating Cyberpunk HUD Portrait */}
-          <div className="relative shrink-0 mx-auto lg:mx-0 flex items-center justify-center">
-            {/* Outer Orbit HUD Ring */}
-            <div className="absolute w-64 sm:w-72 h-64 sm:h-72 rounded-full border border-border-subtle pointer-events-none" />
-            <div className="absolute w-72 sm:w-80 h-72 sm:h-80 rounded-full border border-accent-cyan/20 border-dashed pointer-events-none animate-[spin_80s_linear_infinite]" />
+          {/* Right Column: Floating Cyberpunk HUD Portrait with Visible Glowing Orbit Rings */}
+          <div className="relative shrink-0 mx-auto lg:mx-0 flex items-center justify-center py-6 px-6">
+            {/* Ambient Radial Glow */}
+            <div className="absolute w-64 sm:w-80 h-64 sm:h-80 rounded-full bg-accent-cyan/15 blur-3xl pointer-events-none -z-10" />
+
+            {/* Target Laser Crosshairs */}
+            <div className="absolute w-[340px] sm:w-[420px] h-[1px] bg-gradient-to-r from-transparent via-accent-cyan/30 to-transparent pointer-events-none" />
+            <div className="absolute h-[340px] sm:h-[420px] w-[1px] bg-gradient-to-b from-transparent via-accent-cyan/30 to-transparent pointer-events-none" />
+
+            {/* Inner Ring: Concentric Stationary HUD Circle */}
+            <div className="absolute w-[260px] sm:w-[310px] h-[260px] sm:h-[310px] rounded-full border border-border-subtle/80 pointer-events-none" />
+
+            {/* Middle Ring: Active Spinning Dashed Cyan Ring with Orbital Nodes */}
+            <div className="absolute w-[310px] sm:w-[370px] h-[310px] sm:h-[370px] rounded-full border-2 border-accent-cyan/50 border-dashed pointer-events-none animate-[spin_30s_linear_infinite] shadow-[0_0_15px_rgba(0,240,255,0.2)]">
+              {/* Glowing Orbital Node 1 (North) */}
+              <div className="absolute -top-1.5 left-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-accent-cyan shadow-[0_0_10px_rgba(0,240,255,1)]" />
+              {/* Glowing Orbital Node 2 (South) */}
+              <div className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-2.5 h-2.5 rounded-full bg-accent-yellow shadow-[0_0_10px_rgba(252,238,9,1)]" />
+            </div>
+
+            {/* Outer Ring: Reverse Spinning Dotted Ring with Accent Markers */}
+            <div className="absolute w-[360px] sm:w-[430px] h-[360px] sm:h-[430px] rounded-full border border-accent-yellow/35 border-dotted pointer-events-none animate-[spin_55s_linear_infinite_reverse]">
+              {/* Glowing Orbital Node 3 (West) */}
+              <div className="absolute top-1/2 -left-1.5 -translate-y-1/2 w-2.5 h-2.5 rounded-full bg-accent-pink shadow-[0_0_8px_rgba(255,0,60,1)]" />
+              {/* Glowing Orbital Node 4 (East) */}
+              <div className="absolute top-1/2 -right-1.5 -translate-y-1/2 w-2 h-2 rounded-full bg-accent-cyan shadow-[0_0_8px_rgba(0,240,255,1)]" />
+            </div>
 
             {/* Operator Badge on top */}
-            <div className="absolute -top-3 left-4 bg-secondary border border-border-subtle px-2.5 py-0.5 font-mono text-[9px] text-accent-cyan tracking-widest z-20 flex items-center gap-1.5 shadow-[0_0_8px_rgba(0,240,255,0.2)]">
-              <span className="w-1.5 h-1.5 bg-accent-cyan rounded-full" />
+            <div className="absolute -top-1 left-4 bg-secondary border border-border-subtle px-2.5 py-0.5 font-mono text-[9px] text-accent-cyan tracking-widest z-20 flex items-center gap-1.5 shadow-[0_0_8px_rgba(0,240,255,0.2)]">
+              <span className="w-1.5 h-1.5 bg-accent-cyan rounded-full animate-pulse" />
               OPERATOR // 0XRIYORU
             </div>
 
             {/* Portrait Image Container */}
-            <div className="relative w-52 sm:w-60 h-60 sm:h-72 border-2 border-border-subtle bg-secondary cyber-card overflow-hidden z-10 group shadow-[0_0_30px_rgba(0,0,0,0.6)]">
+            <div className="relative w-52 sm:w-60 h-60 sm:h-72 border-2 border-border-subtle bg-secondary cyber-card overflow-hidden z-10 group shadow-[0_0_30px_rgba(0,0,0,0.8)]">
               <Image
                 src="/profile.png"
                 alt="Rhodge Esperon"
@@ -121,7 +143,8 @@ export default function Home() {
             </div>
 
             {/* Status Metric Badge */}
-            <div className="absolute -bottom-3 right-4 bg-main border border-border-subtle px-2.5 py-0.5 font-mono text-[9px] text-muted tracking-wider z-20">
+            <div className="absolute -bottom-1 right-4 bg-main border border-border-subtle px-2.5 py-0.5 font-mono text-[9px] text-muted tracking-wider z-20 flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-accent-cyan animate-pulse" />
               STATUS: ONLINE & READY
             </div>
           </div>
