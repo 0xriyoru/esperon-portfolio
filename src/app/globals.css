@@ -1,24 +1,50 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-main: #050505;
-  --color-secondary: #121212;
-  --color-primary: #E0E0E0;
-  --color-muted: #888888;
-  --color-accent-yellow: #FCEE09;
-  --color-accent-cyan: #00F0FF;
-  --color-accent-pink: #FF003C;
-  --color-border-subtle: #222222;
+  --color-main: var(--theme-main);
+  --color-secondary: var(--theme-secondary);
+  --color-primary: var(--theme-primary);
+  --color-muted: var(--theme-muted);
+  --color-accent-yellow: var(--theme-accent-yellow);
+  --color-accent-cyan: var(--theme-accent-cyan);
+  --color-accent-pink: var(--theme-accent-pink);
+  --color-border-subtle: var(--theme-border-subtle);
 
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-jetbrains-mono), ui-monospace, SFMono-Regular, monospace;
 }
 
-@layer base {
-  :root {
-    --background: var(--color-main);
-    --foreground: var(--color-primary);
-  }
+:root {
+  --theme-main: #050505;
+  --theme-secondary: #101010;
+  --theme-primary: #E0E0E0;
+  --theme-muted: #888888;
+  --theme-border-subtle: #222222;
+  --theme-accent-yellow: #FCEE09;
+  --theme-accent-cyan: #00F0FF;
+  --theme-accent-pink: #FF003C;
+}
+
+html.light {
+  --theme-main: #EFEFE9;
+  --theme-secondary: #E3E3DC;
+  --theme-primary: #121212;
+  --theme-muted: #62625C;
+  --theme-border-subtle: #CBCBC2;
+  --theme-accent-yellow: #997A00;
+  --theme-accent-cyan: #008291;
+  --theme-accent-pink: #C4002F;
+}
+
+html.dark {
+  --theme-main: #050505;
+  --theme-secondary: #101010;
+  --theme-primary: #E0E0E0;
+  --theme-muted: #888888;
+  --theme-border-subtle: #222222;
+  --theme-accent-yellow: #FCEE09;
+  --theme-accent-cyan: #00F0FF;
+  --theme-accent-pink: #FF003C;
 }
 
 @layer utilities {
@@ -27,14 +53,14 @@
       to bottom,
       rgba(255,255,255,0),
       rgba(255,255,255,0) 50%,
-      rgba(0,0,0,0.1) 50%,
-      rgba(0,0,0,0.1)
+      rgba(0,0,0,0.06) 50%,
+      rgba(0,0,0,0.06)
     );
     background-size: 100% 4px;
   }
   
   .bg-dot-grid {
-    background-image: radial-gradient(var(--color-border-subtle) 1px, transparent 1px);
+    background-image: radial-gradient(var(--theme-border-subtle) 1px, transparent 1px);
     background-size: 20px 20px;
   }
 
@@ -44,9 +70,9 @@
 }
 
 @keyframes glitch-anim {
-  0% { text-shadow: 2px 0 var(--color-accent-yellow), -2px 0 var(--color-accent-cyan); }
-  50% { text-shadow: -2px 0 var(--color-accent-pink), 2px 0 var(--color-accent-yellow); }
-  100% { text-shadow: 2px 0 var(--color-accent-cyan), -2px 0 var(--color-accent-pink); }
+  0% { text-shadow: 2px 0 var(--theme-accent-yellow), -2px 0 var(--theme-accent-cyan); }
+  50% { text-shadow: -2px 0 var(--theme-accent-pink), 2px 0 var(--theme-accent-yellow); }
+  100% { text-shadow: 2px 0 var(--theme-accent-cyan), -2px 0 var(--theme-accent-pink); }
 }
 
 @keyframes cyber-slice {
@@ -58,60 +84,18 @@
   100% { clip-path: inset(0 0 0 0); transform: translateY(0); }
 }
 
-@keyframes cyber-glitch-1 {
-  0% { clip-path: inset(20% 0 80% 0); transform: translate(-2px, 2px); }
-  20% { clip-path: inset(60% 0 10% 0); transform: translate(2px, -2px); }
-  40% { clip-path: inset(40% 0 50% 0); transform: translate(-2px, 1px); }
-  60% { clip-path: inset(80% 0 5% 0); transform: translate(2px, -1px); }
-  80% { clip-path: inset(10% 0 70% 0); transform: translate(-1px, 2px); }
-  100% { clip-path: inset(30% 0 50% 0); transform: translate(1px, -2px); }
-}
-
 @layer utilities {
-  .cyber-glitch-overlay {
-    position: absolute;
-    inset: 0;
-    background: var(--color-main);
-    opacity: 0;
-    pointer-events: none;
-  }
-  
   .cyber-button {
     clip-path: polygon(15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%, 0 15px);
   }
   
   .cyber-card {
-    clip-path: polygon(30px 0, 100% 0, 100% calc(100% - 30px), calc(100% - 30px) 100%, 0 100%, 0 30px);
-  }
-
-  .cyber-glitch-text {
-    position: relative;
-    display: inline-block;
-  }
-  .cyber-glitch-text::before,
-  .cyber-glitch-text::after {
-    content: attr(data-text);
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: transparent;
-    pointer-events: none;
-  }
-  .cyber-glitch-text::before {
-    left: 2px;
-    text-shadow: -2px 0 var(--color-accent-pink);
-    animation: cyber-glitch-1 2s infinite linear alternate-reverse;
-  }
-  .cyber-glitch-text::after {
-    left: -2px;
-    text-shadow: -2px 0 var(--color-accent-cyan);
-    animation: cyber-glitch-1 3s infinite linear alternate-reverse;
+    clip-path: polygon(24px 0, 100% 0, 100% calc(100% - 24px), calc(100% - 24px) 100%, 0 100%, 0 24px);
   }
 }
 
 body {
-  background-color: var(--color-main);
-  color: var(--color-primary);
+  background-color: var(--theme-main);
+  color: var(--theme-primary);
+  transition: background-color 0.2s ease, color 0.2s ease;
 }

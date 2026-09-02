@@ -32,34 +32,62 @@ export default function Skills() {
     }
 
     fetchSkills();
+
+    // Listen to real-time database changes
+    const channel = supabase
+      .channel("skills-realtime")
+      .on(
+        "postgres_changes",
+        { event: "*", schema: "public", table: "skills" },
+        () => {
+          fetchSkills();
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
   }, []);
 
   return (
     <div className="w-full">
       {loading ? (
-        <div className="font-mono text-accent-cyan animate-pulse">&gt; QUERYING SKILLS SCHEMA...</div>
+        <div className="font-mono text-accent-cyan animate-pulse py-8">&gt; QUERYING SKILLS SCHEMA...</div>
       ) : skills.length === 0 ? (
-        <div className="font-mono text-accent-pink cyber-glitch-text" data-text="NO SKILLS DATA FOUND">NO SKILLS DATA FOUND</div>
+        <div className="font-mono text-muted p-8 border border-border-subtle bg-secondary text-center">
+          No skills data loaded from database.
+        </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
           {skills.map((group, i) => (
             <motion.div
               key={group.id}
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.3, delay: i * 0.1 }}
-              className="border border-border-subtle bg-main p-6 cyber-card group hover:border-accent-cyan transition-colors"
+              transition={{ duration: 0.3, delay: i * 0.08 }}
+              className="border border-border-subtle bg-secondary p-6 cyber-card group hover:border-accent-cyan transition-all duration-200"
             >
-              <div className="flex items-center gap-2 mb-4">
-                <span className="text-xs text-muted font-mono">{String(i + 1).padStart(2, '0')}</span>
-                <h3 className="font-bold text-lg group-hover:text-accent-cyan transition-colors">{group.category}</h3>
+              {/* Category Header */}
+              <div className="flex items-center justify-between border-b border-border-subtle pb-3 mb-4 font-mono">
+                <div className="flex items-center gap-2.5">
+                  <span className="text-[10px] text-accent-yellow font-bold">
+                    [{String(i + 1).padStart(2, "0")}]
+                  </span>
+                  <h3 className="font-bold text-sm tracking-wide text-primary group-hover:text-accent-cyan transition-colors uppercase">
+                    {group.category}
+                  </h3>
+                </div>
+                <span className="text-[10px] text-muted">{group.skill_list.length} MODULES</span>
               </div>
+
+              {/* Skills Tags Grid */}
               <div className="flex flex-wrap gap-2">
                 {group.skill_list.map((skill, j) => (
-                  <span 
-                    key={j} 
-                    className="text-xs font-mono border border-border-subtle bg-secondary px-3 py-1 hover:border-accent-yellow hover:text-accent-yellow transition-colors cursor-default"
+                  <span
+                    key={j}
+                    className="text-xs font-mono border border-border-subtle bg-main px-3 py-1.5 text-muted hover:text-accent-cyan hover:border-accent-cyan/50 hover:bg-accent-cyan/5 transition-colors cursor-default"
                   >
                     {skill}
                   </span>

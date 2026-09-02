@@ -3,31 +3,65 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-const bootMessages = [
-  "BREACHING MAINFRAME...",
-  "BYPASSING ICE PROTOCOLS...",
-  "DECRYPTING NEURAL LINK...",
-  "SYNCING BIOMETRICS...",
-  "ACCESS GRANTED"
+const bootLogs = [
+  "INITIALIZING NEURAL KERNEL [BUILD_v4.8]...",
+  "VERIFYING CRYPTOGRAPHIC HANDSHAKE...",
+  "MOUNTING REPOSITORY SCHEMAS & DATABASE...",
+  "SYNCING OPERATOR TELEMETRY // 0XRIYORU",
+  "ESTABLISHING SECURE REALTIME WEBSOCKETS...",
+  "SYSTEM MOUNTED. ACCESS GRANTED."
 ];
 
 export default function BootSequence({ children }: { children: React.ReactNode }) {
   const [loading, setLoading] = useState(true);
-  const [messageIndex, setMessageIndex] = useState(0);
+  const [progress, setProgress] = useState(0);
+  const [logIndex, setLogIndex] = useState(0);
 
   useEffect(() => {
-    let index = 0;
-    const interval = setInterval(() => {
-      index++;
-      if (index < bootMessages.length) {
-        setMessageIndex(index);
+    // Early theme application to match system or stored preference immediately
+    const savedTheme = localStorage.getItem("theme") || "auto";
+    const root = document.documentElement;
+    if (savedTheme === "light") {
+      root.classList.add("light");
+      root.classList.remove("dark");
+    } else if (savedTheme === "dark") {
+      root.classList.add("dark");
+      root.classList.remove("light");
+    } else {
+      const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      if (isDark) {
+        root.classList.add("dark");
+        root.classList.remove("light");
       } else {
-        clearInterval(interval);
-        setTimeout(() => setLoading(false), 800);
+        root.classList.add("light");
+        root.classList.remove("dark");
       }
-    }, 400);
+    }
 
-    return () => clearInterval(interval);
+    // Smooth sequence (~2.2 seconds total)
+    const timeline = [
+      { p: 12, delay: 250, log: 0 },
+      { p: 34, delay: 600, log: 1 },
+      { p: 58, delay: 1050, log: 2 },
+      { p: 78, delay: 1500, log: 3 },
+      { p: 92, delay: 1850, log: 4 },
+      { p: 100, delay: 2200, log: 5 },
+    ];
+
+    const timers: NodeJS.Timeout[] = [];
+
+    timeline.forEach(({ p, delay, log }) => {
+      const timer = setTimeout(() => {
+        setProgress(p);
+        setLogIndex(log);
+        if (p === 100) {
+          setTimeout(() => setLoading(false), 450);
+        }
+      }, delay);
+      timers.push(timer);
+    });
+
+    return () => timers.forEach(clearTimeout);
   }, []);
 
   return (
@@ -37,83 +71,76 @@ export default function BootSequence({ children }: { children: React.ReactNode }
           <motion.div
             key="boot-screen"
             initial={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-[#FCEE09] text-main font-mono overflow-hidden"
+            exit={{ opacity: 0, filter: "blur(12px)", scale: 1.02 }}
+            transition={{ duration: 0.5, ease: "easeInOut" }}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-main text-primary font-mono overflow-hidden"
           >
-            {/* Aggressive background glitch lines */}
-            <motion.div 
-              animate={{ 
-                top: ["-10%", "110%", "50%", "110%", "-10%"],
-                opacity: [0, 0.5, 0.8, 0, 0.5]
-              }}
-              transition={{ repeat: Infinity, duration: 1.5, ease: "linear", times: [0, 0.4, 0.5, 0.9, 1] }}
-              className="absolute left-0 w-full h-32 bg-gradient-to-b from-transparent via-black/20 to-transparent pointer-events-none mix-blend-overlay"
-            />
-            
-            <div className="flex flex-col items-start max-w-lg w-full px-8 relative z-10">
-              <motion.div 
-                initial={{ scaleY: 0 }}
-                animate={{ scaleY: 1 }}
-                className="mb-8 font-black text-6xl tracking-tighter"
-              >
-                <div className="cyber-glitch-text block" data-text="SYSTEM">SYSTEM</div>
-                <div className="cyber-glitch-text block" data-text="OVERRIDE">OVERRIDE</div>
-              </motion.div>
-              
-              <div className="space-y-1 w-full bg-main text-[#FCEE09] p-6 cyber-card">
-                {bootMessages.slice(0, messageIndex + 1).map((msg, i) => {
-                  const isLast = i === bootMessages.length - 1;
-                  return (
-                    <motion.div
-                      key={i}
-                      initial={{ opacity: 0, x: -20, filter: "blur(4px)" }}
-                      animate={{ 
-                        opacity: 1, 
-                        x: 0, 
-                        filter: "blur(0px)",
-                        clipPath: isLast 
-                          ? ["inset(0 0 100% 0)", "inset(40% 0 10% 0)", "inset(10% 0 80% 0)", "inset(0 0 0 0)"]
-                          : "inset(0 0 0 0)"
-                      }}
-                      transition={{ 
-                        duration: isLast ? 0.4 : 0.1, 
-                        times: isLast ? [0, 0.3, 0.6, 1] : undefined 
-                      }}
-                      className={`text-lg font-bold tracking-widest ${
-                        isLast 
-                          ? 'text-[#00F0FF] text-xl mt-4 bg-main p-2 inline-block shadow-[4px_0_0_#FF003C,-4px_0_0_#00F0FF]' 
-                          : ''
+            {/* Ambient Background Grid & Scanlines */}
+            <div className="absolute inset-0 bg-scanlines bg-dot-grid opacity-60 pointer-events-none" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-accent-cyan/10 rounded-full blur-[140px] pointer-events-none" />
+
+            {/* Central High-Tech Terminal Container */}
+            <div className="relative z-10 w-full max-w-lg mx-6 p-6 sm:p-8 border border-border-subtle bg-secondary/95 cyber-card shadow-[0_0_60px_rgba(0,0,0,0.4)]">
+              {/* Header Telemetry */}
+              <div className="flex items-center justify-between border-b border-border-subtle pb-4 mb-6 text-xs text-muted">
+                <div className="flex items-center gap-2.5">
+                  <span className="w-2.5 h-2.5 rounded-full bg-accent-cyan animate-pulse shadow-[0_0_10px_rgba(0,240,255,0.9)]" />
+                  <span className="text-primary font-bold tracking-wider">NODE // 0XRIYORU</span>
+                </div>
+                <span className="text-[10px] text-accent-yellow font-bold tracking-widest px-2 py-0.5 border border-accent-yellow/30 bg-accent-yellow/10">
+                  BOOT_SEQ // v4.8
+                </span>
+              </div>
+
+              {/* Status & Progress Percentage */}
+              <div className="flex justify-between items-end mb-2.5 text-xs font-mono">
+                <span className="text-accent-cyan font-bold flex items-center gap-1.5 truncate max-w-[320px]">
+                  <span>&gt;</span>
+                  <span className="truncate">{bootLogs[logIndex]}</span>
+                </span>
+                <span className="text-primary font-bold text-base tracking-wider">{progress}%</span>
+              </div>
+
+              {/* Futuristic Cyber Progress Bar */}
+              <div className="w-full h-2.5 bg-main border border-border-subtle p-0.5 overflow-hidden mb-6">
+                <motion.div
+                  className="h-full bg-accent-cyan shadow-[0_0_14px_rgba(0,240,255,0.9)]"
+                  initial={{ width: "0%" }}
+                  animate={{ width: `${progress}%` }}
+                  transition={{ ease: "easeOut", duration: 0.3 }}
+                />
+              </div>
+
+              {/* Telemetry Output Log Window */}
+              <div className="space-y-1.5 bg-main/90 p-3.5 border border-border-subtle text-[11px] font-mono">
+                {bootLogs.slice(0, logIndex + 1).map((log, i) => (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, x: -6 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    className="flex items-center gap-2"
+                  >
+                    <span className="text-accent-cyan font-bold text-[10px]">[OK]</span>
+                    <span
+                      className={`truncate ${
+                        i === logIndex ? "text-accent-yellow font-bold" : "text-muted"
                       }`}
                     >
-                      {isLast ? `[ ${msg} ]` : `> ${msg}`}
-                    </motion.div>
-                  );
-                })}
-                
-                {messageIndex < bootMessages.length - 1 && (
-                  <motion.div
-                    animate={{ opacity: [1, 0, 1] }}
-                    transition={{ repeat: Infinity, duration: 0.2 }}
-                    className="w-4 h-6 bg-[#00F0FF] mt-2"
-                  />
-                )}
+                      {log}
+                    </span>
+                  </motion.div>
+                ))}
+              </div>
+
+              <div className="mt-4 flex justify-between items-center text-[10px] text-muted font-mono">
+                <span>SECURITY: ENCRYPTED</span>
+                <span className="animate-pulse text-accent-pink">STANDBY...</span>
               </div>
             </div>
-            
-            {/* Chromatic aberration flashes on the whole screen */}
-            <motion.div 
-              animate={{ 
-                opacity: [0, 1, 0, 0, 0.8, 0],
-                x: [0, -10, 0, 0, 10, 0]
-              }}
-              transition={{ repeat: Infinity, duration: 2, times: [0, 0.05, 0.1, 0.8, 0.85, 0.9] }}
-              className="absolute inset-0 border-[8px] border-[#FF003C] pointer-events-none mix-blend-difference"
-            />
           </motion.div>
         )}
       </AnimatePresence>
-      
+
       {!loading && children}
     </>
   );

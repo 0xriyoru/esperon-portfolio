@@ -10,48 +10,111 @@ import Activity from "@/components/Activity";
 export default function Home() {
   return (
     <div className="flex flex-col gap-24 pb-24">
-      {/* Hero Section */}
-      <section id="profile" className="pt-12 scroll-mt-24">
-        <div className="flex gap-8 items-start mb-6">
-          <div className="relative w-24 h-24 rounded-md overflow-hidden border-2 border-border-subtle shrink-0">
-            <Image
-              src="/profile.png"
-              alt="Rhodge Esperon"
-              fill
-              className="object-cover grayscale hover:grayscale-0 transition-all duration-300"
-            />
-            <div className="absolute inset-0 bg-accent-cyan/10 mix-blend-overlay pointer-events-none" />
-            {/* Halftone / scanline effect overlay */}
-            <div className="absolute inset-0 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:4px_4px] opacity-20 mix-blend-overlay pointer-events-none" />
+      {/* Hero / Profile Section (Open Canvas Layout) */}
+      <section id="profile" className="pt-10 pb-8 scroll-mt-24 relative">
+        {/* Top Telemetry Header */}
+        <div className="flex flex-wrap items-center justify-between gap-4 font-mono text-xs border-b border-border-subtle pb-4 mb-8">
+          <div className="flex items-center gap-3">
+            <span className="flex items-center gap-2 text-accent-cyan font-bold">
+              <span className="w-2 h-2 rounded-full bg-accent-cyan animate-pulse shadow-[0_0_8px_rgba(0,240,255,0.8)]" />
+              SYSTEM // ONLINE
+            </span>
+            <span className="text-muted">|</span>
+            <span className="text-muted hidden sm:inline">LOC: OLONGAPO / SUBIC BAY, PH</span>
           </div>
-          <div>
-            <h1 className="text-4xl font-mono font-bold text-primary mb-2 flex items-center">
-              Rhodge Esperon
-              <motion.span
-                animate={{ opacity: [1, 0, 1] }}
-                transition={{ repeat: Infinity, duration: 1 }}
-                className="ml-2 w-3 h-8 bg-accent-yellow inline-block"
-              />
-            </h1>
-            <p className="text-xl text-accent-cyan font-mono mb-4">AI Engineer & Cybersecurity Specialist</p>
+          <div className="text-[11px] text-accent-yellow tracking-widest uppercase">
+            CLEARANCE: L4 // AGENTIC AI & FULL-STACK
           </div>
         </div>
-        <p className="text-muted leading-relaxed mb-6 max-w-2xl">
-          BSIT Student at Lyceum of Subic Bay. Building intelligent systems and securing them.
-          Transitioning into advanced cybersecurity and agentic AI.
-        </p>
-        <div className="flex flex-wrap gap-3 font-mono text-xs">
-          <div className="px-3 py-1 bg-secondary border border-border-subtle rounded-md text-accent-yellow shadow-[0_0_10px_rgba(252,238,9,0.1)] flex items-center gap-2">
-            <span className="w-1.5 h-1.5 rounded-full bg-accent-yellow" />
-            Hackathons: 3+
+
+        <div className="flex flex-col-reverse lg:flex-row justify-between items-start lg:items-center gap-12">
+          {/* Left Column: Bio & Core Info */}
+          <div className="max-w-2xl flex-1">
+            <div className="text-xs font-mono text-accent-pink tracking-widest uppercase mb-2 flex items-center gap-2">
+              <span>&gt; INITIALIZING OPERATOR DATA</span>
+              <span className="w-2 h-3 bg-accent-pink inline-block animate-pulse" />
+            </div>
+
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-mono font-black text-primary tracking-tighter uppercase mb-3 leading-none">
+              RHODGE ESPERON
+            </h1>
+
+            <div className="text-xs sm:text-sm font-mono text-accent-cyan tracking-wider uppercase mb-6 flex flex-wrap items-center gap-2">
+              <span>BSIT 4TH YEAR @ LYCEUM OF SUBIC BAY</span>
+              <span className="text-muted">•</span>
+              <span className="text-primary font-bold">AI & FULL-STACK DEVELOPER</span>
+            </div>
+
+            <p className="text-muted text-sm md:text-base leading-relaxed mb-6 max-w-xl">
+              I am a 4th year student at Lyceum of Subic Bay specializing in AI agents, backend systems, and UI/UX engineering. Focused on transforming complex data into robust, production-grade applications.
+            </p>
+
+            {/* Core Capability HUD Chips */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-8 font-mono text-xs">
+              <div className="p-3 bg-secondary/80 border border-border-subtle hover:border-accent-cyan transition-colors">
+                <div className="text-[10px] text-accent-cyan mb-1 font-bold">01 // AI & BACKEND</div>
+                <div className="text-primary">Agentic LLMs, Node & Next.js</div>
+              </div>
+              <div className="p-3 bg-secondary/80 border border-border-subtle hover:border-accent-yellow transition-colors">
+                <div className="text-[10px] text-accent-yellow mb-1 font-bold">02 // UI/UX DESIGN</div>
+                <div className="text-primary">Figma, Systems & Prototyping</div>
+              </div>
+              <div className="p-3 bg-secondary/80 border border-border-subtle hover:border-accent-pink transition-colors">
+                <div className="text-[10px] text-accent-pink mb-1 font-bold">03 // DATABASES</div>
+                <div className="text-primary">PostgreSQL, Supabase & APIs</div>
+              </div>
+            </div>
+
+            {/* Action Buttons */}
+            <div className="flex flex-wrap items-center gap-4 font-mono">
+              <a
+                href="#projects"
+                className="bg-accent-cyan text-main font-bold px-6 py-3 text-xs md:text-sm hover:bg-accent-yellow transition-colors cyber-button flex items-center gap-2 active:scale-95 shadow-[0_0_15px_rgba(0,240,255,0.2)]"
+              >
+                <span>EXPLORE PROJECTS</span>
+                <span>↗</span>
+              </a>
+              <a
+                href="#contact"
+                className="border border-border-subtle bg-secondary text-primary px-6 py-3 text-xs md:text-sm hover:border-accent-cyan hover:text-accent-cyan transition-colors cyber-button active:scale-95"
+              >
+                TRANSMIT MESSAGE
+              </a>
+            </div>
           </div>
-          <div className="px-3 py-1 bg-secondary border border-border-subtle rounded-md text-accent-cyan shadow-[0_0_10px_rgba(0,240,255,0.1)] flex items-center gap-2">
-            <span className="w-1.5 h-1.5 rounded-full bg-accent-cyan" />
-            Full-Stack & Systems
-          </div>
-          <div className="px-3 py-1 bg-secondary border border-border-subtle rounded-md text-accent-pink shadow-[0_0_10px_rgba(255,0,60,0.1)] flex items-center gap-2">
-            <span className="w-1.5 h-1.5 rounded-full bg-accent-pink" />
-            Agentic AI & Cybersecurity
+
+          {/* Right Column: Floating Cyberpunk HUD Portrait */}
+          <div className="relative shrink-0 mx-auto lg:mx-0 flex items-center justify-center">
+            {/* Outer Orbit HUD Ring */}
+            <div className="absolute w-64 sm:w-72 h-64 sm:h-72 rounded-full border border-border-subtle pointer-events-none" />
+            <div className="absolute w-72 sm:w-80 h-72 sm:h-80 rounded-full border border-accent-cyan/20 border-dashed pointer-events-none animate-[spin_80s_linear_infinite]" />
+
+            {/* Operator Badge on top */}
+            <div className="absolute -top-3 left-4 bg-secondary border border-border-subtle px-2.5 py-0.5 font-mono text-[9px] text-accent-cyan tracking-widest z-20 flex items-center gap-1.5 shadow-[0_0_8px_rgba(0,240,255,0.2)]">
+              <span className="w-1.5 h-1.5 bg-accent-cyan rounded-full" />
+              OPERATOR // 0XRIYORU
+            </div>
+
+            {/* Portrait Image Container */}
+            <div className="relative w-52 sm:w-60 h-60 sm:h-72 border-2 border-border-subtle bg-secondary cyber-card overflow-hidden z-10 group shadow-[0_0_30px_rgba(0,0,0,0.6)]">
+              <Image
+                src="/profile.png"
+                alt="Rhodge Esperon"
+                fill
+                className="object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
+              />
+              <div className="absolute inset-0 bg-accent-cyan/10 mix-blend-overlay pointer-events-none" />
+              <div className="absolute inset-0 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:4px_4px] opacity-20 mix-blend-overlay pointer-events-none" />
+
+              {/* Cyber corner brackets */}
+              <div className="absolute top-2 left-2 w-3 h-3 border-t-2 border-l-2 border-accent-cyan pointer-events-none" />
+              <div className="absolute bottom-2 right-2 w-3 h-3 border-b-2 border-r-2 border-accent-pink pointer-events-none" />
+            </div>
+
+            {/* Status Metric Badge */}
+            <div className="absolute -bottom-3 right-4 bg-main border border-border-subtle px-2.5 py-0.5 font-mono text-[9px] text-muted tracking-wider z-20">
+              STATUS: ONLINE & READY
+            </div>
           </div>
         </div>
       </section>
@@ -59,34 +122,49 @@ export default function Home() {
 
       {/* Projects Section */}
       <section id="projects" className="scroll-mt-24">
-        <h2 className="text-2xl font-mono font-bold mb-8 text-primary flex items-center gap-2">
-          <span className="text-accent-yellow">#</span> Projects
-        </h2>
+        <div className="flex items-center gap-3 mb-8 border-b border-border-subtle pb-3">
+          <span className="text-xs font-mono text-accent-yellow font-bold">// 02_</span>
+          <h2 className="text-xl sm:text-2xl font-mono font-bold text-primary tracking-wide">
+            FEATURED_PROJECTS
+          </h2>
+        </div>
 
         <Projects />
       </section>
 
       {/* Skills Section */}
       <section id="skills" className="scroll-mt-24">
-        <h2 className="text-2xl font-mono font-bold mb-8 text-primary flex items-center gap-2">
-          <span className="text-accent-pink">#</span> Skills
-        </h2>
+        <div className="flex items-center gap-3 mb-8 border-b border-border-subtle pb-3">
+          <span className="text-xs font-mono text-accent-pink font-bold">// 03_</span>
+          <h2 className="text-xl sm:text-2xl font-mono font-bold text-primary tracking-wide">
+            TECHNICAL_INVENTORY
+          </h2>
+        </div>
+
         <Skills />
       </section>
 
       {/* Credentials Section */}
       <section id="credentials" className="scroll-mt-24">
-        <h2 className="text-2xl font-mono font-bold mb-8 text-primary flex items-center gap-2">
-          <span className="text-accent-cyan">#</span> Credentials
-        </h2>
+        <div className="flex items-center gap-3 mb-8 border-b border-border-subtle pb-3">
+          <span className="text-xs font-mono text-accent-cyan font-bold">// 04_</span>
+          <h2 className="text-xl sm:text-2xl font-mono font-bold text-primary tracking-wide">
+            EXPERIENCE_&_SEMINARS
+          </h2>
+        </div>
+
         <Credentials />
       </section>
 
       {/* Activity Section */}
       <section id="activity" className="scroll-mt-24">
-        <h2 className="text-2xl font-mono font-bold mb-8 text-primary flex items-center gap-2">
-          <span className="text-accent-yellow">#</span> Activity
-        </h2>
+        <div className="flex items-center gap-3 mb-8 border-b border-border-subtle pb-3">
+          <span className="text-xs font-mono text-accent-yellow font-bold">// 05_</span>
+          <h2 className="text-xl sm:text-2xl font-mono font-bold text-primary tracking-wide">
+            GITHUB_TRANSMISSION
+          </h2>
+        </div>
+
         <Activity />
       </section>
 

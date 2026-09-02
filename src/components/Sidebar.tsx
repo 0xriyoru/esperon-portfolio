@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { supabase } from "@/lib/supabase";
+import ThemeToggle from "@/components/ThemeToggle";
 
 const navItems = [
   { name: "Profile", path: "profile" },
@@ -80,7 +81,7 @@ export default function Sidebar() {
       <div>
         <div className="mb-10">
           <h1 className="font-mono text-xl text-primary font-bold tracking-tight">Rhodge Esperon</h1>
-          <p className="text-xs text-muted mt-1.5 font-mono">AI Engineer & Cybersec</p>
+          <p className="text-xs text-muted mt-1.5 font-mono">AI & Full-Stack Developer</p>
         </div>
 
         <nav className="flex flex-col gap-2">
@@ -92,11 +93,10 @@ export default function Sidebar() {
                 key={item.path}
                 href={`#${item.path}`}
                 onClick={(e) => handleClick(e, item.path)}
-                className={`relative font-mono text-sm px-3 py-2 flex items-center transition-all duration-200 rounded ${
-                  isActive
+                className={`relative font-mono text-sm px-3 py-2 flex items-center transition-all duration-200 rounded ${isActive
                     ? "text-accent-cyan font-bold bg-accent-cyan/10 border-l-2 border-accent-cyan shadow-[0_0_12px_rgba(0,240,255,0.15)]"
                     : "text-muted hover:text-primary hover:bg-main/40"
-                }`}
+                  }`}
               >
                 <span className="flex items-center gap-2">
                   <span className={`text-xs ${isActive ? "text-accent-cyan font-bold" : "opacity-0"}`}>
@@ -114,40 +114,50 @@ export default function Sidebar() {
         {/* Live Database Status Legend */}
         <div className="flex items-center gap-3 font-mono text-xs border border-border-subtle bg-main p-3 cyber-card">
           <span
-            className={`w-2 h-2 rounded-full shrink-0 ${
-              dbStatus === "online"
+            className={`w-2 h-2 rounded-full shrink-0 ${dbStatus === "online"
                 ? "bg-accent-cyan animate-[pulse_2s_ease-in-out_infinite] shadow-[0_0_8px_rgba(0,240,255,0.8)]"
                 : dbStatus === "connecting"
-                ? "bg-accent-yellow animate-pulse"
-                : "bg-accent-pink shadow-[0_0_8px_rgba(255,0,60,0.8)]"
-            }`}
+                  ? "bg-accent-yellow animate-pulse"
+                  : "bg-accent-pink shadow-[0_0_8px_rgba(255,0,60,0.8)]"
+              }`}
           />
           <div className="flex flex-col overflow-hidden">
             <span className="text-[9px] text-muted tracking-wider uppercase">DB Connection</span>
             <span
-              className={`text-[11px] font-bold tracking-wide ${
-                dbStatus === "online"
+              className={`text-[11px] font-bold tracking-wide ${dbStatus === "online"
                   ? "text-accent-cyan"
                   : dbStatus === "connecting"
-                  ? "text-accent-yellow"
-                  : "text-accent-pink"
-              }`}
+                    ? "text-accent-yellow"
+                    : "text-accent-pink"
+                }`}
             >
               {dbStatus === "online"
                 ? "LIVE & HEALTHY"
                 : dbStatus === "connecting"
-                ? "CONNECTING..."
-                : "STANDBY"}
+                  ? "CONNECTING..."
+                  : "STANDBY"}
             </span>
           </div>
         </div>
 
+        {/* Theme Switcher (Auto, Light, Dark) */}
+        <ThemeToggle />
+
         <div className="text-xs text-muted font-mono flex flex-col gap-2 pt-2 border-t border-border-subtle">
-          <div className="flex items-center gap-2 opacity-50 cursor-not-allowed">
-            <span className="px-1.5 py-0.5 bg-main border border-border-subtle rounded text-[10px] text-primary">
-              Ctrl + K
-            </span>
-            <span className="text-[11px]">Command</span>
+          <div className="flex items-center justify-between text-[10px]">
+            <div className="flex items-center gap-1.5 opacity-60">
+              <span className="px-1.5 py-0.5 bg-main border border-border-subtle rounded text-[9px] text-primary">
+                Ctrl + K
+              </span>
+              <span>Command</span>
+            </div>
+            <button
+              onClick={() => window.location.reload()}
+              className="text-accent-cyan hover:text-accent-yellow transition-colors underline text-[10px]"
+              title="Re-run Boot Sequence"
+            >
+              [REBOOT]
+            </button>
           </div>
           <a
             href="mailto:rhodgesperon@gmail.com"
