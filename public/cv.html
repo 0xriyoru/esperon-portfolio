@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rhodge Ellio D. Esperon - CV / Resume</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #0f172a;
+      --secondary: #334155;
+      --muted: #64748b;
+      --accent: #0284c7;
+      --border: #e2e8f0;
+      --bg: #ffffff;
+      --tag-bg: #f1f5f9;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      color: var(--primary);
+      background-color: #f8fafc;
+      line-height: 1.5;
+      font-size: 13.5px;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    .no-print-bar {
+      background: #0f172a;
+      color: #fff;
+      padding: 12px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    }
+
+    .no-print-bar button {
+      background: #0284c7;
+      color: #fff;
+      border: none;
+      padding: 8px 18px;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 13px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: background 0.2s;
+    }
+
+    .no-print-bar button:hover {
+      background: #0369a1;
+    }
+
+    .page-container {
+      max-width: 850px;
+      margin: 32px auto;
+      background: var(--bg);
+      padding: 48px 52px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      border-radius: 8px;
+    }
+
+    header {
+      border-bottom: 2px solid var(--primary);
+      padding-bottom: 18px;
+      margin-bottom: 20px;
+    }
+
+    .header-main {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+    }
+
+    h1 {
+      font-size: 26px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--primary);
+      text-transform: uppercase;
+    }
+
+    .role-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--accent);
+      margin-top: 2px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .contact-info {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px 14px;
+      margin-top: 10px;
+      font-size: 12px;
+      color: var(--secondary);
+    }
+
+    .contact-info a {
+      color: var(--secondary);
+      text-decoration: none;
+    }
+
+    .contact-info a:hover {
+      color: var(--accent);
+      text-decoration: underline;
+    }
+
+    .section {
+      margin-bottom: 20px;
+    }
+
+    .section-title {
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--primary);
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 4px;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .section-title::before {
+      content: "";
+      display: inline-block;
+      width: 4px;
+      height: 13px;
+      background: var(--accent);
+      border-radius: 2px;
+    }
+
+    .summary-text {
+      color: var(--secondary);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px 16px;
+      font-size: 12.5px;
+    }
+
+    .skill-category strong {
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    .skill-category span {
+      color: var(--secondary);
+    }
+
+    .item {
+      margin-bottom: 14px;
+    }
+
+    .item:last-child {
+      margin-bottom: 0;
+    }
+
+    .item-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 2px;
+    }
+
+    .item-title {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .item-subtitle {
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--accent);
+    }
+
+    .item-date {
+      font-size: 11.5px;
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    .item-meta {
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+
+    .item-link {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--accent);
+      text-decoration: none;
+      margin-left: 6px;
+    }
+
+    .item-link:hover {
+      text-decoration: underline;
+    }
+
+    ul.bullets {
+      list-style-type: none;
+      padding-left: 0;
+      margin-top: 4px;
+    }
+
+    ul.bullets li {
+      position: relative;
+      padding-left: 15px;
+      margin-bottom: 4px;
+      color: var(--secondary);
+      font-size: 12.5px;
+      line-height: 1.55;
+    }
+
+    ul.bullets li::before {
+      content: "•";
+      position: absolute;
+      left: 2px;
+      color: var(--accent);
+      font-weight: bold;
+    }
+
+    .cert-item {
+      margin-bottom: 6px;
+      font-size: 12.5px;
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .cert-name {
+      color: var(--secondary);
+    }
+
+    .cert-name strong {
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    .cert-date {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11.5px;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    .footer-declaration {
+      margin-top: 24px;
+      padding-top: 14px;
+      border-top: 1px solid var(--border);
+      font-size: 11px;
+      color: var(--muted);
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    @media print {
+      body {
+        background: #ffffff;
+        font-size: 12px;
+      }
+
+      .no-print-bar {
+        display: none !important;
+      }
+
+      .page-container {
+        max-width: 100%;
+        margin: 0;
+        padding: 24px 32px;
+        box-shadow: none;
+        border-radius: 0;
+      }
+
+      .section {
+        margin-bottom: 14px;
+        page-break-inside: avoid;
+      }
+
+      .item {
+        margin-bottom: 10px;
+        page-break-inside: avoid;
+      }
+
+      ul.bullets li {
+        font-size: 11.5px;
+        line-height: 1.45;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="no-print-bar">
+    <div style="font-family: 'JetBrains Mono', monospace; font-size: 13px;">
+      📄 Rhodge Esperon — Curriculum Vitae (Updated September 2026)
+    </div>
+    <button onclick="window.print()">
+      🖨️ Print / Save as PDF
+    </button>
+  </div>
+
+  <div class="page-container">
+    <!-- Header -->
+    <header>
+      <div class="header-main">
+        <div>
+          <h1>Rhodge Ellio D. Esperon</h1>
+          <div class="role-title">AI & Full-Stack Developer</div>
+        </div>
+      </div>
+      <div class="contact-info">
+        <span>📍 Olongapo City, Philippines</span>
+        <span>•</span>
+        <span>📞 +63 949 428 1875</span>
+        <span>•</span>
+        <span>✉️ <a href="mailto:rhodgesperon@gmail.com">rhodgesperon@gmail.com</a></span>
+        <span>•</span>
+        <span>🔗 <a href="https://linkedin.com/in/rhodge-esperon" target="_blank">linkedin.com/in/rhodge-esperon</a></span>
+        <span>•</span>
+        <span>🐙 <a href="https://github.com/0xriyoru" target="_blank">github.com/0xriyoru</a></span>
+        <span>•</span>
+        <span>🌐 <a href="https://esperonrhodge.vercel.app" target="_blank">esperonrhodge.vercel.app</a></span>
+      </div>
+    </header>
+
+    <!-- Professional Summary -->
+    <div class="section">
+      <div class="section-title">Professional Summary</div>
+      <p class="summary-text">
+        Forward-thinking <strong>AI & Full-Stack Developer</strong> and 4th-year BS Information Technology student specializing in agentic AI workflows, backend system architecture, and UI/UX engineering. Proven background delivering production web applications—from internal government asset and job order systems at <strong>Subic Bay Metropolitan Authority (SBMA)</strong> to OCR-powered reading platforms (<strong>Mekai</strong>) and low-latency interactive audio engines (<strong>Rebeat</strong>). Adept in <strong>Next.js, TypeScript, Node.js, Python, PostgreSQL (RLS), Supabase, and Figma</strong>.
+      </p>
+    </div>
+
+    <!-- Technical Skills -->
+    <div class="section">
+      <div class="section-title">Technical Skills</div>
+      <div class="skills-grid">
+        <div class="skill-category">
+          <strong>Languages:</strong>
+          <span>TypeScript, JavaScript, Python, Java, PHP, HTML5, CSS3, SQL</span>
+        </div>
+        <div class="skill-category">
+          <strong>Frontend & Frameworks:</strong>
+          <span>Next.js, React.js, Tailwind CSS, Bootstrap, Progressive Web Apps (PWA)</span>
+        </div>
+        <div class="skill-category">
+          <strong>Backend & Databases:</strong>
+          <span>Node.js, PostgreSQL (RLS), Supabase, MySQL, AWS DynamoDB, Laravel, REST APIs</span>
+        </div>
+        <div class="skill-category">
+          <strong>AI & Specialized Tech:</strong>
+          <span>Agentic AI Workflows, LLM Deployment, OCR Translation Engines, Web Audio API</span>
+        </div>
+        <div class="skill-category">
+          <strong>Developer Tools & Cloud:</strong>
+          <span>Git, GitHub, Vercel, VS Code, Postman, Docker, Supabase Realtime</span>
+        </div>
+        <div class="skill-category">
+          <strong>UI/UX & Methodologies:</strong>
+          <span>Figma (High-Fidelity & Design Systems), Wireframing, ERD Modeling, Tech Documentation</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Work Experience -->
+    <div class="section">
+      <div class="section-title">Work & Internship Experience</div>
+      <div class="item">
+        <div class="item-header">
+          <div>
+            <span class="item-title">Subic Bay Metropolitan Authority (SBMA)</span>
+            <span class="item-meta"> — Subic Bay Freeport Zone, Philippines</span>
+          </div>
+          <span class="item-date">May 2026 – September 2026</span>
+        </div>
+        <div class="item-subtitle">IT Intern – Procurement & Property Management</div>
+        <ul class="bullets">
+          <li>Engineered and deployed <strong>SBMA-JO</strong>, a secure internal property and job order management web system using <strong>Next.js</strong> and <strong>Supabase</strong>, centralizing equipment requests and asset tracking across departments.</li>
+          <li>Automated inventory cycle counting and property disposition workflows, minimizing manual data discrepancies and accelerating processing turnaround.</li>
+          <li>Implemented role-based access control and database integrity rules to safeguard confidential government records and maintain strict audit compliance.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Featured & Academic Projects -->
+    <div class="section">
+      <div class="section-title">Featured & Academic Projects</div>
+
+      <div class="item">
+        <div class="item-header">
+          <div>
+            <span class="item-title">Mekai – OCR-Assisted Manga Reading & Translation Platform</span>
+            <a href="https://mekaiscans.vercel.app" target="_blank" class="item-link">↗ mekaiscans.vercel.app</a>
+          </div>
+          <span class="item-date">Feb 2026 – Mar 2026</span>
+        </div>
+        <div class="item-subtitle">Full-Stack Developer & Designer</div>
+        <ul class="bullets">
+          <li>Engineered a full-stack web application leveraging <strong>Next.js</strong>, <strong>TypeScript</strong>, and OCR-powered translation tools to automate raw comic text extraction and reading.</li>
+          <li>Enforced secure multi-tier user authorization with custom <strong>PostgreSQL Row Level Security (RLS)</strong> policies.</li>
+          <li>Designed a modern, accessible interface in <strong>Figma</strong> and deployed to <strong>Vercel</strong> for optimized mobile reading performance.</li>
+        </ul>
+      </div>
+
+      <div class="item">
+        <div class="item-header">
+          <div>
+            <span class="item-title">ArtNest – Creative Showcase Progressive Web App</span>
+            <a href="https://artnest-hub.vercel.app" target="_blank" class="item-link">↗ artnest-hub.vercel.app</a>
+          </div>
+          <span class="item-date">2026</span>
+        </div>
+        <div class="item-subtitle">Collaborator & Frontend Architect</div>
+        <ul class="bullets">
+          <li>Architected responsive Progressive Web App (PWA) features and modular UI components using <strong>Next.js</strong> and <strong>React</strong> for offline caching and fast asset delivery.</li>
+        </ul>
+      </div>
+
+      <div class="item">
+        <div class="item-header">
+          <div>
+            <span class="item-title">Rebeat – Low-Latency Live Music Web Launchpad</span>
+          </div>
+          <span class="item-date">Dec 2025 – Mar 2026</span>
+        </div>
+        <div class="item-subtitle">UI/UX Designer & Frontend Developer</div>
+        <ul class="bullets">
+          <li>Developed a web-based music launchpad utilizing the <strong>Web Audio API</strong> and React state management, democratizing live music performance without physical MIDI gear.</li>
+          <li>Maintained consistent <strong>60 FPS</strong> UI rendering and reduced initial load times under 2 seconds via audio buffer caching and lazy loading.</li>
+        </ul>
+      </div>
+
+      <div class="item">
+        <div class="item-header">
+          <div>
+            <span class="item-title">MaUlam – AI-Driven Meal Planning Engine</span>
+            <a href="https://github.com/0xriyoru/MaUlam" target="_blank" class="item-link">↗ GitHub</a>
+          </div>
+          <span class="item-date">2026</span>
+        </div>
+        <div class="item-subtitle">AI & Mobile Developer</div>
+        <ul class="bullets">
+          <li>Engineered an intelligent meal planning and ingredient recommendation system utilizing <strong>Python</strong> and LLM prompting pipelines for customized culinary suggestions.</li>
+        </ul>
+      </div>
+
+      <div class="item">
+        <div class="item-header">
+          <div>
+            <span class="item-title">Gakumon – Gamified Pet-Based E-Learning Platform</span>
+          </div>
+          <span class="item-date">Nov 2024 – Mar 2025</span>
+        </div>
+        <div class="item-subtitle">Technical Documenter & Systems Analyst</div>
+        <ul class="bullets">
+          <li>Defined virtual pet health decay mechanics, economic coin multiplier formulas, and admin analytics dashboard specifications.</li>
+        </ul>
+      </div>
+
+      <div class="item">
+        <div class="item-header">
+          <div>
+            <span class="item-title">JobLink – Skill-Based Centralized Employment Platform</span>
+          </div>
+          <span class="item-date">Dec 2022 – Mar 2023</span>
+        </div>
+        <div class="item-subtitle">Technical Lead Documenter & UI/UX Designer</div>
+        <ul class="bullets">
+          <li>Architected system ERD schemas, data flow models, and end-to-end Figma UI/UX prototypes connecting local job seekers with regional employers.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Education -->
+    <div class="section">
+      <div class="section-title">Education</div>
+      <div class="item">
+        <div class="item-header">
+          <div>
+            <span class="item-title">Lyceum of Subic Bay</span>
+            <span class="item-meta"> — Subic Bay Freeport Zone, Philippines</span>
+          </div>
+          <span class="item-date">2023 – Present (Expected: 2027)</span>
+        </div>
+        <div class="item-subtitle">Bachelor of Science in Information Technology (BSIT) — 4th Year</div>
+      </div>
+
+      <div class="item" style="margin-top: 8px;">
+        <div class="item-header">
+          <div>
+            <span class="item-title">Columban College, Inc.</span>
+            <span class="item-meta"> — Olongapo City, Philippines</span>
+          </div>
+          <span class="item-date">2021 – 2023</span>
+        </div>
+        <div class="item-subtitle">Senior High School — Science, Technology, Engineering, and Mathematics (STEM)</div>
+      </div>
+    </div>
+
+    <!-- Certifications & Seminars -->
+    <div class="section">
+      <div class="section-title">Certifications, Seminars & Conferences</div>
+      <div class="cert-item">
+        <div class="cert-name"><strong>AWS Community Day Philippines</strong> | AWS User Group Philippines (Taguig City, Metro Manila)</div>
+        <div class="cert-date">Aug 2026</div>
+      </div>
+      <div class="cert-item">
+        <div class="cert-name"><strong>Convergence III: The Governance & Human Side of Cyber Risk</strong> | DEVCON Pampanga (Certificate of Recognition)</div>
+        <div class="cert-date">Jul 2026</div>
+      </div>
+      <div class="cert-item">
+        <div class="cert-name"><strong>SparkCon: The Next Wave of Innovation</strong> | Campus DevCon x Zellense</div>
+        <div class="cert-date">2025</div>
+      </div>
+      <div class="cert-item">
+        <div class="cert-name"><strong>Skydevs Hack, Play, & Learn Summit 2025 "Masterclass"</strong> | Skydev Solutions, Inc.</div>
+        <div class="cert-date">2025</div>
+      </div>
+      <div class="cert-item">
+        <div class="cert-name"><strong>C# Scripting for Unity: Core Concepts and Best Practices</strong> | Lyceum of Subic Bay</div>
+        <div class="cert-date">2025</div>
+      </div>
+      <div class="cert-item">
+        <div class="cert-name"><strong>Exploring the Angular Frameworks for UI Development</strong> | Lyceum of Subic Bay</div>
+        <div class="cert-date">2024</div>
+      </div>
+      <div class="cert-item">
+        <div class="cert-name"><strong>Data Privacy & IT/CS Career Development</strong> | Lyceum of Subic Bay</div>
+        <div class="cert-date">2023</div>
+      </div>
+    </div>
+
+    <!-- Declaration -->
+    <div class="footer-declaration">
+      <div>I hereby certify that all information contained in this document is true and accurate to the best of my knowledge.</div>
+      <div style="text-align: right; font-weight: 600; color: var(--primary);">
+        Rhodge Ellio D. Esperon<br/>
+        <span style="font-weight: 400; font-size: 10.5px; color: var(--muted);">AI & Full-Stack Developer</span>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>

@@ -75,6 +75,15 @@ export default function Home() {
                 <span>↗</span>
               </a>
               <a
+                href="/cv.html"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="border border-accent-cyan/50 bg-secondary text-accent-cyan px-6 py-3 text-xs md:text-sm hover:border-accent-yellow hover:text-accent-yellow transition-colors cyber-button active:scale-95 flex items-center gap-2"
+              >
+                <span>VIEW CV / RESUME</span>
+                <span>↗</span>
+              </a>
+              <a
                 href="#contact"
                 className="border border-border-subtle bg-secondary text-primary px-6 py-3 text-xs md:text-sm hover:border-accent-cyan hover:text-accent-cyan transition-colors cyber-button active:scale-95"
               >
