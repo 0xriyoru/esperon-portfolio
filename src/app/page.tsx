@@ -11,7 +11,7 @@ export default function Home() {
   return (
     <div className="flex flex-col gap-24 pb-24">
       {/* Hero Section */}
-      <section id="about" className="pt-12 scroll-mt-24">
+      <section id="profile" className="pt-12 scroll-mt-24">
         <div className="flex gap-8 items-start mb-6">
           <div className="relative w-24 h-24 rounded-md overflow-hidden border-2 border-border-subtle shrink-0">
             <Image
@@ -88,26 +88,26 @@ export default function Home() {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="scroll-mt-24 mb-32 flex flex-col items-center justify-center text-center relative py-24 overflow-hidden border border-border-subtle bg-secondary cyber-card">
+      <section id="contact" className="scroll-mt-24 mb-16 flex flex-col items-center justify-center text-center relative py-12 md:py-16 overflow-hidden border border-border-subtle bg-secondary cyber-card">
         {/* Decorative background circle/crosshair */}
         <div className="absolute inset-0 pointer-events-none flex items-center justify-center opacity-10">
-          <div className="w-[300px] md:w-[500px] h-[300px] md:h-[500px] rounded-full border border-accent-cyan" />
-          <div className="absolute w-[400px] md:w-[600px] h-[400px] md:h-[600px] rounded-full border border-border-subtle border-dashed" />
+          <div className="w-[200px] md:w-[320px] h-[200px] md:h-[320px] rounded-full border border-accent-cyan" />
+          <div className="absolute w-[280px] md:w-[440px] h-[280px] md:h-[440px] rounded-full border border-border-subtle border-dashed" />
         </div>
 
-        <div className="text-xs font-mono text-accent-yellow mb-6 tracking-widest">FINAL TRANSMISSION / 06</div>
-        <h2 className="text-4xl md:text-5xl font-bold font-mono text-primary mb-6">
+        <div className="text-[11px] font-mono text-accent-yellow mb-3 tracking-widest">FINAL TRANSMISSION / 06</div>
+        <h2 className="text-2xl md:text-3xl font-bold font-mono text-primary mb-3">
           HAVE A SYSTEM TO SECURE?
         </h2>
-        <p className="text-muted max-w-xl mx-auto mb-10 text-sm md:text-base px-6">
-          I'm ready to learn, contribute, and turn complex security vulnerabilities into fortified,
+        <p className="text-muted max-w-lg mx-auto mb-8 text-xs md:text-sm px-6 leading-relaxed">
+          I&apos;m ready to learn, contribute, and turn complex security vulnerabilities into fortified,
           resilient infrastructure.
         </p>
 
-        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center relative z-10 w-full sm:w-auto px-6">
+        <div className="flex flex-col sm:flex-row gap-3 justify-center items-center relative z-10 w-full sm:w-auto px-6">
           <a
             href="mailto:rhodgesperon@gmail.com"
-            className="w-full sm:w-auto bg-accent-cyan text-main font-bold font-mono px-6 py-3 hover:bg-accent-yellow transition-colors cyber-button"
+            className="w-full sm:w-auto bg-accent-cyan text-main font-bold font-mono px-5 py-2.5 text-xs hover:bg-accent-yellow transition-colors cyber-button active:scale-95"
           >
             START A CONVERSATION
           </a>
@@ -115,7 +115,7 @@ export default function Home() {
             href="https://github.com/0xriyoru"
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full sm:w-auto border border-border-subtle bg-main text-primary font-mono px-6 py-3 hover:border-accent-cyan transition-colors cyber-button"
+            className="w-full sm:w-auto border border-border-subtle bg-main text-primary font-mono px-5 py-2.5 text-xs hover:border-accent-cyan transition-colors cyber-button active:scale-95"
           >
             GITHUB
           </a>
@@ -123,7 +123,7 @@ export default function Home() {
             href="https://www.linkedin.com/in/rhodge-esperon"
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full sm:w-auto border border-border-subtle bg-main text-primary font-mono px-6 py-3 hover:border-accent-pink transition-colors cyber-button"
+            className="w-full sm:w-auto border border-border-subtle bg-main text-primary font-mono px-5 py-2.5 text-xs hover:border-accent-pink transition-colors cyber-button active:scale-95"
           >
             LINKEDIN
           </a>

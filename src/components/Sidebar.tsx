@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
 const navItems = [
-  { name: "About", path: "about" },
+  { name: "Profile", path: "profile" },
   { name: "Projects", path: "projects" },
   { name: "Skills", path: "skills" },
   { name: "Credentials", path: "credentials" },
@@ -13,33 +13,44 @@ const navItems = [
 ];
 
 export default function Sidebar() {
-  const [activeSection, setActiveSection] = useState("about");
+  const [activeSection, setActiveSection] = useState("profile");
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveSection(entry.target.id);
-          }
-        });
-      },
-      { rootMargin: "-40% 0px -60% 0px" }
-    );
+    const mainEl = document.querySelector("main");
+    if (!mainEl) return;
 
-    // Small delay to ensure elements exist
-    setTimeout(() => {
-      navItems.forEach((item) => {
+    const handleScroll = () => {
+      // If near bottom of main container, activate 'contact'
+      if (mainEl.scrollHeight - mainEl.scrollTop - mainEl.clientHeight < 120) {
+        setActiveSection("contact");
+        return;
+      }
+
+      // Find currently visible section in the main scroll container
+      const scrollPosition = mainEl.scrollTop + 180;
+
+      for (let i = navItems.length - 1; i >= 0; i--) {
+        const item = navItems[i];
         const element = document.getElementById(item.path);
-        if (element) observer.observe(element);
-      });
-    }, 100);
+        if (element) {
+          const top = element.offsetTop;
+          if (scrollPosition >= top) {
+            setActiveSection(item.path);
+            break;
+          }
+        }
+      }
+    };
 
-    return () => observer.disconnect();
+    mainEl.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+
+    return () => mainEl.removeEventListener("scroll", handleScroll);
   }, []);
 
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, path: string) => {
     e.preventDefault();
+    setActiveSection(path);
     const element = document.getElementById(path);
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
@@ -58,15 +69,14 @@ export default function Sidebar() {
         <nav className="flex flex-col gap-5">
           {navItems.map((item) => {
             const isActive = activeSection === item.path;
-            
+
             return (
-              <a 
-                key={item.path} 
+              <a
+                key={item.path}
                 href={`#${item.path}`}
                 onClick={(e) => handleClick(e, item.path)}
-                className={`relative group font-mono text-sm flex items-center transition-colors ${
-                  isActive ? "text-accent-cyan" : "text-muted hover:text-primary glitch-hover"
-                }`}
+                className={`relative group font-mono text-sm flex items-center transition-colors ${isActive ? "text-accent-cyan" : "text-muted hover:text-primary glitch-hover"
+                  }`}
               >
                 {isActive && (
                   <motion.div
