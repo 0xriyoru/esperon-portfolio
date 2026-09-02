@@ -18,8 +18,12 @@ const jetBrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Rhodge Esperon | AI Engineer & Cybersec",
-  description: "Personal portfolio of Rhodge Esperon. Building intelligent systems and securing them.",
+  title: "Rhodge Esperon | AI & Full-Stack Developer",
+  description: "Personal portfolio of Rhodge Esperon. Building intelligent systems, AI agents, and secure applications.",
+  icons: {
+    icon: "/icon.png",
+    apple: "/icon.png",
+  },
 };
 
 export default function RootLayout({

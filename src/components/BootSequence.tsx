@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const matrixGrid = [
@@ -11,12 +11,186 @@ const matrixGrid = [
   ["55", "1C", "BD", "55", "55"],
 ];
 
-const hackingSteps = [
-  { row: 4, col: 0, val: "55", delay: 350 },
-  { row: 4, col: 1, val: "1C", delay: 750 },
-  { row: 3, col: 3, val: "E9", delay: 1200 },
-  { row: 0, col: 3, val: "BD", delay: 1650 },
-];
+// Dual-Engine Audio Player with robust Browser Autoplay Policy unlocking
+class CyberpunkAudioEngine {
+  public ctx: AudioContext | null = null;
+  public enabled: boolean = true;
+  public hasMp3: boolean = false;
+  private mp3Audio: HTMLAudioElement | null = null;
+  public isUnlocked: boolean = false;
+
+  constructor() {
+    if (typeof window !== "undefined") {
+      // Check if user has placed breach.mp3 in public/sounds/ without tripping autoplay errors
+      fetch("/sounds/breach.mp3", { method: "HEAD" })
+        .then((res) => {
+          if (res.ok) {
+            this.hasMp3 = true;
+            this.mp3Audio = new Audio("/sounds/breach.mp3");
+          }
+        })
+        .catch(() => {
+          this.hasMp3 = false;
+        });
+
+      // Auto-unlock AudioContext on first user touch/click/key
+      const unlock = () => {
+        this.unlock();
+        window.removeEventListener("pointerdown", unlock);
+        window.removeEventListener("keydown", unlock);
+        window.removeEventListener("click", unlock);
+      };
+
+      window.addEventListener("pointerdown", unlock, { once: true });
+      window.addEventListener("keydown", unlock, { once: true });
+      window.addEventListener("click", unlock, { once: true });
+    }
+  }
+
+  public unlock() {
+    this.initCtx();
+    if (this.ctx && this.ctx.state === "suspended") {
+      this.ctx.resume().then(() => {
+        this.isUnlocked = true;
+      });
+    } else {
+      this.isUnlocked = true;
+    }
+  }
+
+  private initCtx() {
+    if (!this.ctx && typeof window !== "undefined") {
+      const AudioCtx =
+        window.AudioContext ||
+        (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
+      this.ctx = new AudioCtx();
+    }
+  }
+
+  playStart() {
+    if (!this.enabled) return;
+    this.unlock();
+
+    if (this.hasMp3 && this.mp3Audio) {
+      this.mp3Audio.currentTime = 0;
+      this.mp3Audio.play().catch(() => {});
+      return;
+    }
+
+    // Procedural Cyber Hum
+    try {
+      if (!this.ctx) return;
+      const osc = this.ctx.createOscillator();
+      const gain = this.ctx.createGain();
+      osc.type = "sawtooth";
+      osc.frequency.setValueAtTime(55, this.ctx.currentTime);
+      gain.gain.setValueAtTime(0.04, this.ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.6);
+      osc.connect(gain);
+      gain.connect(this.ctx.destination);
+      osc.start();
+      osc.stop(this.ctx.currentTime + 0.6);
+    } catch {}
+  }
+
+  // Hex selection click
+  playByteSelect(pitch = 1) {
+    if (!this.enabled || this.hasMp3) return;
+    try {
+      this.unlock();
+      if (!this.ctx) return;
+
+      const carrier = this.ctx.createOscillator();
+      const modulator = this.ctx.createOscillator();
+      const modGain = this.ctx.createGain();
+      const gain = this.ctx.createGain();
+
+      carrier.type = "sine";
+      carrier.frequency.setValueAtTime(1400 * pitch, this.ctx.currentTime);
+
+      modulator.type = "sawtooth";
+      modulator.frequency.setValueAtTime(2800 * pitch, this.ctx.currentTime);
+
+      modGain.gain.setValueAtTime(400, this.ctx.currentTime);
+      modGain.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + 0.04);
+
+      modulator.connect(modGain);
+      modGain.connect(carrier.frequency);
+
+      gain.gain.setValueAtTime(0.08, this.ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.05);
+
+      carrier.connect(gain);
+      gain.connect(this.ctx.destination);
+
+      carrier.start();
+      modulator.start();
+      carrier.stop(this.ctx.currentTime + 0.06);
+      modulator.stop(this.ctx.currentTime + 0.06);
+    } catch {}
+  }
+
+  // Daemon installed chime
+  playDaemonInstalled() {
+    if (!this.enabled || this.hasMp3) return;
+    try {
+      this.unlock();
+      if (!this.ctx) return;
+      const now = this.ctx.currentTime;
+      [1046, 1318, 1567].forEach((freq, i) => {
+        if (!this.ctx) return;
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+        osc.type = "triangle";
+        osc.frequency.setValueAtTime(freq, now + i * 0.03);
+        gain.gain.setValueAtTime(0.06, now + i * 0.03);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + i * 0.03 + 0.14);
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+        osc.start(now + i * 0.03);
+        osc.stop(now + i * 0.03 + 0.15);
+      });
+    } catch {}
+  }
+
+  // Final root access breach override
+  playBreachSuccess() {
+    if (!this.enabled || this.hasMp3) return;
+    try {
+      this.unlock();
+      if (!this.ctx) return;
+      const now = this.ctx.currentTime;
+
+      // Heavy Sub-bass Drop
+      const subOsc = this.ctx.createOscillator();
+      const subGain = this.ctx.createGain();
+      subOsc.type = "sawtooth";
+      subOsc.frequency.setValueAtTime(95, now);
+      subOsc.frequency.exponentialRampToValueAtTime(28, now + 0.5);
+      subGain.gain.setValueAtTime(0.14, now);
+      subGain.gain.exponentialRampToValueAtTime(0.001, now + 0.55);
+      subOsc.connect(subGain);
+      subGain.connect(this.ctx.destination);
+      subOsc.start(now);
+      subOsc.stop(now + 0.55);
+
+      // Ascending Cyber Synth Chords
+      [587, 880, 1174, 1760].forEach((freq, i) => {
+        if (!this.ctx) return;
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+        osc.type = "sine";
+        osc.frequency.setValueAtTime(freq, now + i * 0.05);
+        gain.gain.setValueAtTime(0.08, now + i * 0.05);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + i * 0.05 + 0.32);
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+        osc.start(now + i * 0.05);
+        osc.stop(now + i * 0.05 + 0.35);
+      });
+    } catch {}
+  }
+}
 
 export default function BootSequence({ children }: { children: React.ReactNode }) {
   const [loading, setLoading] = useState(true);
@@ -29,8 +203,25 @@ export default function BootSequence({ children }: { children: React.ReactNode }
   const [v2Uploaded, setV2Uploaded] = useState(false);
   const [v3Uploaded, setV3Uploaded] = useState(false);
   const [breachSuccess, setBreachSuccess] = useState(false);
+  const [audioEnabled, setAudioEnabled] = useState(true);
+  const [userInteracted, setUserInteracted] = useState(false);
+
+  const audioRef = useRef<CyberpunkAudioEngine | null>(null);
 
   useEffect(() => {
+    audioRef.current = new CyberpunkAudioEngine();
+
+    const handleFirstGesture = () => {
+      setUserInteracted(true);
+      if (audioRef.current) {
+        audioRef.current.unlock();
+      }
+    };
+
+    window.addEventListener("pointerdown", handleFirstGesture, { once: true });
+    window.addEventListener("click", handleFirstGesture, { once: true });
+    window.addEventListener("keydown", handleFirstGesture, { once: true });
+
     // Early theme initialization
     const savedTheme = localStorage.getItem("theme") || "auto";
     const root = document.documentElement;
@@ -65,12 +256,16 @@ export default function BootSequence({ children }: { children: React.ReactNode }
       });
     }, 50);
 
+    // Initial cyber sound
+    audioRef.current.playStart();
+
     // Step 1: select 55
     timers.push(
       setTimeout(() => {
         setActiveRow(4);
         setActiveCell({ row: 4, col: 0 });
         setBuffer(["55"]);
+        audioRef.current?.playByteSelect(1.0);
       }, 350)
     );
 
@@ -81,6 +276,8 @@ export default function BootSequence({ children }: { children: React.ReactNode }
         setActiveCell({ row: 4, col: 1 });
         setBuffer(["55", "1C"]);
         setV1Uploaded(true);
+        audioRef.current?.playByteSelect(1.2);
+        audioRef.current?.playDaemonInstalled();
       }, 800)
     );
 
@@ -91,6 +288,7 @@ export default function BootSequence({ children }: { children: React.ReactNode }
         setActiveCol(null);
         setActiveCell({ row: 3, col: 3 });
         setBuffer(["55", "1C", "E9"]);
+        audioRef.current?.playByteSelect(1.4);
       }, 1250)
     );
 
@@ -104,6 +302,9 @@ export default function BootSequence({ children }: { children: React.ReactNode }
         setV2Uploaded(true);
         setV3Uploaded(true);
         setBreachSuccess(true);
+        audioRef.current?.playByteSelect(1.6);
+        audioRef.current?.playDaemonInstalled();
+        audioRef.current?.playBreachSuccess();
       }, 1700)
     );
 
@@ -111,14 +312,37 @@ export default function BootSequence({ children }: { children: React.ReactNode }
     timers.push(
       setTimeout(() => {
         setLoading(false);
-      }, 2350)
+      }, 2450)
     );
 
     return () => {
       clearInterval(interval);
       timers.forEach(clearTimeout);
+      window.removeEventListener("pointerdown", handleFirstGesture);
+      window.removeEventListener("click", handleFirstGesture);
+      window.removeEventListener("keydown", handleFirstGesture);
     };
   }, []);
+
+  const handleScreenClick = () => {
+    setUserInteracted(true);
+    if (audioRef.current) {
+      audioRef.current.unlock();
+      audioRef.current.playByteSelect(1.5);
+    }
+  };
+
+  const toggleAudio = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    const next = !audioEnabled;
+    setAudioEnabled(next);
+    if (audioRef.current) {
+      audioRef.current.enabled = next;
+      if (next) {
+        audioRef.current.unlock();
+      }
+    }
+  };
 
   return (
     <>
@@ -129,7 +353,8 @@ export default function BootSequence({ children }: { children: React.ReactNode }
             initial={{ opacity: 1 }}
             exit={{ opacity: 0, scale: 1.03, filter: "blur(10px)" }}
             transition={{ duration: 0.45, ease: "easeInOut" }}
-            className="fixed inset-0 z-[100000] flex items-center justify-center bg-[#070908] text-[#9FEF00] font-mono overflow-hidden select-none p-4 sm:p-8"
+            onClick={handleScreenClick}
+            className="fixed inset-0 z-[100000] flex items-center justify-center bg-[#070908] text-[#9FEF00] font-mono overflow-hidden select-none p-4 sm:p-8 cursor-pointer"
           >
             {/* Background Scanlines & CRT Distortion */}
             <div className="absolute inset-0 bg-scanlines opacity-50 pointer-events-none" />
@@ -152,8 +377,16 @@ export default function BootSequence({ children }: { children: React.ReactNode }
                   BREACH PROTOCOL INTERFACE
                 </div>
 
-                <div className="text-[10px] text-[#9FEF00]/60 tracking-widest hidden md:inline">
-                  PROTOCOL 6120-AA4 // NODE_0XRIYORU
+                <div className="flex items-center gap-3">
+                  <button
+                    onClick={toggleAudio}
+                    className="text-[10px] text-[#9FEF00] border border-[#9FEF00]/40 px-2 py-0.5 hover:bg-[#9FEF00]/20 transition-colors"
+                  >
+                    {audioEnabled ? "AUDIO [ON]" : "AUDIO [MUTE]"}
+                  </button>
+                  <div className="text-[10px] text-[#9FEF00]/60 tracking-widest hidden md:inline">
+                    PROTOCOL 6120-AA4
+                  </div>
                 </div>
               </div>
 
@@ -316,8 +549,13 @@ export default function BootSequence({ children }: { children: React.ReactNode }
                         <span>BREACH SUCCESSFUL // CONNECTING TO NODE_0XRIYORU...</span>
                       </div>
                     ) : (
-                      <div className="text-[11px] text-[#9FEF00]/70 tracking-wider">
-                        BYPASSING ICE & DECRYPTING PORTFOLIO SCHEMAS...
+                      <div className="text-[11px] text-[#9FEF00]/70 tracking-wider flex items-center justify-center gap-2">
+                        <span>BYPASSING ICE PROTOCOLS...</span>
+                        {!userInteracted && (
+                          <span className="text-[10px] text-accent-yellow animate-pulse">
+                            [CLICK ANYWHERE TO UNMUTE]
+                          </span>
+                        )}
                       </div>
                     )}
                   </div>

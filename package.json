@@ -17,6 +17,7 @@
     "react-github-calendar": "^5.0.9"
   },
   "devDependencies": {
+    "@distube/ytdl-core": "^4.16.12",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
