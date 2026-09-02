@@ -1,24 +1,38 @@
-# Design System & Layout Rules
+# Design System & Architecture Guidelines
 
-## Core Aesthetic
-The site is a fusion of minimalist structure and Cyberpunk/Cybersecurity elements. It should feel like a high-end terminal. Dark mode only. Avoid clutter; use the neon accent colors from TOKENS.md sparingly for maximum impact (e.g., terminal cursors, active links, button hover states).
+## 1. Core Aesthetic
+A fusion of high-precision **Living Data Schema** and **Cyberpunk Systems Engineering**. 
+The interface presents content as a living telemetry stream, prioritizing readability, structural modularity, and snappy micro-interactions.
 
-## Global Layout
-- **Left Sidebar (Fixed)**: 
-  - Width: ~250px.
-  - Contains navigation links (About, Projects, Experience, Certs, Contact).
-  - Bottom of sidebar: A mock "Ask anything" command palette hint (e.g., `Ctrl + K`) and a generic contact email.
-- **Main Content Area (Scrollable)**:
-  - Centered horizontally within the remaining viewport.
-  - Max-width for text readability (e.g., `max-w-3xl`).
-  - Top padding to align with the sidebar nicely.
+---
 
-## Animations & UX (Use Framer Motion)
-- **Page Load Reveal**: Content should slide up slightly (`y: 10`) and fade in (`opacity: 1`) on mount. Keep it fast (`duration: 0.3`).
-- **Staggered Lists**: Project cards and experience items should stagger in one by one (e.g., `staggerChildren: 0.1`) so it looks like a terminal loading data.
-- **Glitch Hover Effect**: On primary buttons or active links, add a very subtle, fast CSS text-shadow glitch effect or a quick color flicker using Framer Motion.
-- **Active Navigation**: The active sidebar link should have a monospace `>` cursor before it or a neon left-border highlight.
+## 2. Layout Structure
 
-## Component Rules
-- **Profile Image**: Must use the dithered/halftone styling outlined in TOKENS.md.
-- **Cards (Projects/Experience)**: Minimalist borders (`Border Subtle`). On hover, the border transitions to a glowing `Neon Cyan` or `Neon Magenta`.
+### Fixed Cyberpunk Sidebar (`Sidebar.tsx`)
+- **Width**: `250px` sticky desktop sidebar.
+- **Header**: Operator identity (`Rhodge Esperon`), role (`AI & Full-Stack Developer`).
+- **Nav Matrix**: Monospace nav items with real-time scroll-spy listening to `<main>` container:
+  - `Profile` (`#profile`)
+  - `Projects` (`#projects`)
+  - `Skills` (`#skills`)
+  - `Credentials` (`#credentials`)
+  - `Activity` (`#activity`)
+  - `Contact` (`#contact`)
+- **Telemetry & Utilities**:
+  - Live Database Connection status (`LIVE & HEALTHY` / `STANDBY` with Supabase ping).
+  - 3-Way Theme Switcher (`AUTO`, `LIGHT`, `DARK`).
+  - Command palette hint and reboot trigger (`[REBOOT]`).
+
+### Main Content Area (`src/app/page.tsx`)
+- **`// 01_PROFILE`**: Open canvas layout blending directly into dot-matrix background with telemetry bar, bio, 3 core capability chips (`01 // AI & BACKEND`, `02 // UI/UX DESIGN`, `03 // DATABASES`), action triggers, and a floating HUD portrait frame with rotating orbit ring.
+- **`// 02_FEATURED_PROJECTS`**: Grid of cyber-cards with domain header, live status indicator (`DEPLOYED`, `DEVELOPMENT`, `ARCHIVED`), tags, and status filter tabs.
+- **`// 03_TECHNICAL_INVENTORY`**: Modular inventory categories with module counts and interactive glowing tag pills.
+- **`// 04_EXPERIENCE_&_SEMINARS`**: Vertical circuit timeline with connecting laser traces, glowing node pulses, organization badges, and filter tabs (`ALL`, `WORK`, `EVENTS & SEMINARS`).
+- **`// 05_GITHUB_TRANSMISSION`**: Live GitHub contribution calendar with custom theme and interactive Year switcher (`PAST 1Y`, `2026`, `2025`, `2024`).
+- **`// 06_CONTACT`**: Minimized communication panel with email trigger and direct links to GitHub & LinkedIn.
+
+---
+
+## 3. Interactive Motion & Cybernetic Cursor
+- **`<BootSequence />`**: Cinematic ~2.2s boot sequence with step-by-step telemetry logs and smooth progress easing that adapts to Light/Dark theme instantly.
+- **`<CyberCursor />`**: Dual-element reticle cursor (center laser dot + trailing spring crosshair ring) that expands and targets interactive elements on desktop.

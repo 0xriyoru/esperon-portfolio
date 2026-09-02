@@ -1,21 +1,45 @@
 # Design Tokens & Theme Configuration
 
-## Colors (Cyberpunk x Minimalist)
-- **Background Main**: `#050505` (Deep Black)
-- **Background Secondary**: `#121212` (Dark Gray - for sidebar or cards)
-- **Text Primary**: `#E0E0E0` (Off-white)
-- **Text Secondary**: `#888888` (Muted gray)
-- **Accent 1 (Cyberpunk Yellow)**: `#FCEE09`
-- **Accent 2 (Neon Cyan)**: `#00F0FF`
-- **Accent 3 (Neon Magenta/Pink)**: `#FF003C`
-- **Border Subtle**: `#222222`
+## Theme Modes (Dual-Palette System)
+
+### Dark Theme (Cyberpunk Terminal)
+- `--theme-main`: `#050505` (Deep Black Canvas)
+- `--theme-secondary`: `#101010` (Dark Charcoal / Card Surfaces)
+- `--theme-primary`: `#E0E0E0` (High-Contrast Off-White Text)
+- `--theme-muted`: `#888888` (Muted Telemetry Gray)
+- `--theme-border-subtle`: `#222222` (Subtle Grid & Card Borders)
+- `--theme-accent-yellow`: `#FCEE09` (Cyberpunk Electric Yellow)
+- `--theme-accent-cyan`: `#00F0FF` (Neon Cyan)
+- `--theme-accent-pink`: `#FF003C` (Neon Crimson / Magenta)
+
+### Light Theme (Cyber-Alabaster Schema)
+- `--theme-main`: `#EFEFE9` (Alabaster Paper / Schema Canvas)
+- `--theme-secondary`: `#E3E3DC` (Warm Concrete Card Surface)
+- `--theme-primary`: `#121212` (Crisp Charcoal Text)
+- `--theme-muted`: `#62625C` (Muted Technical Gray)
+- `--theme-border-subtle`: `#CBCBC2` (Precision Schema Lines)
+- `--theme-accent-yellow`: `#997A00` (Deep Industrial Amber)
+- `--theme-accent-cyan`: `#008291` (Deep High-Tech Teal)
+- `--theme-accent-pink`: `#C4002F` (Deep Crimson Accent)
+
+---
 
 ## Typography
-- **Sans-serif (Body)**: 'Inter', sans-serif
-- **Monospace (Headings, Tech Details, Navigation)**: 'JetBrains Mono', 'Fira Code', or 'Space Mono'
+- **Sans-Serif (Body & Descriptions)**: `'Inter'`, `var(--font-inter)`, sans-serif
+- **Monospace (Headings, Telemetry, Navigation, Metrics)**: `'JetBrains Mono'`, `var(--font-jetbrains-mono)`, monospace
 
-## Visual Effects & Animations (Framer Motion)
-- **Hover States**: Glowing neon borders using the accent colors.
-- **Images**: Apply a CSS grayscale and halftone/dithered filter to profile images to match a terminal hacker aesthetic.
-- **Background Texture**: Subtle CSS scanlines or a faint dot grid.
-- **Animation Timing**: UX must feel FAST. Use duration `0.2s` for color/opacity changes. Use spring physics (`stiffness: 300, damping: 20`) for structural movements to make them feel snappy, not sluggish.
+---
+
+## Visual Utilities & Classes
+- `.cyber-card`: High-tech polygon sliced corners (`clip-path: polygon(24px 0, 100% 0, 100% calc(100% - 24px), calc(100% - 24px) 100%, 0 100%, 0 24px)`)
+- `.cyber-button`: Angled button slice (`clip-path: polygon(15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%, 0 15px)`)
+- `.bg-scanlines`: Subtitle 4px scanlines with blend modes
+- `.bg-dot-grid`: Radial dot-matrix grid (20px by 20px)
+- `.glitch-hover`: High-speed chromatic text shadow jitter on hover
+
+---
+
+## Motion & Spring Physics
+- **Fast Interactive Transitions**: `0.2s ease`
+- **Spring Physics for Structural Elements**: `stiffness: 400`, `damping: 25`
+- **Cursor Springs**: `stiffness: 500`, `damping: 28` for reticle smoothing

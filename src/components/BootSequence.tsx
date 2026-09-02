@@ -3,22 +3,35 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-const bootLogs = [
-  "INITIALIZING NEURAL KERNEL [BUILD_v4.8]...",
-  "VERIFYING CRYPTOGRAPHIC HANDSHAKE...",
-  "MOUNTING REPOSITORY SCHEMAS & DATABASE...",
-  "SYNCING OPERATOR TELEMETRY // 0XRIYORU",
-  "ESTABLISHING SECURE REALTIME WEBSOCKETS...",
-  "SYSTEM MOUNTED. ACCESS GRANTED."
+const matrixGrid = [
+  ["BD", "E9", "1C", "BD", "BD"],
+  ["1C", "1C", "BD", "BD", "55"],
+  ["BD", "BD", "55", "BD", "BD"],
+  ["1C", "55", "55", "E9", "BD"],
+  ["55", "1C", "BD", "55", "55"],
+];
+
+const hackingSteps = [
+  { row: 4, col: 0, val: "55", delay: 350 },
+  { row: 4, col: 1, val: "1C", delay: 750 },
+  { row: 3, col: 3, val: "E9", delay: 1200 },
+  { row: 0, col: 3, val: "BD", delay: 1650 },
 ];
 
 export default function BootSequence({ children }: { children: React.ReactNode }) {
   const [loading, setLoading] = useState(true);
-  const [progress, setProgress] = useState(0);
-  const [logIndex, setLogIndex] = useState(0);
+  const [buffer, setBuffer] = useState<string[]>([]);
+  const [activeCell, setActiveCell] = useState<{ row: number; col: number } | null>(null);
+  const [activeRow, setActiveRow] = useState<number | null>(0);
+  const [activeCol, setActiveCol] = useState<number | null>(null);
+  const [timeLeft, setTimeLeft] = useState("63.00");
+  const [v1Uploaded, setV1Uploaded] = useState(false);
+  const [v2Uploaded, setV2Uploaded] = useState(false);
+  const [v3Uploaded, setV3Uploaded] = useState(false);
+  const [breachSuccess, setBreachSuccess] = useState(false);
 
   useEffect(() => {
-    // Early theme application to match system or stored preference immediately
+    // Early theme initialization
     const savedTheme = localStorage.getItem("theme") || "auto";
     const root = document.documentElement;
     if (savedTheme === "light") {
@@ -38,30 +51,73 @@ export default function BootSequence({ children }: { children: React.ReactNode }
       }
     }
 
-    // Smooth sequence (~2.2 seconds total)
-    const timeline = [
-      { p: 12, delay: 250, log: 0 },
-      { p: 34, delay: 600, log: 1 },
-      { p: 58, delay: 1050, log: 2 },
-      { p: 78, delay: 1500, log: 3 },
-      { p: 92, delay: 1850, log: 4 },
-      { p: 100, delay: 2200, log: 5 },
-    ];
-
     const timers: NodeJS.Timeout[] = [];
 
-    timeline.forEach(({ p, delay, log }) => {
-      const timer = setTimeout(() => {
-        setProgress(p);
-        setLogIndex(log);
-        if (p === 100) {
-          setTimeout(() => setLoading(false), 450);
+    // Rapid countdown timer animation
+    const interval = setInterval(() => {
+      setTimeLeft((prev) => {
+        const val = parseFloat(prev) - 0.42;
+        if (val <= 0) {
+          clearInterval(interval);
+          return "00.00";
         }
-      }, delay);
-      timers.push(timer);
-    });
+        return val.toFixed(2);
+      });
+    }, 50);
 
-    return () => timers.forEach(clearTimeout);
+    // Step 1: select 55
+    timers.push(
+      setTimeout(() => {
+        setActiveRow(4);
+        setActiveCell({ row: 4, col: 0 });
+        setBuffer(["55"]);
+      }, 350)
+    );
+
+    // Step 2: select 1C (completes V1)
+    timers.push(
+      setTimeout(() => {
+        setActiveCol(1);
+        setActiveCell({ row: 4, col: 1 });
+        setBuffer(["55", "1C"]);
+        setV1Uploaded(true);
+      }, 800)
+    );
+
+    // Step 3: select E9
+    timers.push(
+      setTimeout(() => {
+        setActiveRow(3);
+        setActiveCol(null);
+        setActiveCell({ row: 3, col: 3 });
+        setBuffer(["55", "1C", "E9"]);
+      }, 1250)
+    );
+
+    // Step 4: select BD (completes V2 & V3)
+    timers.push(
+      setTimeout(() => {
+        setActiveRow(null);
+        setActiveCol(3);
+        setActiveCell({ row: 0, col: 3 });
+        setBuffer(["55", "1C", "E9", "BD"]);
+        setV2Uploaded(true);
+        setV3Uploaded(true);
+        setBreachSuccess(true);
+      }, 1700)
+    );
+
+    // Fade out and grant access
+    timers.push(
+      setTimeout(() => {
+        setLoading(false);
+      }, 2350)
+    );
+
+    return () => {
+      clearInterval(interval);
+      timers.forEach(clearTimeout);
+    };
   }, []);
 
   return (
@@ -69,72 +125,203 @@ export default function BootSequence({ children }: { children: React.ReactNode }
       <AnimatePresence>
         {loading && (
           <motion.div
-            key="boot-screen"
+            key="breach-screen"
             initial={{ opacity: 1 }}
-            exit={{ opacity: 0, filter: "blur(12px)", scale: 1.02 }}
-            transition={{ duration: 0.5, ease: "easeInOut" }}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-main text-primary font-mono overflow-hidden"
+            exit={{ opacity: 0, scale: 1.03, filter: "blur(10px)" }}
+            transition={{ duration: 0.45, ease: "easeInOut" }}
+            className="fixed inset-0 z-[100000] flex items-center justify-center bg-[#070908] text-[#9FEF00] font-mono overflow-hidden select-none p-4 sm:p-8"
           >
-            {/* Ambient Background Grid & Scanlines */}
-            <div className="absolute inset-0 bg-scanlines bg-dot-grid opacity-60 pointer-events-none" />
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-accent-cyan/10 rounded-full blur-[140px] pointer-events-none" />
+            {/* Background Scanlines & CRT Distortion */}
+            <div className="absolute inset-0 bg-scanlines opacity-50 pointer-events-none" />
+            <div className="absolute inset-0 bg-[radial-gradient(#9FEF00_0.8px,transparent_0.8px)] [background-size:24px_24px] opacity-10 pointer-events-none" />
 
-            {/* Central High-Tech Terminal Container */}
-            <div className="relative z-10 w-full max-w-lg mx-6 p-6 sm:p-8 border border-border-subtle bg-secondary/95 cyber-card shadow-[0_0_60px_rgba(0,0,0,0.4)]">
-              {/* Header Telemetry */}
-              <div className="flex items-center justify-between border-b border-border-subtle pb-4 mb-6 text-xs text-muted">
-                <div className="flex items-center gap-2.5">
-                  <span className="w-2.5 h-2.5 rounded-full bg-accent-cyan animate-pulse shadow-[0_0_10px_rgba(0,240,255,0.9)]" />
-                  <span className="text-primary font-bold tracking-wider">NODE // 0XRIYORU</span>
+            {/* Main Cyberpunk Breach Protocol Frame */}
+            <div className="relative z-10 w-full max-w-4xl border-2 border-[#9FEF00]/80 bg-[#090D09]/95 p-4 sm:p-6 shadow-[0_0_50px_rgba(159,239,0,0.25)]">
+              {/* Top Header Bar */}
+              <div className="flex flex-wrap items-center justify-between gap-3 border-b-2 border-[#9FEF00]/50 pb-3 mb-5 text-xs">
+                <div className="flex items-center gap-3">
+                  <span className="font-black text-sm tracking-widest bg-[#9FEF00] text-black px-2 py-0.5">
+                    NET===TECH
+                  </span>
+                  <span className="text-[#9FEF00]/70 text-[11px] hidden sm:inline">
+                    // NEURAL_DAEMON_INTERFACE
+                  </span>
                 </div>
-                <span className="text-[10px] text-accent-yellow font-bold tracking-widest px-2 py-0.5 border border-accent-yellow/30 bg-accent-yellow/10">
-                  BOOT_SEQ // v4.8
-                </span>
+
+                <div className="bg-[#9FEF00] text-black px-4 py-1 text-xs font-black tracking-wider uppercase shadow-[0_0_10px_rgba(159,239,0,0.5)]">
+                  BREACH PROTOCOL INTERFACE
+                </div>
+
+                <div className="text-[10px] text-[#9FEF00]/60 tracking-widest hidden md:inline">
+                  PROTOCOL 6120-AA4 // NODE_0XRIYORU
+                </div>
               </div>
 
-              {/* Status & Progress Percentage */}
-              <div className="flex justify-between items-end mb-2.5 text-xs font-mono">
-                <span className="text-accent-cyan font-bold flex items-center gap-1.5 truncate max-w-[320px]">
-                  <span>&gt;</span>
-                  <span className="truncate">{bootLogs[logIndex]}</span>
-                </span>
-                <span className="text-primary font-bold text-base tracking-wider">{progress}%</span>
-              </div>
+              {/* Upper HUD Row: Timer & Buffer */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6 border-b border-[#9FEF00]/30 pb-5">
+                {/* Breach Time Remaining */}
+                <div className="border border-[#9FEF00]/40 bg-black/50 p-3.5 flex flex-col justify-between">
+                  <span className="text-[10px] tracking-wider text-[#9FEF00]/70 uppercase">
+                    BREACH TIME REMAINING
+                  </span>
+                  <div className="text-2xl sm:text-3xl font-black tracking-widest text-[#9FEF00] mt-1 font-mono">
+                    {timeLeft}
+                  </div>
+                </div>
 
-              {/* Futuristic Cyber Progress Bar */}
-              <div className="w-full h-2.5 bg-main border border-border-subtle p-0.5 overflow-hidden mb-6">
-                <motion.div
-                  className="h-full bg-accent-cyan shadow-[0_0_14px_rgba(0,240,255,0.9)]"
-                  initial={{ width: "0%" }}
-                  animate={{ width: `${progress}%` }}
-                  transition={{ ease: "easeOut", duration: 0.3 }}
-                />
-              </div>
-
-              {/* Telemetry Output Log Window */}
-              <div className="space-y-1.5 bg-main/90 p-3.5 border border-border-subtle text-[11px] font-mono">
-                {bootLogs.slice(0, logIndex + 1).map((log, i) => (
-                  <motion.div
-                    key={i}
-                    initial={{ opacity: 0, x: -6 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    className="flex items-center gap-2"
-                  >
-                    <span className="text-accent-cyan font-bold text-[10px]">[OK]</span>
-                    <span
-                      className={`truncate ${
-                        i === logIndex ? "text-accent-yellow font-bold" : "text-muted"
-                      }`}
-                    >
-                      {log}
+                {/* Buffer Slots */}
+                <div className="md:col-span-2 border border-[#9FEF00]/40 bg-black/50 p-3.5">
+                  <div className="flex justify-between items-center mb-2">
+                    <span className="text-[10px] tracking-wider text-[#9FEF00]/70 uppercase">
+                      BUFFER MEMORY
                     </span>
-                  </motion.div>
-                ))}
+                    <span className="text-[10px] text-[#9FEF00]/60">CAPACITY: 6 BYTES</span>
+                  </div>
+                  <div className="flex gap-2">
+                    {[0, 1, 2, 3, 4, 5].map((idx) => {
+                      const val = buffer[idx];
+                      return (
+                        <div
+                          key={idx}
+                          className={`w-10 h-10 sm:w-11 sm:h-11 border flex items-center justify-center font-bold text-sm sm:text-base font-mono transition-all ${
+                            val
+                              ? "border-[#9FEF00] bg-[#9FEF00] text-black shadow-[0_0_10px_rgba(159,239,0,0.6)]"
+                              : "border-[#9FEF00]/30 text-[#9FEF00]/20 bg-black/40"
+                          }`}
+                        >
+                          {val || "--"}
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
               </div>
 
-              <div className="mt-4 flex justify-between items-center text-[10px] text-muted font-mono">
-                <span>SECURITY: ENCRYPTED</span>
-                <span className="animate-pulse text-accent-pink">STANDBY...</span>
+              {/* Lower Section: Code Matrix & Sequence Required */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {/* Left: Code Matrix */}
+                <div className="border border-[#9FEF00]/40 bg-black/60 p-4">
+                  <div className="flex justify-between items-center mb-3 text-xs border-b border-[#9FEF00]/30 pb-2">
+                    <span className="font-bold uppercase tracking-wider text-[#9FEF00]">
+                      CODE MATRIX
+                    </span>
+                    <span className="text-[10px] text-[#9FEF00]/60">5x5 GRID</span>
+                  </div>
+
+                  <div className="grid grid-rows-5 gap-2 font-mono text-sm sm:text-base font-bold">
+                    {matrixGrid.map((rowArr, rIdx) => {
+                      const isRowHighlight = activeRow === rIdx;
+                      return (
+                        <div
+                          key={rIdx}
+                          className={`grid grid-cols-5 gap-2 p-1 transition-colors ${
+                            isRowHighlight ? "bg-[#9FEF00]/15" : ""
+                          }`}
+                        >
+                          {rowArr.map((byte, cIdx) => {
+                            const isCellActive =
+                              activeCell?.row === rIdx && activeCell?.col === cIdx;
+                            const isColHighlight = activeCol === cIdx;
+
+                            return (
+                              <div
+                                key={cIdx}
+                                className={`h-8 sm:h-9 flex items-center justify-center border transition-all ${
+                                  isCellActive
+                                    ? "border-[#00F0FF] bg-[#00F0FF] text-black font-black shadow-[0_0_12px_#00F0FF] scale-105"
+                                    : isColHighlight
+                                    ? "border-[#9FEF00] bg-[#9FEF00]/20 text-[#9FEF00]"
+                                    : "border-transparent text-[#9FEF00]/80 hover:text-[#9FEF00]"
+                                }`}
+                              >
+                                {byte}
+                              </div>
+                            );
+                          })}
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                {/* Right: Sequence Required to Upload */}
+                <div className="border border-[#9FEF00]/40 bg-black/60 p-4 flex flex-col justify-between">
+                  <div>
+                    <div className="flex justify-between items-center mb-4 text-xs border-b border-[#9FEF00]/30 pb-2">
+                      <span className="font-bold uppercase tracking-wider text-[#9FEF00]">
+                        SEQUENCE REQUIRED TO UPLOAD
+                      </span>
+                      <span className="text-[10px] text-[#9FEF00]/60">DAEMONS: 3</span>
+                    </div>
+
+                    <div className="space-y-3 font-mono text-xs">
+                      {/* Daemon V1 */}
+                      <div
+                        className={`p-2.5 border transition-all flex items-center justify-between ${
+                          v1Uploaded
+                            ? "border-[#9FEF00] bg-[#9FEF00]/15 shadow-[0_0_10px_rgba(159,239,0,0.3)]"
+                            : "border-[#9FEF00]/30 bg-black/40"
+                        }`}
+                      >
+                        <div className="flex items-center gap-3">
+                          <span className="text-sm font-bold tracking-wider">55 1C</span>
+                          <span className="text-[10px] text-[#9FEF00]/70">DATAMINE_V1 (BASIC)</span>
+                        </div>
+                        <span className={`text-[10px] font-bold ${v1Uploaded ? "text-[#9FEF00]" : "text-[#9FEF00]/40"}`}>
+                          {v1Uploaded ? "[INSTALLED]" : "[PENDING]"}
+                        </span>
+                      </div>
+
+                      {/* Daemon V2 */}
+                      <div
+                        className={`p-2.5 border transition-all flex items-center justify-between ${
+                          v2Uploaded
+                            ? "border-[#9FEF00] bg-[#9FEF00]/15 shadow-[0_0_10px_rgba(159,239,0,0.3)]"
+                            : "border-[#9FEF00]/30 bg-black/40"
+                        }`}
+                      >
+                        <div className="flex items-center gap-3">
+                          <span className="text-sm font-bold tracking-wider">1C E9 BD</span>
+                          <span className="text-[10px] text-[#9FEF00]/70">DATAMINE_V2 (ADVANCED)</span>
+                        </div>
+                        <span className={`text-[10px] font-bold ${v2Uploaded ? "text-[#9FEF00]" : "text-[#9FEF00]/40"}`}>
+                          {v2Uploaded ? "[INSTALLED]" : "[PENDING]"}
+                        </span>
+                      </div>
+
+                      {/* Daemon V3 */}
+                      <div
+                        className={`p-2.5 border transition-all flex items-center justify-between ${
+                          v3Uploaded
+                            ? "border-[#9FEF00] bg-[#9FEF00]/15 shadow-[0_0_10px_rgba(159,239,0,0.3)]"
+                            : "border-[#9FEF00]/30 bg-black/40"
+                        }`}
+                      >
+                        <div className="flex items-center gap-3">
+                          <span className="text-sm font-bold tracking-wider">BD BD 55</span>
+                          <span className="text-[10px] text-[#9FEF00]/70">DATAMINE_V3 (ROOT_ACCESS)</span>
+                        </div>
+                        <span className={`text-[10px] font-bold ${v3Uploaded ? "text-[#9FEF00]" : "text-[#9FEF00]/40"}`}>
+                          {v3Uploaded ? "[INSTALLED]" : "[PENDING]"}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Status Banner */}
+                  <div className="mt-4 pt-3 border-t border-[#9FEF00]/30 text-center font-mono">
+                    {breachSuccess ? (
+                      <div className="text-xs sm:text-sm font-black text-[#00F0FF] tracking-wider animate-pulse flex items-center justify-center gap-2">
+                        <span>●</span>
+                        <span>BREACH SUCCESSFUL // CONNECTING TO NODE_0XRIYORU...</span>
+                      </div>
+                    ) : (
+                      <div className="text-[11px] text-[#9FEF00]/70 tracking-wider">
+                        BYPASSING ICE & DECRYPTING PORTFOLIO SCHEMAS...
+                      </div>
+                    )}
+                  </div>
+                </div>
               </div>
             </div>
           </motion.div>
