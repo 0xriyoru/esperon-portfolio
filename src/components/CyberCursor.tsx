@@ -63,6 +63,8 @@ export default function CyberCursor() {
       setIsHovered(!!isInteractive);
     };
 
+    document.documentElement.classList.add("cyber-cursor-active");
+
     window.addEventListener("mousemove", onMouseMove, { passive: true });
     window.addEventListener("mousedown", onMouseDown);
     window.addEventListener("mouseup", onMouseUp);
@@ -71,6 +73,7 @@ export default function CyberCursor() {
     document.body.addEventListener("mouseenter", onMouseEnter);
 
     return () => {
+      document.documentElement.classList.remove("cyber-cursor-active");
       cancelAnimationFrame(rafId);
       window.removeEventListener("mousemove", onMouseMove);
       window.removeEventListener("mousedown", onMouseDown);

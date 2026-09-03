@@ -99,3 +99,19 @@ body {
   color: var(--theme-primary);
   transition: background-color 0.2s ease, color 0.2s ease;
 }
+
+@media (pointer: fine) {
+  html.cyber-cursor-active,
+  html.cyber-cursor-active body,
+  html.cyber-cursor-active a,
+  html.cyber-cursor-active button,
+  html.cyber-cursor-active input,
+  html.cyber-cursor-active [role="button"] {
+    cursor: none !important;
+  }
+}
+
+:focus-visible {
+  outline: 2px solid var(--theme-accent-cyan);
+  outline-offset: 2px;
+}

@@ -279,6 +279,13 @@ export default function BootSequence({ children }: { children: React.ReactNode }
     audioRef.current = new CyberpunkAudioEngine();
     setupPuzzle();
 
+    // Check if user has already seen/completed boot in this session
+    try {
+      if (sessionStorage.getItem("portfolio_boot_seen") === "true") {
+        setPhase("DONE");
+      }
+    } catch {}
+
     // Early theme initialization
     const savedTheme = localStorage.getItem("theme") || "auto";
     const root = document.documentElement;
@@ -309,9 +316,29 @@ export default function BootSequence({ children }: { children: React.ReactNode }
       });
     }, 100);
 
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        try {
+          sessionStorage.setItem("portfolio_boot_seen", "true");
+        } catch {}
+        audioRef.current?.playSelect();
+        setPhase("DONE");
+      }
+    };
+
+    const handleReboot = () => {
+      setupPuzzle();
+      setPhase("PROMPT");
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    window.addEventListener("portfolio:reboot", handleReboot);
+
     return () => {
       clearInterval(timerInterval);
       autoSolverTimers.current.forEach(clearTimeout);
+      window.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("portfolio:reboot", handleReboot);
     };
   }, []);
 
@@ -359,6 +386,9 @@ export default function BootSequence({ children }: { children: React.ReactNode }
           if (idx === solutionPath.length - 1) {
             setBreachSuccess(true);
             audioRef.current?.playBreachSuccess();
+            try {
+              sessionStorage.setItem("portfolio_boot_seen", "true");
+            } catch {}
             setTimeout(() => setPhase("DONE"), 900);
           }
         }, idx * 420)
@@ -368,6 +398,9 @@ export default function BootSequence({ children }: { children: React.ReactNode }
 
   // Choice 3: Direct Instant Access
   const handleDirectAccess = () => {
+    try {
+      sessionStorage.setItem("portfolio_boot_seen", "true");
+    } catch {}
     audioRef.current?.playSelect();
     setPhase("DONE");
   };
@@ -551,16 +584,22 @@ export default function BootSequence({ children }: { children: React.ReactNode }
                       </span>
                     </button>
 
-                    {/* Choice 3: Direct Instant Entry */}
+                    {/* Choice 3: Direct Instant Entry / Recruiter Fast-Pass */}
                     <button
                       onClick={handleDirectAccess}
-                      className="w-full text-left p-3.5 border border-border-subtle bg-black/20 hover:border-accent-cyan hover:text-accent-cyan group transition-colors flex items-center justify-between text-xs"
+                      className="w-full text-left p-3.5 border border-accent-cyan/70 bg-accent-cyan/15 hover:bg-accent-cyan hover:text-black group transition-all duration-150 flex items-center justify-between text-xs font-bold shadow-[0_0_12px_rgba(0,240,255,0.15)] cursor-pointer"
                     >
-                      <div className="flex items-center gap-2">
-                        <span className="text-muted">[03]</span>
-                        <span>DIRECT ICE-BYPASS (INSTANT ACCESS)</span>
+                      <div className="flex items-center gap-2.5">
+                        <span className="px-1.5 py-0.5 bg-black/80 border border-accent-cyan text-accent-cyan group-hover:bg-black group-hover:text-accent-cyan text-[10px] font-mono">
+                          ESC
+                        </span>
+                        <span className="text-white group-hover:text-black tracking-wide">
+                          RECRUITER FAST-PASS // DIRECT ENTRY
+                        </span>
                       </div>
-                      <span className="text-muted group-hover:text-accent-cyan">SKIP INTRO →</span>
+                      <span className="text-accent-cyan group-hover:text-black tracking-wider text-[11px]">
+                        SKIP INTRO →
+                      </span>
                     </button>
                   </div>
                 </div>

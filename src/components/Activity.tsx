@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { GitHubCalendar } from "react-github-calendar";
 
@@ -8,6 +8,23 @@ const availableYears = ["last", "2026", "2025", "2024"];
 
 export default function Activity() {
   const [selectedYear, setSelectedYear] = useState<string>("last");
+  const [isLightMode, setIsLightMode] = useState(false);
+
+  useEffect(() => {
+    const checkTheme = () => {
+      setIsLightMode(document.documentElement.classList.contains("light"));
+    };
+    checkTheme();
+
+    const observer = new MutationObserver(checkTheme);
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
+    window.addEventListener("theme-change", checkTheme);
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("theme-change", checkTheme);
+    };
+  }, []);
 
   return (
     <div className="w-full">
@@ -51,9 +68,10 @@ export default function Activity() {
           <GitHubCalendar
             username="0xriyoru"
             year={selectedYear === "last" ? undefined : Number(selectedYear)}
-            colorScheme="dark"
+            colorScheme={isLightMode ? "light" : "dark"}
             theme={{
               dark: ["#121212", "#4d0012", "#990024", "#cc0030", "#FF003C"],
+              light: ["#D8D8CF", "#FCA5A5", "#EF4444", "#DC2626", "#991B1B"],
             }}
             blockSize={10.5}
             blockMargin={3}

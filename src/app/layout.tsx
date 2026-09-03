@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import Sidebar from "@/components/Sidebar";
+import MobileNav from "@/components/MobileNav";
+import CommandPalette from "@/components/CommandPalette";
 import PageWrapper from "@/components/PageWrapper";
 import BootSequence from "@/components/BootSequence";
 import CyberCursor from "@/components/CyberCursor";
@@ -34,13 +36,15 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark scroll-smooth">
       <body
-        className={`${inter.variable} ${jetBrainsMono.variable} antialiased min-h-screen flex bg-scanlines bg-dot-grid`}
+        className={`${inter.variable} ${jetBrainsMono.variable} antialiased min-h-screen flex flex-col lg:flex-row bg-scanlines bg-dot-grid`}
       >
         <CyberCursor />
         <CyberBackgroundCanvas />
         <BootSequence>
+          <CommandPalette />
+          <MobileNav />
           <Sidebar />
-          <main className="flex-1 overflow-y-auto h-screen scroll-smooth">
+          <main className="flex-1 overflow-y-auto h-screen scroll-smooth w-full">
             <PageWrapper>
               {children}
             </PageWrapper>
