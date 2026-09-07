@@ -3,35 +3,61 @@
 import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabase";
 import { motion } from "framer-motion";
-
-type Project = {
-  id: string;
-  title: string;
-  description: string;
-  type: string;
-  tags: string[];
-  status: string;
-  link: string;
-  domain: string;
-  image_url: string;
-};
+import { staticProjects, Project } from "@/data/projectsData";
 
 export default function Projects() {
-  const [projects, setProjects] = useState<Project[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [projects, setProjects] = useState<Project[]>(staticProjects);
   const [activeFilter, setActiveFilter] = useState<string>("ALL");
 
   useEffect(() => {
     const fetchProjects = async () => {
-      const { data, error } = await supabase
-        .from("projects")
-        .select("*")
-        .order("created_at", { ascending: true });
+      try {
+        const { data, error } = await supabase
+          .from("projects")
+          .select("*")
+          .order("created_at", { ascending: true });
 
-      if (!error && data) {
-        setProjects(data);
+        if (!error && data && data.length > 0) {
+          // Merge dynamic Supabase rows with rich static architecture highlights
+          setProjects((prev) => {
+            const merged = [...prev];
+            data.forEach((remote) => {
+              const existingIndex = merged.findIndex(
+                (p) =>
+                  p.id === remote.id ||
+                  p.title?.toLowerCase() === remote.title?.toLowerCase()
+              );
+              if (existingIndex >= 0) {
+                merged[existingIndex] = {
+                  ...merged[existingIndex],
+                  ...remote,
+                  // Preserve detailed architecture & highlights if remote is minimal
+                  architecture:
+                    merged[existingIndex].architecture || remote.type || "Full-Stack System",
+                  highlights:
+                    merged[existingIndex].highlights || remote.highlights || [],
+                };
+              } else {
+                merged.push({
+                  id: remote.id,
+                  title: remote.title,
+                  type: remote.type || "Web System",
+                  architecture: remote.type || "System Architecture",
+                  description: remote.description || "",
+                  highlights: remote.highlights || [],
+                  tags: remote.tags || [],
+                  status: (remote.status?.toUpperCase() as Project["status"]) || "DEVELOPMENT",
+                  link: remote.link,
+                  domain: remote.domain,
+                });
+              }
+            });
+            return merged;
+          });
+        }
+      } catch {
+        // Graceful fallback: staticProjects is already loaded
       }
-      setLoading(false);
     };
 
     fetchProjects();
@@ -67,9 +93,9 @@ export default function Projects() {
           <button
             key={f}
             onClick={() => setActiveFilter(f)}
-            className={`px-3 py-1 border transition-colors ${
+            className={`px-3 py-1 border rounded transition-colors ${
               activeFilter === f
-                ? "border-accent-yellow bg-accent-yellow/15 text-accent-yellow font-bold shadow-[0_0_8px_rgba(252,238,9,0.2)]"
+                ? "border-accent-cyan bg-accent-cyan/15 text-accent-cyan font-bold shadow-[0_0_8px_rgba(6,182,212,0.2)]"
                 : "border-border-subtle bg-secondary text-muted hover:text-primary hover:border-muted"
             }`}
           >
@@ -78,103 +104,139 @@ export default function Projects() {
         ))}
       </div>
 
-      {loading ? (
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          {[1, 2].map((i) => (
-            <div
-              key={i}
-              className="h-[360px] border border-border-subtle bg-secondary animate-pulse flex items-center justify-center cyber-card"
-            >
-              <span className="font-mono text-accent-cyan text-xs">&gt; QUERYING PROJECTS SCHEMA...</span>
-            </div>
-          ))}
-        </div>
-      ) : filteredProjects.length === 0 ? (
-        <div className="p-8 border border-border-subtle bg-secondary text-center font-mono text-muted text-sm cyber-card">
+      {filteredProjects.length === 0 ? (
+        <div className="p-8 border border-border-subtle bg-secondary rounded-lg text-center font-mono text-muted text-sm">
           No projects found under status: {activeFilter}
         </div>
       ) : (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {filteredProjects.map((project, i) => (
-            <motion.a
-              href={project.link || undefined}
-              target={project.link ? "_blank" : undefined}
-              rel={project.link ? "noopener noreferrer" : undefined}
+            <motion.div
               key={project.id}
               initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-40px" }}
-              transition={{ duration: 0.3, delay: i * 0.06 }}
-              className={`group relative border border-border-subtle bg-secondary flex flex-col min-h-[360px] transition-all duration-200 overflow-hidden cyber-card ${
-                project.link
-                  ? "hover:border-accent-yellow hover:shadow-[0_0_20px_rgba(252,238,9,0.1)] cursor-pointer"
-                  : "cursor-default"
-              }`}
+              transition={{ duration: 0.3, delay: i * 0.05 }}
+              className="group relative border border-border-subtle bg-secondary/90 hover:border-accent-cyan/50 transition-all duration-200 rounded-lg flex flex-col justify-between overflow-hidden shadow-[0_4px_24px_rgba(0,0,0,0.3)]"
             >
-              {/* Top Header - Domain & Link Arrow */}
-              <div className="flex justify-between items-center p-4 border-b border-border-subtle font-mono text-xs text-muted bg-main/40">
-                <span className="truncate max-w-[240px] text-[11px]">{project.domain || "INTERNAL"}</span>
-                <span
-                  className={`text-sm ${
-                    project.link
-                      ? "group-hover:text-accent-yellow group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"
-                      : "opacity-0"
-                  }`}
-                >
-                  ↗
-                </span>
-              </div>
-
-              {/* Main Body */}
-              <div className="flex flex-col flex-1 p-6">
-                <h3
-                  className={`font-mono font-bold text-2xl text-primary mb-1.5 transition-colors ${
-                    project.link ? "group-hover:text-accent-yellow" : ""
-                  }`}
-                >
-                  {project.title}
-                </h3>
-                <div className="text-xs font-mono text-accent-cyan mb-4 font-bold tracking-wider">
-                  {project.type}
-                </div>
-
-                <p className="text-muted text-xs md:text-sm leading-relaxed flex-1 mb-6 font-sans">
-                  {project.description}
-                </p>
-
-                {/* Bottom Section - Status & Tags */}
-                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 mt-auto pt-4 border-t border-border-subtle/60">
-                  <div className="flex flex-wrap gap-1.5 order-2 sm:order-1">
-                    {project.tags?.map((tag, idx) => (
-                      <span
-                        key={idx}
-                        className={`px-2 py-0.5 text-[9px] font-mono border border-border-subtle bg-main text-muted transition-colors ${
-                          project.link ? "group-hover:border-accent-yellow/30" : ""
-                        }`}
-                      >
-                        {tag.toUpperCase()}
-                      </span>
-                    ))}
-                  </div>
-
-                  <div className="flex items-center gap-2 font-mono text-[10px] tracking-widest text-muted order-1 sm:order-2 shrink-0">
+              <div>
+                {/* Top Header - Domain / Classification & Status Pill */}
+                <div className="flex justify-between items-center px-5 py-3.5 border-b border-border-subtle/80 bg-main/50 font-mono text-xs">
+                  <span className="truncate max-w-[220px] text-[11px] text-muted tracking-wider">
+                    {project.domain || "ENGINEERING PROJECT"}
+                  </span>
+                  <div className="flex items-center gap-2 text-[10px] tracking-widest uppercase shrink-0">
                     <span
-                      className={`w-2 h-2 rounded-full ${
-                        project.status?.toLowerCase() === "deployed"
-                          ? "bg-accent-cyan animate-[pulse_2s_ease-in-out_infinite] shadow-[0_0_6px_rgba(0,240,255,0.8)]"
-                          : project.status?.toLowerCase() === "development"
-                          ? "bg-accent-pink shadow-[0_0_6px_rgba(255,0,60,0.8)]"
+                      className={`w-1.5 h-1.5 rounded-full ${
+                        project.status === "DEPLOYED"
+                          ? "bg-accent-cyan shadow-[0_0_6px_rgba(6,182,212,0.8)]"
+                          : project.status === "DEVELOPMENT"
+                          ? "bg-accent-yellow shadow-[0_0_6px_rgba(245,158,11,0.8)]"
                           : "bg-muted"
                       }`}
                     />
-                    <span className="text-[10px] uppercase">{project.status || "DEVELOPMENT"}</span>
+                    <span
+                      className={
+                        project.status === "DEPLOYED"
+                          ? "text-accent-cyan font-bold"
+                          : project.status === "DEVELOPMENT"
+                          ? "text-accent-yellow font-bold"
+                          : "text-muted"
+                      }
+                    >
+                      {project.status === "DEPLOYED"
+                        ? "PRODUCTION"
+                        : project.status === "DEVELOPMENT"
+                        ? "IN PROGRESS"
+                        : "ARCHIVED"}
+                    </span>
                   </div>
                 </div>
+
+                {/* Main Card Body */}
+                <div className="p-5 sm:p-6">
+                  <div className="flex flex-col gap-2 mb-4">
+                    <h3 className="font-mono font-bold text-2xl text-primary group-hover:text-accent-cyan transition-colors">
+                      {project.title}
+                    </h3>
+                    {project.architecture && (
+                      <div className="text-[10px] font-mono text-accent-cyan/90 bg-accent-cyan/10 border border-accent-cyan/20 px-2.5 py-1 rounded inline-flex items-center gap-1.5 w-fit">
+                        <span className="font-bold">ARCH:</span>
+                        <span>{project.architecture}</span>
+                      </div>
+                    )}
+                  </div>
+
+                  <p className="text-muted text-xs md:text-sm leading-relaxed mb-4 font-sans">
+                    {project.description}
+                  </p>
+
+                  {/* Architecture & Engineering Highlights */}
+                  {project.highlights && project.highlights.length > 0 && (
+                    <div className="space-y-1.5 mb-5 pt-3 border-t border-border-subtle/40">
+                      {project.highlights.map((item, hIdx) => (
+                        <div key={hIdx} className="flex items-start gap-2 text-xs text-muted/90 font-sans">
+                          <span className="text-accent-cyan text-[10px] select-none mt-0.5">▹</span>
+                          <span className="leading-snug">{item}</span>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
               </div>
-            </motion.a>
+
+              {/* Bottom Footer - Tech Tags & Action Buttons */}
+              <div className="px-5 sm:px-6 pb-5 pt-3 border-t border-border-subtle/50 bg-main/20 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                <div className="flex flex-wrap gap-1.5">
+                  {project.tags?.map((tag, idx) => (
+                    <span
+                      key={idx}
+                      className="px-2 py-0.5 text-[9px] font-mono border border-border-subtle bg-secondary text-muted rounded"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+
+                {/* Action Links */}
+                <div className="flex items-center gap-2 font-mono text-xs shrink-0 w-full sm:w-auto justify-end">
+                  {project.confidential ? (
+                    <span className="text-[10px] text-accent-yellow bg-accent-yellow/10 border border-accent-yellow/30 px-2.5 py-1 rounded flex items-center gap-1.5">
+                      <span>CONFIDENTIAL GOV ACCESS 🔒</span>
+                    </span>
+                  ) : (
+                    <>
+                      {project.link && (
+                        <a
+                          href={project.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="px-3 py-1 bg-accent-cyan text-main text-[11px] font-bold rounded hover:brightness-110 transition-all flex items-center gap-1 active:scale-95 shadow-[0_0_8px_rgba(6,182,212,0.2)]"
+                        >
+                          <span>LIVE DEMO</span>
+                          <span>↗</span>
+                        </a>
+                      )}
+                      {project.github && project.github !== project.link && (
+                        <a
+                          href={project.github}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="px-3 py-1 border border-border-subtle bg-secondary text-primary text-[11px] rounded hover:border-accent-cyan hover:text-accent-cyan transition-colors flex items-center gap-1 active:scale-95"
+                        >
+                          <span>SOURCE</span>
+                          <span>↗</span>
+                        </a>
+                      )}
+                    </>
+                  )}
+                </div>
+              </div>
+            </motion.div>
           ))}
         </div>
       )}
     </div>
   );
 }
+

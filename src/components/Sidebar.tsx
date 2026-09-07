@@ -159,13 +159,12 @@ export default function Sidebar() {
             </button>
             <button
               onClick={() => {
-                sessionStorage.removeItem("portfolio_boot_seen");
                 window.dispatchEvent(new CustomEvent("portfolio:reboot"));
               }}
-              className="text-accent-cyan hover:text-accent-yellow transition-colors underline text-[10px]"
-              title="Re-run Boot Sequence / Breach Protocol"
+              className="text-accent-cyan hover:text-accent-yellow transition-colors underline text-[10px] cursor-pointer"
+              title="Launch Cyberpunk Breach Protocol Minigame (Easter Egg)"
             >
-              [REBOOT]
+              [BREACH MINIGAME]
             </button>
           </div>
           <a

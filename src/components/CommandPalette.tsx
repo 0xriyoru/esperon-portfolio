@@ -57,7 +57,6 @@ export default function CommandPalette() {
   };
 
   const relaunchBreach = () => {
-    sessionStorage.removeItem("portfolio_boot_seen");
     window.dispatchEvent(new CustomEvent("portfolio:reboot"));
     setIsOpen(false);
   };
@@ -156,9 +155,9 @@ export default function CommandPalette() {
     {
       id: "act-reboot",
       category: "ACTIONS",
-      label: "Execute Breach Protocol Minigame",
-      detail: "Replay the interactive Cyberpunk ICE breach",
-      shortcut: "REBOOT",
+      label: "Play Cyberpunk Breach Protocol (Minigame)",
+      detail: "Interactive puzzle hacking minigame & neural auto-solver easter egg",
+      shortcut: "GAME",
       action: relaunchBreach,
     },
 

@@ -15,36 +15,36 @@
 }
 
 :root {
-  --theme-main: #050505;
-  --theme-secondary: #101010;
-  --theme-primary: #E0E0E0;
-  --theme-muted: #888888;
-  --theme-border-subtle: #222222;
-  --theme-accent-yellow: #FCEE09;
-  --theme-accent-cyan: #00F0FF;
-  --theme-accent-pink: #FF003C;
+  --theme-main: #0B0C0E;
+  --theme-secondary: #131518;
+  --theme-primary: #EDEDED;
+  --theme-muted: #80858E;
+  --theme-border-subtle: #202328;
+  --theme-accent-yellow: #F59E0B;
+  --theme-accent-cyan: #06B6D4;
+  --theme-accent-pink: #F43F5E;
 }
 
 html.light {
-  --theme-main: #EFEFE9;
-  --theme-secondary: #E3E3DC;
-  --theme-primary: #121212;
-  --theme-muted: #62625C;
-  --theme-border-subtle: #CBCBC2;
-  --theme-accent-yellow: #997A00;
-  --theme-accent-cyan: #008291;
-  --theme-accent-pink: #C4002F;
+  --theme-main: #F7F7F5;
+  --theme-secondary: #EFEFEA;
+  --theme-primary: #111315;
+  --theme-muted: #686C75;
+  --theme-border-subtle: #DCDCD6;
+  --theme-accent-yellow: #D97706;
+  --theme-accent-cyan: #0891B2;
+  --theme-accent-pink: #E11D48;
 }
 
 html.dark {
-  --theme-main: #050505;
-  --theme-secondary: #101010;
-  --theme-primary: #E0E0E0;
-  --theme-muted: #888888;
-  --theme-border-subtle: #222222;
-  --theme-accent-yellow: #FCEE09;
-  --theme-accent-cyan: #00F0FF;
-  --theme-accent-pink: #FF003C;
+  --theme-main: #0B0C0E;
+  --theme-secondary: #131518;
+  --theme-primary: #EDEDED;
+  --theme-muted: #80858E;
+  --theme-border-subtle: #202328;
+  --theme-accent-yellow: #F59E0B;
+  --theme-accent-cyan: #06B6D4;
+  --theme-accent-pink: #F43F5E;
 }
 
 @layer utilities {
@@ -53,8 +53,8 @@ html.dark {
       to bottom,
       rgba(255,255,255,0),
       rgba(255,255,255,0) 50%,
-      rgba(0,0,0,0.06) 50%,
-      rgba(0,0,0,0.06)
+      rgba(0,0,0,0.02) 50%,
+      rgba(0,0,0,0.02)
     );
     background-size: 100% 4px;
   }
@@ -86,11 +86,11 @@ html.dark {
 
 @layer utilities {
   .cyber-button {
-    clip-path: polygon(15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%, 0 15px);
+    border-radius: 4px;
   }
   
   .cyber-card {
-    clip-path: polygon(24px 0, 100% 0, 100% calc(100% - 24px), calc(100% - 24px) 100%, 0 100%, 0 24px);
+    border-radius: 8px;
   }
 }
 
@@ -100,16 +100,6 @@ body {
   transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-@media (pointer: fine) {
-  html.cyber-cursor-active,
-  html.cyber-cursor-active body,
-  html.cyber-cursor-active a,
-  html.cyber-cursor-active button,
-  html.cyber-cursor-active input,
-  html.cyber-cursor-active [role="button"] {
-    cursor: none !important;
-  }
-}
 
 :focus-visible {
   outline: 2px solid var(--theme-accent-cyan);

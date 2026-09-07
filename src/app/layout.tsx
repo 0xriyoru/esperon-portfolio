@@ -6,7 +6,6 @@ import MobileNav from "@/components/MobileNav";
 import CommandPalette from "@/components/CommandPalette";
 import PageWrapper from "@/components/PageWrapper";
 import BootSequence from "@/components/BootSequence";
-import CyberCursor from "@/components/CyberCursor";
 import CyberBackgroundCanvas from "@/components/CyberBackgroundCanvas";
 
 const inter = Inter({
@@ -38,7 +37,6 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${jetBrainsMono.variable} antialiased min-h-screen flex flex-col lg:flex-row bg-scanlines bg-dot-grid`}
       >
-        <CyberCursor />
         <CyberBackgroundCanvas />
         <BootSequence>
           <CommandPalette />

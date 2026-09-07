@@ -238,7 +238,7 @@ class CyberpunkAudioEngine {
 }
 
 export default function BootSequence({ children }: { children: React.ReactNode }) {
-  const [phase, setPhase] = useState<SequencePhase>("PROMPT");
+  const [phase, setPhase] = useState<SequencePhase>("DONE");
   const [mode, setMode] = useState<"MANUAL" | "AUTO">("MANUAL");
 
   const [gridData, setGridData] = useState<string[][]>([]);
@@ -256,6 +256,13 @@ export default function BootSequence({ children }: { children: React.ReactNode }
 
   const audioRef = useRef<CyberpunkAudioEngine | null>(null);
   const autoSolverTimers = useRef<NodeJS.Timeout[]>([]);
+
+  const getAudio = () => {
+    if (!audioRef.current) {
+      audioRef.current = new CyberpunkAudioEngine();
+    }
+    return audioRef.current;
+  };
 
   const setupPuzzle = () => {
     autoSolverTimers.current.forEach(clearTimeout);
@@ -276,16 +283,6 @@ export default function BootSequence({ children }: { children: React.ReactNode }
   };
 
   useEffect(() => {
-    audioRef.current = new CyberpunkAudioEngine();
-    setupPuzzle();
-
-    // Check if user has already seen/completed boot in this session
-    try {
-      if (sessionStorage.getItem("portfolio_boot_seen") === "true") {
-        setPhase("DONE");
-      }
-    } catch {}
-
     // Early theme initialization
     const savedTheme = localStorage.getItem("theme") || "auto";
     const root = document.documentElement;
@@ -306,6 +303,33 @@ export default function BootSequence({ children }: { children: React.ReactNode }
       }
     }
 
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        audioRef.current?.playSelect();
+        setPhase("DONE");
+      }
+    };
+
+    const handleReboot = () => {
+      getAudio();
+      setupPuzzle();
+      setPhase("PROMPT");
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    window.addEventListener("portfolio:reboot", handleReboot);
+
+    return () => {
+      autoSolverTimers.current.forEach(clearTimeout);
+      window.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("portfolio:reboot", handleReboot);
+    };
+  }, []);
+
+  // Timer interval runs strictly during active matrix hacking
+  useEffect(() => {
+    if (phase !== "MATRIX_GAME") return;
+
     const timerInterval = setInterval(() => {
       setTimeLeft((prev) => {
         if (prev <= 0.1) {
@@ -316,43 +340,22 @@ export default function BootSequence({ children }: { children: React.ReactNode }
       });
     }, 100);
 
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
-        try {
-          sessionStorage.setItem("portfolio_boot_seen", "true");
-        } catch {}
-        audioRef.current?.playSelect();
-        setPhase("DONE");
-      }
-    };
-
-    const handleReboot = () => {
-      setupPuzzle();
-      setPhase("PROMPT");
-    };
-
-    window.addEventListener("keydown", handleKeyDown);
-    window.addEventListener("portfolio:reboot", handleReboot);
-
-    return () => {
-      clearInterval(timerInterval);
-      autoSolverTimers.current.forEach(clearTimeout);
-      window.removeEventListener("keydown", handleKeyDown);
-      window.removeEventListener("portfolio:reboot", handleReboot);
-    };
-  }, []);
+    return () => clearInterval(timerInterval);
+  }, [phase]);
 
   // Choice 1: Launch Playable Minigame
   const handleStartMinigame = () => {
-    audioRef.current?.playSelect();
-    audioRef.current?.playStart();
+    const audio = getAudio();
+    audio.playSelect();
+    audio.playStart();
     setMode("MANUAL");
     setPhase("MATRIX_GAME");
   };
 
   // Choice 2: Launch Neural Auto-Solver
   const handleStartAutoSolve = () => {
-    audioRef.current?.playSelect();
+    const audio = getAudio();
+    audio.playSelect();
     audioRef.current?.playStart();
     setMode("AUTO");
     setPhase("MATRIX_GAME");
@@ -515,12 +518,21 @@ export default function BootSequence({ children }: { children: React.ReactNode }
                     </span>
                     <span className="text-xs text-[#9FEF00]/70">// GATEWAY_INITIALIZER</span>
                   </div>
-                  <button
-                    onClick={toggleAudio}
-                    className="text-[10px] border border-[#9FEF00]/40 px-2 py-0.5 hover:bg-[#9FEF00]/20"
-                  >
-                    {audioEnabled ? "AUDIO [ON]" : "AUDIO [MUTE]"}
-                  </button>
+                  <div className="flex items-center gap-2">
+                    <button
+                      onClick={toggleAudio}
+                      className="text-[10px] border border-[#9FEF00]/40 px-2 py-0.5 hover:bg-[#9FEF00]/20"
+                    >
+                      {audioEnabled ? "AUDIO [ON]" : "AUDIO [MUTE]"}
+                    </button>
+                    <button
+                      onClick={() => setPhase("DONE")}
+                      className="text-[10px] text-accent-pink border border-accent-pink/40 px-2 py-0.5 hover:bg-accent-pink/20 font-bold"
+                      title="Close minigame (ESC)"
+                    >
+                      ✕ CLOSE
+                    </button>
+                  </div>
                 </div>
 
                 {/* Telemetry Target Info */}
@@ -652,9 +664,10 @@ export default function BootSequence({ children }: { children: React.ReactNode }
                     </button>
                     <button
                       onClick={handleDirectAccess}
-                      className="text-[10px] text-accent-cyan border border-accent-cyan/50 px-2 py-0.5 hover:bg-accent-cyan/20 font-bold"
+                      className="text-[10px] text-accent-pink border border-accent-pink/50 px-2 py-0.5 hover:bg-accent-pink/20 font-bold transition-colors"
+                      title="Exit minigame (ESC)"
                     >
-                      [SKIP]
+                      [✕ EXIT]
                     </button>
                   </div>
                 </div>
