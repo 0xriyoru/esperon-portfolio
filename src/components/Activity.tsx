@@ -29,35 +29,39 @@ export default function Activity() {
   return (
     <div className="w-full">
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 15 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="border border-border-subtle bg-secondary p-5 md:p-6 cyber-card"
+        className="glass-card p-6"
       >
-        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mb-6 border-b border-border-subtle pb-4">
-          <div className="flex items-center gap-2">
-            <div className="w-2 h-2 bg-accent-pink animate-pulse" />
-            <span className="font-mono text-xs text-muted tracking-widest uppercase">
-              Github Transmission / 0xriyoru
-            </span>
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 border-b border-border-subtle pb-4">
+          <div className="flex items-center gap-2.5">
+            <span className="w-2 h-2 rounded-full bg-accent-emerald animate-pulse" />
+            <a
+              href="https://github.com/0xriyoru"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-xs font-mono text-muted hover:text-primary transition-colors"
+            >
+              github.com/0xriyoru ↗
+            </a>
           </div>
 
           {/* Year selector buttons */}
-          <div className="flex items-center gap-1.5 font-mono text-xs">
-            <span className="text-muted mr-1 text-[11px]">YEAR:</span>
+          <div className="flex items-center gap-1.5 text-xs">
             {availableYears.map((yr) => {
               const isSelected = selectedYear === yr;
               return (
                 <button
                   key={yr}
                   onClick={() => setSelectedYear(yr)}
-                  className={`px-2 py-0.5 border text-[10px] transition-colors ${
+                  className={`px-3 py-1 rounded-md text-xs font-mono transition-colors cursor-pointer ${
                     isSelected
-                      ? "border-accent-cyan bg-accent-cyan/15 text-accent-cyan font-bold shadow-[0_0_8px_rgba(0,240,255,0.3)]"
-                      : "border-border-subtle bg-main text-muted hover:text-primary hover:border-muted"
+                      ? "bg-primary text-main font-semibold shadow-sm"
+                      : "bg-main border border-border-subtle text-muted hover:text-primary"
                   }`}
                 >
-                  {yr === "last" ? "PAST 1Y" : yr}
+                  {yr === "last" ? "Past Year" : yr}
                 </button>
               );
             })}
@@ -70,17 +74,16 @@ export default function Activity() {
             year={selectedYear === "last" ? undefined : Number(selectedYear)}
             colorScheme={isLightMode ? "light" : "dark"}
             theme={{
-              dark: ["#121212", "#4d0012", "#990024", "#cc0030", "#FF003C"],
-              light: ["#D8D8CF", "#FCA5A5", "#EF4444", "#DC2626", "#991B1B"],
+              dark: ["#18181B", "#064e3b", "#047857", "#059669", "#10b981"],
+              light: ["#F4F4F5", "#A7F3D0", "#34D399", "#10B981", "#059669"],
             }}
-            blockSize={10.5}
+            blockSize={11}
             blockMargin={3}
             fontSize={11}
-            blockRadius={0}
+            blockRadius={2}
           />
         </div>
       </motion.div>
     </div>
   );
 }
-
