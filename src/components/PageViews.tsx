@@ -8,12 +8,9 @@ export default function PageViews() {
 
   useEffect(() => {
     const incrementAndFetchViews = async () => {
-      // In a real app, this should ideally be an API route calling an RPC function 
-      // or edge function to avoid exposing the ability to increment arbitrarily.
-      // We will assume an RPC function `increment_page_view` was created in Supabase.
       try {
-        const { data, error } = await supabase.rpc('increment_page_view');
-        
+        const { data, error } = await supabase.rpc("increment_page_view");
+
         if (!error && data !== null) {
           setViews(data);
         }
@@ -21,16 +18,18 @@ export default function PageViews() {
         console.error(e);
       }
     };
-    
+
     incrementAndFetchViews();
   }, []);
 
   if (views === null) return null;
 
   return (
-    <div className="fixed bottom-6 right-6 font-mono text-xs text-muted bg-secondary border border-border-subtle px-3 py-1.5 rounded-sm z-50 shadow-lg flex items-center gap-2">
-      <span className="w-2 h-2 rounded-full bg-accent-cyan animate-pulse" />
-      <span><span className="text-accent-cyan">{views.toLocaleString()}</span> VISITS</span>
+    <div className="fixed bottom-5 right-5 font-mono text-[11px] text-muted bg-secondary/90 backdrop-blur-md border border-border-subtle px-3 py-1.5 rounded-full z-30 shadow-lg flex items-center gap-2">
+      <span className="w-1.5 h-1.5 rounded-full bg-accent-emerald animate-pulse" />
+      <span>
+        <span className="text-primary font-semibold">{views.toLocaleString()}</span> visits
+      </span>
     </div>
   );
 }
