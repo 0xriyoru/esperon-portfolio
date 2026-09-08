@@ -5,7 +5,6 @@ import Sidebar from "@/components/Sidebar";
 import MobileNav from "@/components/MobileNav";
 import CommandPalette from "@/components/CommandPalette";
 import PageWrapper from "@/components/PageWrapper";
-import BootSequence from "@/components/BootSequence";
 import CyberBackgroundCanvas from "@/components/CyberBackgroundCanvas";
 
 const inter = Inter({
@@ -19,8 +18,8 @@ const jetBrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Rhodge Esperon | AI & Full-Stack Developer",
-  description: "Personal portfolio of Rhodge Esperon. Building intelligent systems, AI agents, and secure applications.",
+  title: "Rhodge Esperon | Full-Stack & AI Systems Developer",
+  description: "Personal portfolio of Rhodge Esperon. Engineering production web platforms, agentic AI workflows, and resilient systems.",
   icons: {
     icon: "/icon.png",
     apple: "/icon.png",
@@ -35,19 +34,17 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark scroll-smooth">
       <body
-        className={`${inter.variable} ${jetBrainsMono.variable} antialiased min-h-screen flex flex-col lg:flex-row bg-scanlines bg-dot-grid`}
+        className={`${inter.variable} ${jetBrainsMono.variable} antialiased min-h-screen flex flex-col lg:flex-row bg-main text-primary relative overflow-x-hidden`}
       >
         <CyberBackgroundCanvas />
-        <BootSequence>
-          <CommandPalette />
-          <MobileNav />
-          <Sidebar />
-          <main className="flex-1 overflow-y-auto h-screen scroll-smooth w-full">
-            <PageWrapper>
-              {children}
-            </PageWrapper>
-          </main>
-        </BootSequence>
+        <CommandPalette />
+        <MobileNav />
+        <Sidebar />
+        <main className="flex-1 overflow-y-auto h-screen scroll-smooth w-full relative z-10">
+          <PageWrapper>
+            {children}
+          </PageWrapper>
+        </main>
       </body>
     </html>
   );
