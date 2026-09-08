@@ -1,7 +1,7 @@
 "use client";
+
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import { motion } from "framer-motion";
 import PageViews from "@/components/PageViews";
 import Projects from "@/components/Projects";
 import Skills from "@/components/Skills";
@@ -10,6 +10,7 @@ import Activity from "@/components/Activity";
 
 export default function Home() {
   const [timeStr, setTimeStr] = useState<string>("");
+  const [copiedEmail, setCopiedEmail] = useState(false);
 
   useEffect(() => {
     const updateTime = () => {
@@ -29,183 +30,175 @@ export default function Home() {
     return () => clearInterval(interval);
   }, []);
 
+  const handleCopyEmail = () => {
+    navigator.clipboard.writeText("rhodgesperon@gmail.com");
+    setCopiedEmail(true);
+    setTimeout(() => setCopiedEmail(false), 2000);
+  };
+
   return (
-    <div className="flex flex-col gap-16 sm:gap-24 pb-24">
-      {/* Hero / Profile Section (Open Canvas Layout) */}
-      <section id="profile" className="pt-6 sm:pt-10 pb-8 scroll-mt-24 relative">
-        {/* Top Telemetry Header */}
-        <div className="flex flex-wrap items-center justify-between gap-3 font-mono text-xs border-b border-border-subtle pb-4 mb-8">
-          <div className="flex flex-wrap items-center gap-2 sm:gap-3">
-            <span className="flex items-center gap-2 text-accent-cyan font-semibold">
-              <span className="w-2 h-2 rounded-full bg-accent-cyan shadow-[0_0_8px_rgba(6,182,212,0.6)]" />
-              SYSTEM // READY
+    <div className="flex flex-col gap-20 sm:gap-28 pb-24 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Hero / Profile Section */}
+      <section id="profile" className="pt-8 sm:pt-14 pb-4 scroll-mt-24 relative">
+        {/* Top Status Bar */}
+        <div className="flex flex-wrap items-center justify-between gap-3 text-xs border-b border-border-subtle pb-4 mb-10">
+          <div className="flex flex-wrap items-center gap-2 sm:gap-3 text-muted">
+            <span className="flex items-center gap-1.5 text-primary font-medium">
+              <span className="w-1.5 h-1.5 rounded-full bg-accent-emerald animate-pulse" />
+              Subic Bay &amp; Olongapo, PH
             </span>
-            <span className="text-muted">|</span>
-            <span className="text-muted hidden sm:inline">LOC: OLONGAPO / SUBIC BAY, PH</span>
-            {timeStr && (
-              <>
-                <span className="text-muted hidden md:inline">|</span>
-                <span className="text-accent-cyan/90 hidden md:inline font-mono">
-                  PHT // {timeStr} [UTC+8]
-                </span>
-              </>
+            <span>•</span>
+            {timeStr ? (
+              <span className="font-mono text-accent-cyan/90">
+                PHT {timeStr} [UTC+8]
+              </span>
+            ) : (
+              <span className="font-mono text-accent-cyan/90">PHT [UTC+8]</span>
             )}
           </div>
-          <div className="text-[10px] sm:text-[11px] text-accent-yellow font-medium tracking-wider uppercase flex items-center gap-1.5">
-            <span className="w-1.5 h-1.5 rounded-full bg-accent-yellow" />
-            AVAILABILITY: OPEN FOR ROLES & CONTRACTS
+
+          <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-accent-emerald/10 border border-accent-emerald/20 text-[11px] text-accent-emerald font-medium">
+            <span className="w-1.5 h-1.5 rounded-full bg-accent-emerald" />
+            <span>Available for roles &amp; contracts</span>
           </div>
         </div>
 
-        <div className="flex flex-col-reverse lg:flex-row justify-between items-start lg:items-center gap-10 lg:gap-12">
-          {/* Left Column: Bio & Core Info */}
+        <div className="flex flex-col-reverse lg:flex-row justify-between items-start lg:items-center gap-10 lg:gap-14">
+          {/* Left Column: Bio & Identity */}
           <div className="w-full max-w-2xl flex-1">
-            <div className="text-xs font-mono text-accent-cyan tracking-widest uppercase mb-2 flex items-center gap-2">
-              <span>// ENGINEERING SYSTEMS ARCHITECTURE</span>
+            <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-md bg-main border border-border-subtle text-[11px] font-mono text-accent-cyan font-medium mb-4">
+              <span>Full-Stack &amp; AI Systems Engineer</span>
             </div>
 
-            <h1 className="text-3xl sm:text-5xl md:text-6xl font-mono font-black text-primary tracking-tighter uppercase mb-3 leading-tight sm:leading-none">
-              RHODGE ESPERON
+            <h1 className="text-3xl sm:text-5xl md:text-6xl font-bold font-sans text-primary tracking-tight mb-4 leading-[1.1]">
+              Rhodge Esperon
             </h1>
 
-            <div className="text-xs sm:text-sm font-mono text-accent-cyan tracking-wider uppercase mb-6 flex flex-wrap items-center gap-2">
-              <span>BSIT 4TH YEAR @ LYCEUM OF SUBIC BAY</span>
-              <span className="text-muted">•</span>
-              <span className="text-primary font-bold">AI & FULL-STACK DEVELOPER</span>
-            </div>
-
-            <p className="text-muted text-xs sm:text-sm md:text-base leading-relaxed mb-6 max-w-xl font-sans">
-              AI &amp; Full-Stack Developer and 4th-year IT student specializing in agentic AI workflows, backend system architecture, and UI/UX engineering. Experienced in delivering production systems—from internal government asset platforms at SBMA to low-latency Web Audio engines and OCR pipelines.
+            <p className="text-muted text-sm sm:text-base leading-relaxed mb-8 max-w-xl font-sans">
+              4th-year IT student at Lyceum of Subic Bay specializing in production web systems, agentic AI workflows, and UI/UX engineering. Experienced in building high-reliability platforms—from internal government asset systems at SBMA to OCR processing pipelines and low-latency audio applications.
             </p>
 
-            {/* Core Capability HUD Chips */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-8 font-mono text-xs">
-              <div className="p-3.5 bg-secondary border border-border-subtle rounded-md hover:border-accent-cyan/60 transition-colors">
-                <div className="text-[10px] text-accent-cyan mb-1 font-bold tracking-wider">01 // AI & BACKEND</div>
-                <div className="text-primary font-medium">Agentic LLMs, Node & Next.js</div>
+            {/* Core Capability Cards */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-8 text-xs">
+              <div className="p-4 bg-secondary/80 border border-border-subtle rounded-xl hover:border-border-hover transition-all duration-200">
+                <div className="text-[11px] font-mono text-accent-cyan font-semibold mb-1">
+                  Full-Stack Systems
+                </div>
+                <div className="text-muted leading-snug">
+                  Next.js, TypeScript, PostgreSQL RLS &amp; Supabase
+                </div>
               </div>
-              <div className="p-3.5 bg-secondary border border-border-subtle rounded-md hover:border-accent-yellow/60 transition-colors">
-                <div className="text-[10px] text-accent-yellow mb-1 font-bold tracking-wider">02 // UI/UX DESIGN</div>
-                <div className="text-primary font-medium">Figma, Design Systems & Prototyping</div>
+
+              <div className="p-4 bg-secondary/80 border border-border-subtle rounded-xl hover:border-border-hover transition-all duration-200">
+                <div className="text-[11px] font-mono text-accent-amber font-semibold mb-1">
+                  Agentic AI &amp; Pipelines
+                </div>
+                <div className="text-muted leading-snug">
+                  LLM Workflows, OCR Engines &amp; Python Services
+                </div>
               </div>
-              <div className="p-3.5 bg-secondary border border-border-subtle rounded-md hover:border-accent-pink/60 transition-colors">
-                <div className="text-[10px] text-accent-pink mb-1 font-bold tracking-wider">03 // DATABASES</div>
-                <div className="text-primary font-medium">PostgreSQL, Supabase & APIs</div>
+
+              <div className="p-4 bg-secondary/80 border border-border-subtle rounded-xl hover:border-border-hover transition-all duration-200">
+                <div className="text-[11px] font-mono text-primary font-semibold mb-1">
+                  Interface &amp; Audio Craft
+                </div>
+                <div className="text-muted leading-snug">
+                  Figma Design Systems, Web Audio &amp; PWAs
+                </div>
               </div>
             </div>
 
             {/* Action Buttons Trio */}
-            <div className="flex flex-wrap items-center gap-3 sm:gap-4 font-mono pt-1">
+            <div className="flex flex-wrap items-center gap-3 sm:gap-4 pt-1">
               <a
                 href="#projects"
-                className="bg-accent-cyan text-main font-bold px-5 py-2.5 text-xs sm:text-sm hover:brightness-110 transition-all cyber-button flex items-center gap-2 active:scale-95 shadow-[0_0_15px_rgba(6,182,212,0.25)] whitespace-nowrap"
+                className="bg-primary text-main font-medium px-5 py-2.5 text-xs sm:text-sm rounded-lg hover:opacity-90 transition-all flex items-center gap-2 shadow-sm active:scale-95"
               >
-                <span>EXPLORE PROJECTS</span>
-                <span>↗</span>
+                <span>Explore Projects</span>
+                <span>↓</span>
               </a>
               <a
                 href="/cv.html"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="border border-border-subtle bg-secondary text-primary px-5 py-2.5 text-xs sm:text-sm hover:border-accent-cyan hover:text-accent-cyan transition-all cyber-button active:scale-95 flex items-center gap-2 whitespace-nowrap"
+                className="border border-border-subtle bg-secondary text-primary px-5 py-2.5 text-xs sm:text-sm rounded-lg hover:border-border-hover hover:bg-secondary/80 transition-all flex items-center gap-2 active:scale-95 font-medium"
               >
-                <span>VIEW CV / RESUME</span>
+                <span>View CV / Resume</span>
                 <span>↗</span>
               </a>
               <a
                 href="#contact"
-                className="border border-border-subtle bg-secondary text-muted hover:text-primary px-5 py-2.5 text-xs sm:text-sm hover:border-accent-yellow transition-all cyber-button active:scale-95 whitespace-nowrap"
+                className="text-muted hover:text-primary px-4 py-2.5 text-xs sm:text-sm transition-colors font-medium"
               >
-                <span>GET IN TOUCH ↗</span>
+                <span>Get in Touch →</span>
               </a>
             </div>
           </div>
 
-          {/* Right Column: Hardware Schematic Frame */}
-          <div className="relative shrink-0 mx-auto lg:mx-0 flex items-center justify-center py-4 px-4">
-            {/* Ambient Radial Lighting */}
-            <div className="absolute w-64 h-64 rounded-full bg-accent-cyan/10 blur-3xl pointer-events-none -z-10" />
+          {/* Right Column: Refined Portrait Card */}
+          <div className="relative shrink-0 mx-auto lg:mx-0 flex items-center justify-center py-2">
+            {/* Ambient Back Glow */}
+            <div className="absolute w-56 h-56 rounded-full bg-accent-cyan/15 blur-3xl pointer-events-none -z-10" />
 
-            {/* Precision Schematic Boundary Container */}
-            <div className="relative p-2.5 border border-border-subtle bg-secondary/40 rounded-xl">
-              {/* Corner Calibration Marks */}
-              <span className="absolute -top-1.5 -left-1.5 font-mono text-accent-cyan/60 text-xs leading-none select-none">+</span>
-              <span className="absolute -top-1.5 -right-1.5 font-mono text-accent-cyan/60 text-xs leading-none select-none">+</span>
-              <span className="absolute -bottom-1.5 -left-1.5 font-mono text-accent-cyan/60 text-xs leading-none select-none">+</span>
-              <span className="absolute -bottom-1.5 -right-1.5 font-mono text-accent-cyan/60 text-xs leading-none select-none">+</span>
-
-              {/* Header Telemetry Badge */}
-              <div className="flex items-center justify-between gap-3 px-3 py-1.5 mb-2 border border-border-subtle bg-main/80 rounded font-mono text-[9px] text-muted">
-                <span className="flex items-center gap-1.5 text-accent-cyan font-bold">
-                  <span className="w-1.5 h-1.5 rounded-full bg-accent-cyan" />
-                  OPERATOR // 0XRIYORU
-                </span>
-                <span className="tracking-wider">ID: RE-2026</span>
-              </div>
-
-              {/* Portrait Image Container */}
-              <div className="relative w-56 sm:w-64 h-64 sm:h-76 border border-border-subtle bg-secondary rounded-lg overflow-hidden group shadow-[0_8px_30px_rgba(0,0,0,0.5)]">
+            <div className="relative p-2 rounded-2xl border border-border-subtle bg-secondary/50 shadow-xl backdrop-blur-sm">
+              <div className="relative w-56 sm:w-64 h-64 sm:h-72 rounded-xl overflow-hidden group">
                 <Image
                   src="/profile.png"
                   alt="Rhodge Esperon"
                   fill
                   priority
-                  className="object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-main/70 via-transparent to-transparent pointer-events-none" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />
 
-                {/* Subic Bay Intern & BSIT Badge at image bottom */}
-                <div className="absolute bottom-2.5 left-2.5 right-2.5 bg-main/90 backdrop-blur-sm border border-border-subtle px-2.5 py-1 rounded font-mono text-[9px] flex items-center justify-between">
-                  <span className="text-primary font-semibold">SBMA IT INTERN ALUMNI</span>
-                  <span className="text-accent-yellow">BSIT &apos;27</span>
+                {/* Bottom Caption Pill */}
+                <div className="absolute bottom-3 left-3 right-3 bg-black/70 backdrop-blur-md border border-white/10 px-3 py-1.5 rounded-lg flex items-center justify-between text-[11px] font-mono">
+                  <span className="text-white font-medium">SBMA IT Alumni</span>
+                  <span className="text-accent-cyan">BSIT &apos;27</span>
                 </div>
-              </div>
-
-              {/* Footer Telemetry Badge */}
-              <div className="flex items-center justify-between px-3 py-1.5 mt-2 border border-border-subtle bg-main/80 rounded font-mono text-[9px] text-muted">
-                <span className="text-muted tracking-wider">FULL-STACK & AI AGENTS</span>
-                <span className="text-accent-cyan font-medium flex items-center gap-1">
-                  <span className="w-1 h-1 rounded-full bg-accent-cyan animate-ping" />
-                  AVAILABLE
-                </span>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-
-      {/* Projects Section */}
+      {/* Featured Projects Section */}
       <section id="projects" className="scroll-mt-24">
-        <div className="flex items-center gap-3 mb-8 border-b border-border-subtle pb-3">
-          <span className="text-xs font-mono text-accent-yellow font-bold">// 02_</span>
-          <h2 className="text-xl sm:text-2xl font-mono font-bold text-primary tracking-wide">
-            FEATURED_PROJECTS
+        <div className="flex flex-col gap-1 mb-8 border-b border-border-subtle pb-4">
+          <h2 className="text-2xl font-bold font-sans text-primary tracking-tight">
+            Featured Projects
           </h2>
+          <p className="text-xs sm:text-sm text-muted">
+            Production web platforms, internal government systems, and architecture highlights
+          </p>
         </div>
 
         <Projects />
       </section>
 
-      {/* Skills Section */}
+      {/* Technical Inventory Section */}
       <section id="skills" className="scroll-mt-24">
-        <div className="flex items-center gap-3 mb-8 border-b border-border-subtle pb-3">
-          <span className="text-xs font-mono text-accent-pink font-bold">// 03_</span>
-          <h2 className="text-xl sm:text-2xl font-mono font-bold text-primary tracking-wide">
-            TECHNICAL_INVENTORY
+        <div className="flex flex-col gap-1 mb-8 border-b border-border-subtle pb-4">
+          <h2 className="text-2xl font-bold font-sans text-primary tracking-tight">
+            Technical Inventory
           </h2>
+          <p className="text-xs sm:text-sm text-muted">
+            Core technologies, backend databases, and specialization toolkits
+          </p>
         </div>
 
         <Skills />
       </section>
 
-      {/* Credentials Section */}
+      {/* Experience & Credentials Section */}
       <section id="credentials" className="scroll-mt-24">
-        <div className="flex items-center gap-3 mb-8 border-b border-border-subtle pb-3">
-          <span className="text-xs font-mono text-accent-cyan font-bold">// 04_</span>
-          <h2 className="text-xl sm:text-2xl font-mono font-bold text-primary tracking-wide">
-            EXPERIENCE_&_SEMINARS
+        <div className="flex flex-col gap-1 mb-8 border-b border-border-subtle pb-4">
+          <h2 className="text-2xl font-bold font-sans text-primary tracking-tight">
+            Experience &amp; Milestones
           </h2>
+          <p className="text-xs sm:text-sm text-muted">
+            Government internship, verified certifications, hackathons, and technical summits
+          </p>
         </div>
 
         <Credentials />
@@ -213,48 +206,66 @@ export default function Home() {
 
       {/* Activity Section */}
       <section id="activity" className="scroll-mt-24">
-        <div className="flex items-center gap-3 mb-8 border-b border-border-subtle pb-3">
-          <span className="text-xs font-mono text-accent-yellow font-bold">// 05_</span>
-          <h2 className="text-xl sm:text-2xl font-mono font-bold text-primary tracking-wide">
-            GITHUB_TRANSMISSION
+        <div className="flex flex-col gap-1 mb-8 border-b border-border-subtle pb-4">
+          <h2 className="text-2xl font-bold font-sans text-primary tracking-tight">
+            GitHub Transmission
           </h2>
+          <p className="text-xs sm:text-sm text-muted">
+            Live contribution frequency and activity telemetry
+          </p>
         </div>
 
         <Activity />
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="scroll-mt-24 mb-16 flex flex-col items-center justify-center text-center relative py-12 md:py-16 overflow-hidden border border-border-subtle bg-secondary rounded-xl">
-        <div className="text-[11px] font-mono text-accent-cyan mb-3 tracking-widest uppercase">// 06_GET_IN_TOUCH</div>
-        <h2 className="text-2xl md:text-3xl font-bold font-mono text-primary mb-3">
-          READY TO BUILD INTELLIGENT SYSTEMS?
+      <section
+        id="contact"
+        className="scroll-mt-24 mb-16 flex flex-col items-center justify-center text-center relative py-12 md:py-16 px-6 overflow-hidden border border-border-subtle bg-secondary/80 rounded-2xl shadow-lg"
+      >
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent-cyan/10 border border-accent-cyan/20 text-accent-cyan text-xs font-mono mb-4">
+          <span>Let&apos;s Build Together</span>
+        </div>
+
+        <h2 className="text-2xl md:text-3xl font-bold font-sans text-primary mb-3 tracking-tight">
+          Ready to engineer intelligent systems?
         </h2>
-        <p className="text-muted max-w-lg mx-auto mb-8 text-xs md:text-sm px-6 leading-relaxed">
-          Whether you need an enterprise web system, an agentic AI workflow, or an accessible data system—let&apos;s build something robust together.
+        <p className="text-muted max-w-lg mx-auto mb-8 text-xs md:text-sm leading-relaxed">
+          Whether you need a scalable web application, an agentic AI workflow, or an accessible data system—let&apos;s build something resilient together.
         </p>
 
-        <div className="flex flex-col sm:flex-row gap-3 justify-center items-center relative z-10 w-full sm:w-auto px-6">
+        <div className="flex flex-col sm:flex-row gap-3 justify-center items-center relative z-10 w-full sm:w-auto">
           <a
             href="mailto:rhodgesperon@gmail.com"
-            className="w-full sm:w-auto bg-accent-cyan text-main font-bold font-mono px-5 py-2.5 text-xs hover:brightness-110 transition-all cyber-button active:scale-95 shadow-[0_0_12px_rgba(6,182,212,0.25)]"
+            className="w-full sm:w-auto bg-primary text-main font-medium px-5 py-2.5 text-xs sm:text-sm rounded-lg hover:opacity-90 transition-all flex items-center justify-center gap-2 active:scale-95 shadow-sm"
           >
-            START A CONVERSATION
+            <span>Start a Conversation</span>
+            <span>✉</span>
           </a>
+
+          <button
+            onClick={handleCopyEmail}
+            className="w-full sm:w-auto border border-border-subtle bg-main text-muted hover:text-primary px-4 py-2.5 text-xs sm:text-sm rounded-lg transition-colors font-mono cursor-pointer"
+          >
+            {copiedEmail ? "✓ Copied to clipboard" : "Copy Email"}
+          </button>
+
           <a
             href="https://github.com/0xriyoru"
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full sm:w-auto border border-border-subtle bg-main text-primary font-mono px-5 py-2.5 text-xs hover:border-accent-cyan transition-colors cyber-button active:scale-95"
+            className="w-full sm:w-auto border border-border-subtle bg-main text-muted hover:text-primary px-4 py-2.5 text-xs sm:text-sm rounded-lg transition-colors font-mono"
           >
-            GITHUB ↗
+            GitHub ↗
           </a>
+
           <a
             href="https://www.linkedin.com/in/rhodge-esperon"
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full sm:w-auto border border-border-subtle bg-main text-primary font-mono px-5 py-2.5 text-xs hover:border-accent-yellow transition-colors cyber-button active:scale-95"
+            className="w-full sm:w-auto border border-border-subtle bg-main text-muted hover:text-primary px-4 py-2.5 text-xs sm:text-sm rounded-lg transition-colors font-mono"
           >
-            LINKEDIN ↗
+            LinkedIn ↗
           </a>
         </div>
       </section>
