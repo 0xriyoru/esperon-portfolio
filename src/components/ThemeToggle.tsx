@@ -44,6 +44,8 @@ export default function ThemeToggle() {
     localStorage.setItem("theme", newTheme);
     applyThemeToDOM(newTheme);
     window.dispatchEvent(new Event("theme-change"));
+    // Re-trigger the bootloader animation so it immediately renders in the toggled theme
+    window.dispatchEvent(new CustomEvent("portfolio:reboot"));
   };
 
   return (

@@ -115,9 +115,9 @@ export default function Credentials() {
             <button
               key={f.id}
               onClick={() => setActiveFilter(f.id)}
-              className={`px-3.5 py-1.5 rounded-lg text-xs font-medium transition-all whitespace-nowrap cursor-pointer ${
+              className={`px-3.5 py-1.5 rounded-md text-xs font-mono transition-all whitespace-nowrap cursor-pointer ${
                 isSelected
-                  ? "bg-primary text-main shadow-sm"
+                  ? "bg-accent-cyan text-black font-bold shadow-[0_0_12px_rgba(0,240,255,0.4)]"
                   : "bg-secondary text-muted hover:text-primary hover:bg-secondary/80 border border-border-subtle"
               }`}
             >
@@ -138,10 +138,10 @@ export default function Credentials() {
         </div>
       ) : filteredCredentials.length === 0 ? (
         <div className="p-12 border border-border-subtle bg-secondary/50 rounded-xl text-center text-muted text-sm font-sans">
-          No records found under this filter.
+          No milestones found in this category.
         </div>
       ) : (
-        <div className="relative pl-6 md:pl-8 border-l border-border-subtle space-y-6">
+        <div className="relative pl-6 md:pl-8 border-l-2 border-border-subtle/80 space-y-6">
           {filteredCredentials.map((cred, i) => {
             const style = getTypeStyle(cred.type);
 
@@ -152,24 +152,24 @@ export default function Credentials() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.3, delay: i * 0.05 }}
-                className="relative group glass-card p-6 hover:-translate-y-0.5 transition-all duration-200"
+                className="relative group glass-card p-6 hover:-translate-y-1 transition-all duration-200 overflow-hidden"
               >
-                {/* Timeline Node */}
+                {/* Timeline Node Reticle */}
                 <div
-                  className={`absolute -left-[31px] md:-left-[39px] top-6 w-3 h-3 rounded-full border-2 border-main ${style.node}`}
+                  className={`absolute -left-[32px] md:-left-[41px] top-6 w-3.5 h-3.5 rounded-full border-2 border-main ${style.node}`}
                 />
 
                 <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 mb-3">
                   <div className="flex flex-wrap items-center gap-2">
-                    <span className={`text-[11px] font-mono border px-2.5 py-0.5 rounded-md font-medium tracking-wide ${style.badge}`}>
-                      {style.label}
+                    <span className={`text-[10px] font-mono border px-2.5 py-0.5 rounded font-semibold tracking-wide ${style.badge}`}>
+                      {style.label.toUpperCase()}
                     </span>
-                    <span className="text-xs font-mono text-primary font-medium">{cred.organization}</span>
+                    <span className="text-xs font-mono text-primary font-semibold tracking-wide">{cred.organization}</span>
                   </div>
                   <span className="text-xs font-mono text-muted">{cred.date_range}</span>
                 </div>
 
-                <h3 className="font-sans font-bold text-lg text-primary group-hover:text-accent-cyan transition-colors mb-2 tracking-tight">
+                <h3 className="font-cyber font-bold text-base sm:text-lg text-primary group-hover:text-accent-cyan transition-colors mb-2 tracking-wide uppercase">
                   {cred.title}
                 </h3>
 
@@ -185,7 +185,7 @@ export default function Credentials() {
                     {cred.skills_acquired.map((skill, idx) => (
                       <span
                         key={idx}
-                        className="px-2 py-0.5 text-[10px] font-mono border border-border-subtle bg-main/80 text-muted rounded-md"
+                        className="px-2 py-0.5 text-[10px] font-mono border border-border-subtle bg-main/80 text-muted rounded"
                       >
                         {skill}
                       </span>
@@ -201,10 +201,9 @@ export default function Credentials() {
                         href={cred.certificate_url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md border border-accent-amber/30 bg-accent-amber/10 text-accent-amber text-xs font-medium hover:bg-accent-amber/20 transition-colors"
+                        className="cyber-chamfer-btn inline-flex items-center gap-1.5 px-3.5 py-1.5 border border-accent-amber/40 bg-accent-amber/10 text-accent-amber text-xs font-cyber font-semibold hover:bg-accent-amber/20 transition-colors"
                       >
-                        <span>View Certificate / Proof</span>
-                        <span>↗</span>
+                        <span>Proof / Certificate ↗</span>
                       </a>
                     )}
                     {cred.credential_url && !cred.certificate_url && (
@@ -212,14 +211,16 @@ export default function Credentials() {
                         href={cred.credential_url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md border border-accent-cyan/30 bg-accent-cyan/10 text-accent-cyan text-xs font-medium hover:bg-accent-cyan/20 transition-colors"
+                        className="cyber-chamfer-btn inline-flex items-center gap-1.5 px-3.5 py-1.5 border border-accent-cyan/40 bg-accent-cyan/10 text-accent-cyan text-xs font-cyber font-semibold hover:bg-accent-cyan/20 transition-colors"
                       >
-                        <span>View Credential</span>
-                        <span>↗</span>
+                        <span>View Credential ↗</span>
                       </a>
                     )}
                   </div>
                 )}
+
+                {/* Bottom Laser Trace on Hover */}
+                <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-accent-cyan to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
               </motion.div>
             );
           })}

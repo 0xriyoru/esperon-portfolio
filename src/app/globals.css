@@ -16,59 +16,137 @@
 
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-jetbrains-mono), ui-monospace, SFMono-Regular, monospace;
+  --font-cyber: var(--font-orbitron), var(--font-chakra), sans-serif;
+  --font-chakra: var(--font-chakra), sans-serif;
 }
 
 :root {
-  --theme-main: #09090B;
-  --theme-secondary: #121215;
-  --theme-card: #18181B;
-  --theme-primary: #FAFAFA;
-  --theme-muted: #A1A1AA;
+  --theme-main: #08090C;
+  --theme-secondary: #101217;
+  --theme-card: #14171E;
+  --theme-primary: #F4F4F6;
+  --theme-muted: #8E929B;
   --theme-border-subtle: rgba(255, 255, 255, 0.08);
-  --theme-border-hover: rgba(255, 255, 255, 0.18);
+  --theme-border-hover: rgba(0, 240, 255, 0.35);
   --theme-accent-cyan: #00F0FF;
   --theme-accent-emerald: #10B981;
   --theme-accent-amber: #F59E0B;
+  --theme-accent-yellow: #FCEE09;
+  --theme-accent-rose: #FF003C;
 }
 
 html.light {
-  --theme-main: #FAFAFA;
-  --theme-secondary: #F4F4F5;
+  --theme-main: #F6F7F9;
+  --theme-secondary: #ECEEF2;
   --theme-card: #FFFFFF;
-  --theme-primary: #09090B;
-  --theme-muted: #71717A;
-  --theme-border-subtle: rgba(0, 0, 0, 0.08);
-  --theme-border-hover: rgba(0, 0, 0, 0.18);
+  --theme-primary: #0C0D10;
+  --theme-muted: #626772;
+  --theme-border-subtle: rgba(0, 0, 0, 0.09);
+  --theme-border-hover: rgba(8, 145, 178, 0.45);
   --theme-accent-cyan: #0891B2;
   --theme-accent-emerald: #059669;
   --theme-accent-amber: #D97706;
+  --theme-accent-yellow: #CA8A04;
+  --theme-accent-rose: #E11D48;
 }
 
 html.dark {
-  --theme-main: #09090B;
-  --theme-secondary: #121215;
-  --theme-card: #18181B;
-  --theme-primary: #FAFAFA;
-  --theme-muted: #A1A1AA;
+  --theme-main: #08090C;
+  --theme-secondary: #101217;
+  --theme-card: #14171E;
+  --theme-primary: #F4F4F6;
+  --theme-muted: #8E929B;
   --theme-border-subtle: rgba(255, 255, 255, 0.08);
-  --theme-border-hover: rgba(255, 255, 255, 0.18);
+  --theme-border-hover: rgba(0, 240, 255, 0.35);
   --theme-accent-cyan: #00F0FF;
   --theme-accent-emerald: #10B981;
   --theme-accent-amber: #F59E0B;
+  --theme-accent-yellow: #FCEE09;
+  --theme-accent-rose: #FF003C;
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes spin-reverse {
+  from { transform: rotate(360deg); }
+  to { transform: rotate(0deg); }
+}
+
+@keyframes radar-pulse {
+  0% { transform: scale(0.95); opacity: 0.8; }
+  50% { transform: scale(1.05); opacity: 0.3; }
+  100% { transform: scale(0.95); opacity: 0.8; }
+}
+
+@keyframes laser-sweep {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(200%); }
+}
+
+@keyframes eq-bounce-1 {
+  0%, 100% { height: 4px; }
+  50% { height: 14px; }
+}
+
+@keyframes eq-bounce-2 {
+  0%, 100% { height: 12px; }
+  50% { height: 5px; }
+}
+
+@keyframes eq-bounce-3 {
+  0%, 100% { height: 7px; }
+  50% { height: 16px; }
 }
 
 @layer utilities {
+  .font-cyber {
+    font-family: var(--font-cyber);
+  }
+
+  .font-chakra {
+    font-family: var(--font-chakra);
+  }
+
+  /* Cyber Chamfers */
+  .cyber-chamfer {
+    clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+  }
+
+  .cyber-chamfer-btn {
+    clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+  }
+
+  .cyber-chamfer-tag {
+    clip-path: polygon(6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%, 0 6px);
+  }
+
+  /* Hazard / Cyber Scan Decal */
+  .hazard-stripes {
+    background: repeating-linear-gradient(
+      -45deg,
+      var(--theme-border-subtle),
+      var(--theme-border-subtle) 2px,
+      transparent 2px,
+      transparent 8px
+    );
+  }
+
+  /* Glass Card with Sleek Dark Depth */
   .glass-card {
     background-color: var(--theme-secondary);
     border: 1px solid var(--theme-border-subtle);
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04), 0 8px 24px rgba(0, 0, 0, 0.2);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04), 0 8px 24px rgba(0, 0, 0, 0.35);
     border-radius: 12px;
-    transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+    position: relative;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
   }
   
   .glass-card:hover {
     border-color: var(--theme-border-hover);
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 12px 32px rgba(0, 0, 0, 0.35);
+    box-shadow: inset 0 1px 0 rgba(0, 240, 255, 0.15), 0 14px 36px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 240, 255, 0.1);
   }
 
   /* Backward compatibility aliases */
@@ -81,12 +159,12 @@ html.dark {
 
   .cyber-card:hover {
     border-color: var(--theme-border-hover);
+    box-shadow: 0 0 16px rgba(0, 240, 255, 0.15);
   }
 
-  .cyber-button,
-  .obsidian-button {
-    border-radius: 8px;
-    font-family: var(--font-sans);
+  .cyber-button {
+    font-family: var(--font-cyber);
+    letter-spacing: 0.05em;
     transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   }
 }

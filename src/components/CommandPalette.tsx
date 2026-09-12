@@ -86,7 +86,7 @@ export default function CommandPalette() {
       id: "nav-credentials",
       category: "NAVIGATION",
       label: "Go to Experience & Milestones",
-      detail: "SBMA Internship, Certifications, and Summits",
+      detail: "Work experience, certifications, and technical summits",
       shortcut: "G E",
       action: () => navigateTo("credentials"),
     },

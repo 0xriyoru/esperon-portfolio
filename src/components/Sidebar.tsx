@@ -4,12 +4,12 @@ import { useEffect, useState } from "react";
 import ThemeToggle from "@/components/ThemeToggle";
 
 const navItems = [
-  { name: "Profile", path: "profile" },
-  { name: "Projects", path: "projects" },
-  { name: "Skills", path: "skills" },
-  { name: "Experience", path: "credentials" },
-  { name: "Activity", path: "activity" },
-  { name: "Contact", path: "contact" },
+  { id: "01", name: "Profile", path: "profile" },
+  { id: "02", name: "Projects", path: "projects" },
+  { id: "03", name: "Skills", path: "skills" },
+  { id: "04", name: "Experience", path: "credentials" },
+  { id: "05", name: "Activity", path: "activity" },
+  { id: "06", name: "Contact", path: "contact" },
 ];
 
 export default function Sidebar() {
@@ -62,15 +62,22 @@ export default function Sidebar() {
       <div>
         {/* Brand / Identity */}
         <div className="mb-8">
-          <h1 className="font-sans text-lg text-primary font-bold tracking-tight">
+          <h1 className="font-cyber text-base sm:text-lg text-primary font-bold tracking-wide uppercase">
             Rhodge Esperon
           </h1>
           <p className="text-xs text-muted mt-1 font-sans">
-            Full-Stack & AI Systems Developer
+            Full-Stack &amp; AI Systems Developer
           </p>
-          <div className="mt-3 inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-accent-emerald/10 border border-accent-emerald/20 text-[11px] text-accent-emerald font-medium">
-            <span className="w-1.5 h-1.5 rounded-full bg-accent-emerald animate-pulse" />
-            <span>Open to opportunities</span>
+
+          {/* Status Badge with Live Equalizer Animation */}
+          <div className="mt-3 inline-flex items-center gap-2 px-2.5 py-1 rounded-md bg-main border border-border-subtle text-[11px] text-accent-emerald font-sans">
+            {/* 3-bar live equalizer */}
+            <span className="flex items-end gap-[2px] h-3 w-3 select-none">
+              <span className="w-[2px] bg-accent-emerald rounded-full animate-[eq-bounce-1_1.2s_ease-in-out_infinite]" />
+              <span className="w-[2px] bg-accent-emerald rounded-full animate-[eq-bounce-2_1s_ease-in-out_infinite]" />
+              <span className="w-[2px] bg-accent-emerald rounded-full animate-[eq-bounce-3_1.4s_ease-in-out_infinite]" />
+            </span>
+            <span className="font-medium">Available for roles</span>
           </div>
         </div>
 
@@ -84,15 +91,27 @@ export default function Sidebar() {
                 key={item.path}
                 href={`#${item.path}`}
                 onClick={(e) => handleClick(e, item.path)}
-                className={`relative font-sans text-sm px-3.5 py-2 flex items-center justify-between transition-all duration-150 rounded-lg group ${
+                className={`relative text-xs px-3.5 py-2.5 flex items-center justify-between transition-all duration-150 rounded-lg group ${
                   isActive
-                    ? "text-primary font-medium bg-main border border-border-subtle shadow-sm"
+                    ? "text-primary font-semibold bg-main border border-border-subtle shadow-sm translate-x-0.5"
                     : "text-muted hover:text-primary hover:bg-main/50"
                 }`}
               >
-                <span>{item.name}</span>
+                <div className="flex items-center gap-2.5">
+                  <span
+                    className={`font-mono text-[10px] ${
+                      isActive ? "text-accent-cyan font-bold" : "text-muted/50"
+                    }`}
+                  >
+                    {item.id}
+                  </span>
+                  <span className="font-sans font-medium tracking-wide">
+                    {item.name}
+                  </span>
+                </div>
+
                 {isActive && (
-                  <span className="w-1.5 h-1.5 rounded-full bg-accent-cyan shadow-[0_0_8px_rgba(0,240,255,0.6)]" />
+                  <span className="w-1.5 h-1.5 rounded-full bg-accent-cyan shadow-[0_0_8px_rgba(0,240,255,0.7)]" />
                 )}
               </a>
             );
@@ -102,28 +121,14 @@ export default function Sidebar() {
 
       {/* Utilities & Footer */}
       <div className="flex flex-col gap-4 pt-4 border-t border-border-subtle">
+        {/* Node Status Telemetry */}
+        <div className="flex items-center justify-between text-[10px] font-mono text-muted px-1">
+          <span className="text-muted/80">LATENCY: 18ms</span>
+          <span className="text-accent-cyan font-medium">LIVE_STREAM</span>
+        </div>
+
         {/* Theme Switcher */}
         <ThemeToggle />
-
-        <div className="flex items-center justify-between text-xs text-muted pt-1">
-          <button
-            onClick={() => window.dispatchEvent(new CustomEvent("portfolio:open-command-palette"))}
-            className="flex items-center gap-1.5 text-muted hover:text-primary transition-colors group cursor-pointer"
-            title="Open Command Palette"
-          >
-            <kbd className="px-1.5 py-0.5 bg-main border border-border-subtle rounded text-[10px] font-mono text-muted group-hover:border-accent-cyan/50 group-hover:text-primary transition-colors">
-              Ctrl K
-            </kbd>
-            <span className="text-[11px]">Command</span>
-          </button>
-
-          <a
-            href="mailto:rhodgesperon@gmail.com"
-            className="text-[11px] text-muted hover:text-accent-cyan transition-colors"
-          >
-            Email ↗
-          </a>
-        </div>
       </div>
     </aside>
   );

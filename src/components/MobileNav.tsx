@@ -5,12 +5,12 @@ import { motion, AnimatePresence } from "framer-motion";
 import ThemeToggle from "@/components/ThemeToggle";
 
 const navItems = [
-  { name: "Profile", path: "profile" },
-  { name: "Projects", path: "projects" },
-  { name: "Skills", path: "skills" },
-  { name: "Experience", path: "credentials" },
-  { name: "Activity", path: "activity" },
-  { name: "Contact", path: "contact" },
+  { id: "01", name: "Profile", path: "profile" },
+  { id: "02", name: "Projects", path: "projects" },
+  { id: "03", name: "Skills", path: "skills" },
+  { id: "04", name: "Experience", path: "credentials" },
+  { id: "05", name: "Activity", path: "activity" },
+  { id: "06", name: "Contact", path: "contact" },
 ];
 
 export default function MobileNav() {
@@ -52,11 +52,6 @@ export default function MobileNav() {
     }
   };
 
-  const openCommandPalette = () => {
-    setIsOpen(false);
-    window.dispatchEvent(new CustomEvent("portfolio:open-command-palette"));
-  };
-
   return (
     <>
       {/* Mobile Top Header (Visible on < 1024px) */}
@@ -69,15 +64,6 @@ export default function MobileNav() {
         </div>
 
         <div className="flex items-center gap-2">
-          {/* Quick Command Trigger */}
-          <button
-            onClick={openCommandPalette}
-            className="px-2 py-1 rounded bg-main border border-border-subtle text-muted hover:text-primary text-xs font-mono transition-colors"
-            title="Open Command Palette (Ctrl+K)"
-          >
-            ⌘K
-          </button>
-
           {/* Menu Toggle */}
           <button
             onClick={() => setIsOpen((prev) => !prev)}
@@ -112,8 +98,8 @@ export default function MobileNav() {
                 {/* Header info */}
                 <div className="flex items-center justify-between border-b border-border-subtle pb-4 mb-6">
                   <div>
-                    <h2 className="font-sans text-base font-bold text-primary">Rhodge Esperon</h2>
-                    <p className="text-xs text-muted font-sans mt-0.5">Full-Stack & AI Developer</p>
+                    <h2 className="font-cyber text-base font-bold text-primary uppercase">Rhodge Esperon</h2>
+                    <p className="text-xs text-muted font-sans mt-0.5">Full-Stack &amp; AI Developer</p>
                   </div>
                   <button
                     onClick={() => setIsOpen(false)}
@@ -131,15 +117,20 @@ export default function MobileNav() {
                       <button
                         key={item.path}
                         onClick={() => handleNavClick(item.path)}
-                        className={`text-left px-3.5 py-2.5 text-sm rounded-lg transition-all flex items-center justify-between ${
+                        className={`text-left px-3.5 py-2.5 text-xs rounded-lg transition-all flex items-center justify-between ${
                           isActive
-                            ? "text-primary font-medium bg-main border border-border-subtle shadow-sm"
+                            ? "text-primary font-bold bg-main border border-border-subtle shadow-sm"
                             : "text-muted hover:text-primary hover:bg-main/50"
                         }`}
                       >
-                        <span>{item.name}</span>
+                        <div className="flex items-center gap-2">
+                          <span className={`font-mono text-[10px] ${isActive ? "text-accent-cyan font-bold" : "text-muted/50"}`}>
+                            {item.id}
+                          </span>
+                          <span className="font-sans font-medium tracking-wide">{item.name}</span>
+                        </div>
                         {isActive && (
-                          <span className="w-1.5 h-1.5 rounded-full bg-accent-cyan" />
+                          <span className="w-1.5 h-1.5 rounded-full bg-accent-cyan shadow-[0_0_6px_rgba(0,240,255,0.8)]" />
                         )}
                       </button>
                     );
@@ -158,13 +149,6 @@ export default function MobileNav() {
                     <span>View CV / Resume</span>
                     <span>↗</span>
                   </a>
-                  <button
-                    onClick={openCommandPalette}
-                    className="px-3.5 py-2.5 rounded-lg bg-main border border-border-subtle text-muted hover:text-primary transition-colors flex items-center justify-between font-medium"
-                  >
-                    <span>Command Palette</span>
-                    <span className="text-[10px] font-mono">Ctrl+K</span>
-                  </button>
                 </div>
               </div>
 

@@ -90,7 +90,7 @@ export default function Projects() {
 
   return (
     <div className="w-full">
-      {/* Filter controls */}
+      {/* Filter controls with Cyber HUD styling */}
       <div className="flex items-center gap-2 mb-8 overflow-x-auto pb-1">
         {filterOptions.map((f) => {
           const isSelected = activeFilter === f.id;
@@ -98,9 +98,9 @@ export default function Projects() {
             <button
               key={f.id}
               onClick={() => setActiveFilter(f.id)}
-              className={`px-3.5 py-1.5 rounded-lg text-xs font-medium transition-all whitespace-nowrap cursor-pointer ${
+              className={`px-3.5 py-1.5 rounded-md text-xs font-mono transition-all whitespace-nowrap cursor-pointer ${
                 isSelected
-                  ? "bg-primary text-main shadow-sm"
+                  ? "bg-accent-cyan text-black font-bold shadow-[0_0_12px_rgba(0,240,255,0.4)]"
                   : "bg-secondary text-muted hover:text-primary hover:bg-secondary/80 border border-border-subtle"
               }`}
             >
@@ -112,7 +112,7 @@ export default function Projects() {
 
       {filteredProjects.length === 0 ? (
         <div className="p-12 border border-border-subtle bg-secondary/50 rounded-xl text-center text-muted text-sm font-sans">
-          No projects found under this filter.
+          No projects found matching this filter.
         </div>
       ) : (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -123,38 +123,38 @@ export default function Projects() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-40px" }}
               transition={{ duration: 0.3, delay: i * 0.05 }}
-              className="glass-card flex flex-col justify-between overflow-hidden group hover:-translate-y-0.5 transition-all duration-200"
+              className="glass-card flex flex-col justify-between overflow-hidden group hover:-translate-y-1 transition-all duration-200 relative"
             >
               <div>
                 {/* Header - Domain / Status */}
-                <div className="flex justify-between items-center px-6 py-3.5 border-b border-border-subtle bg-main/40 text-xs">
-                  <span className="truncate max-w-[220px] font-mono text-[11px] text-muted tracking-wide">
-                    {project.domain || project.type || "System Architecture"}
+                <div className="flex justify-between items-center px-6 py-3 border-b border-border-subtle bg-main/50 text-xs">
+                  <span className="truncate max-w-[220px] font-mono text-[10px] text-muted tracking-wide">
+                    {project.domain || project.type || "SYSTEM ARCHITECTURE"}
                   </span>
-                  <div className="flex items-center gap-1.5 text-[11px] font-mono shrink-0">
+                  <div className="flex items-center gap-1.5 text-[10px] font-mono shrink-0">
                     <span
                       className={`w-1.5 h-1.5 rounded-full ${
                         project.status === "DEPLOYED"
-                          ? "bg-accent-emerald shadow-[0_0_8px_rgba(16,185,129,0.7)]"
+                          ? "bg-accent-emerald shadow-[0_0_8px_rgba(16,185,129,0.8)]"
                           : project.status === "DEVELOPMENT"
-                          ? "bg-accent-amber shadow-[0_0_8px_rgba(245,158,11,0.7)]"
+                          ? "bg-accent-amber shadow-[0_0_8px_rgba(245,158,11,0.8)]"
                           : "bg-muted"
                       }`}
                     />
                     <span
                       className={
                         project.status === "DEPLOYED"
-                          ? "text-accent-emerald font-medium"
+                          ? "text-accent-emerald font-semibold"
                           : project.status === "DEVELOPMENT"
-                          ? "text-accent-amber font-medium"
+                          ? "text-accent-amber font-semibold"
                           : "text-muted"
                       }
                     >
                       {project.status === "DEPLOYED"
-                        ? "Production"
+                        ? "PRODUCTION"
                         : project.status === "DEVELOPMENT"
-                        ? "In Progress"
-                        : "Archived"}
+                        ? "IN PROGRESS"
+                        : "ARCHIVED"}
                     </span>
                   </div>
                 </div>
@@ -162,12 +162,12 @@ export default function Projects() {
                 {/* Card Content */}
                 <div className="p-6">
                   <div className="flex flex-col gap-2 mb-3">
-                    <h3 className="font-sans font-bold text-xl text-primary group-hover:text-accent-cyan transition-colors tracking-tight">
+                    <h3 className="font-cyber font-bold text-lg sm:text-xl text-primary group-hover:text-accent-cyan transition-colors tracking-wide uppercase">
                       {project.title}
                     </h3>
                     {project.architecture && (
-                      <div className="text-[11px] font-mono text-muted bg-main/70 border border-border-subtle px-2.5 py-1 rounded-md inline-flex items-center gap-1.5 w-fit">
-                        <span className="text-accent-cyan">Architecture:</span>
+                      <div className="text-[10px] font-mono text-muted bg-main/80 border border-border-subtle px-2.5 py-1 rounded inline-flex items-center gap-1.5 w-fit">
+                        <span className="text-accent-cyan font-semibold">STACK:</span>
                         <span>{project.architecture}</span>
                       </div>
                     )}
@@ -182,7 +182,7 @@ export default function Projects() {
                     <div className="space-y-1.5 mb-2 pt-3 border-t border-border-subtle/50">
                       {project.highlights.map((item, hIdx) => (
                         <div key={hIdx} className="flex items-start gap-2 text-xs text-muted font-sans">
-                          <span className="text-accent-cyan text-[10px] select-none mt-0.5">▹</span>
+                          <span className="text-accent-cyan text-[10px] select-none mt-0.5 font-mono">▸</span>
                           <span className="leading-snug">{item}</span>
                         </div>
                       ))}
@@ -192,12 +192,12 @@ export default function Projects() {
               </div>
 
               {/* Bottom Footer - Tech Tags & Action Buttons */}
-              <div className="px-6 pb-6 pt-3 border-t border-border-subtle bg-main/20 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+              <div className="px-6 pb-6 pt-3 border-t border-border-subtle bg-main/30 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                 <div className="flex flex-wrap gap-1.5">
                   {project.tags?.map((tag, idx) => (
                     <span
                       key={idx}
-                      className="px-2 py-0.5 text-[10px] font-mono border border-border-subtle bg-secondary text-muted rounded-md"
+                      className="px-2 py-0.5 text-[10px] font-mono border border-border-subtle bg-secondary text-muted rounded"
                     >
                       {tag}
                     </span>
@@ -207,8 +207,8 @@ export default function Projects() {
                 {/* Action Links */}
                 <div className="flex items-center gap-2 text-xs shrink-0 w-full sm:w-auto justify-end">
                   {project.confidential ? (
-                    <span className="text-[11px] text-accent-amber/90 bg-accent-amber/10 border border-accent-amber/20 px-2.5 py-1 rounded-md flex items-center gap-1.5 font-medium">
-                      <span>Restricted Gov Access 🔒</span>
+                    <span className="text-[10px] font-mono text-accent-amber bg-accent-amber/10 border border-accent-amber/30 px-2.5 py-1 rounded flex items-center gap-1.5 font-semibold">
+                      <span>RESTRICTED GOV ACCESS 🔒</span>
                     </span>
                   ) : (
                     <>
@@ -217,10 +217,9 @@ export default function Projects() {
                           href={project.link}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="px-3 py-1.5 bg-primary text-main text-xs font-medium rounded-lg hover:opacity-90 transition-all flex items-center gap-1 active:scale-95 shadow-sm"
+                          className="cyber-chamfer-btn px-3.5 py-1.5 bg-primary text-main text-xs font-cyber font-bold hover:bg-accent-cyan hover:text-black transition-all flex items-center gap-1 active:scale-95 shadow-[0_0_10px_rgba(0,240,255,0.2)]"
                         >
-                          <span>Live Demo</span>
-                          <span>↗</span>
+                          <span>Live Demo ↗</span>
                         </a>
                       )}
                       {project.github && project.github !== project.link && (
@@ -228,16 +227,18 @@ export default function Projects() {
                           href={project.github}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="px-3 py-1.5 border border-border-subtle bg-secondary text-primary text-xs font-medium rounded-lg hover:border-border-hover transition-colors flex items-center gap-1 active:scale-95"
+                          className="cyber-chamfer-btn px-3.5 py-1.5 border border-border-subtle bg-secondary text-primary text-xs font-cyber font-medium hover:border-accent-cyan/50 hover:text-accent-cyan transition-colors flex items-center gap-1 active:scale-95"
                         >
-                          <span>Source</span>
-                          <span>↗</span>
+                          <span>Source ↗</span>
                         </a>
                       )}
                     </>
                   )}
                 </div>
               </div>
+
+              {/* Bottom Laser Trace on Hover */}
+              <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-accent-cyan to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
             </motion.div>
           ))}
         </div>
