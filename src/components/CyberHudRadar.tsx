@@ -64,13 +64,6 @@ export default function CyberHudRadar() {
           {/* Vignette Gradient Overlay */}
           <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent pointer-events-none" />
 
-          {/* Reticle Target Crosshairs on Hover */}
-          <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none flex items-center justify-center">
-            <div className="w-12 h-12 border border-accent-cyan/40 rounded-full flex items-center justify-center animate-ping" />
-            <div className="absolute w-full h-[1px] bg-accent-cyan/20" />
-            <div className="absolute h-full w-[1px] bg-accent-cyan/20" />
-          </div>
-
           {/* Bottom Telemetry Badge */}
           <div className="absolute bottom-2.5 left-2.5 right-2.5 bg-black/85 backdrop-blur-md border border-white/10 px-3 py-1.5 rounded-lg flex items-center justify-between text-[11px] font-mono">
             <div className="flex items-center gap-1.5">

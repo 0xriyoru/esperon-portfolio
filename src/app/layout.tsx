@@ -5,7 +5,6 @@ import Sidebar from "@/components/Sidebar";
 import MobileNav from "@/components/MobileNav";
 import PageWrapper from "@/components/PageWrapper";
 import CyberBackgroundCanvas from "@/components/CyberBackgroundCanvas";
-import CyberCursor from "@/components/CyberCursor";
 import CyberBootLoader from "@/components/CyberBootLoader";
 
 const inter = Inter({
@@ -37,6 +36,9 @@ export const metadata: Metadata = {
     icon: "/icon.png",
     apple: "/icon.png",
   },
+  other: {
+    "darkreader-lock": "",
+  },
 };
 
 export default function RootLayout({
@@ -47,6 +49,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark scroll-smooth" suppressHydrationWarning>
       <head>
+        <meta name="darkreader-lock" content="" />
         <script
           dangerouslySetInnerHTML={{
             __html: `
@@ -65,7 +68,6 @@ export default function RootLayout({
         className={`${inter.variable} ${jetBrainsMono.variable} ${orbitron.variable} ${chakraPetch.variable} antialiased min-h-screen flex flex-col lg:flex-row bg-main text-primary relative overflow-x-hidden selection:bg-accent-cyan/20 selection:text-white`}
       >
         <CyberBootLoader />
-        <CyberCursor />
         <CyberBackgroundCanvas />
         <MobileNav />
         <Sidebar />
