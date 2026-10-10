@@ -41,11 +41,50 @@ export default function ThemeToggle() {
   const theme = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 
   const handleSelectTheme = (newTheme: Theme) => {
+    if (newTheme === theme) return;
+
     localStorage.setItem("theme", newTheme);
-    applyThemeToDOM(newTheme);
-    window.dispatchEvent(new Event("theme-change"));
-    // Re-trigger the bootloader animation so it immediately renders in the toggled theme
-    window.dispatchEvent(new CustomEvent("portfolio:reboot"));
+
+    const executeThemeChange = () => {
+      applyThemeToDOM(newTheme);
+      window.dispatchEvent(
+        new CustomEvent("theme-change", { detail: { theme: newTheme } })
+      );
+    };
+
+    const doc = typeof document !== "undefined" ? document : null;
+    const hasViewTransition =
+      Boolean(
+        doc &&
+        "startViewTransition" in doc &&
+        typeof (doc as unknown as { startViewTransition?: unknown }).startViewTransition === "function" &&
+        !window.matchMedia("(prefers-reduced-motion: reduce)").matches
+      );
+
+    if (hasViewTransition && doc) {
+      doc.documentElement.classList.add("theme-view-transitioning");
+      const transition = (doc as unknown as { startViewTransition: (cb: () => void) => { finished: Promise<void> } }).startViewTransition(() => {
+        executeThemeChange();
+      });
+      transition.finished.finally(() => {
+        doc.documentElement.classList.remove("theme-view-transitioning");
+      });
+    } else {
+      if (
+        typeof window !== "undefined" &&
+        !window.matchMedia("(prefers-reduced-motion: reduce)").matches
+      ) {
+        const curtain = document.createElement("div");
+        curtain.className = "theme-curtain-fallback";
+        document.body.appendChild(curtain);
+        setTimeout(executeThemeChange, 220);
+        setTimeout(() => {
+          curtain.remove();
+        }, 460);
+      } else {
+        executeThemeChange();
+      }
+    }
   };
 
   return (

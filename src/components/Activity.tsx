@@ -4,10 +4,13 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { GitHubCalendar } from "react-github-calendar";
 
-const availableYears = ["last", "2026", "2025", "2024"];
+// Default verified years based on actual GitHub activity
+const DEFAULT_YEARS = ["last", "2026"];
 
 export default function Activity() {
   const [selectedYear, setSelectedYear] = useState<string>("last");
+  const [availableYears, setAvailableYears] = useState<string[]>(DEFAULT_YEARS);
+  const [contributionTotals, setContributionTotals] = useState<Record<string, number>>({});
   const [isLightMode, setIsLightMode] = useState(false);
   const [mounted, setMounted] = useState(false);
 
@@ -23,11 +26,59 @@ export default function Activity() {
     observer.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
     window.addEventListener("theme-change", checkTheme);
 
+    // Dynamically query contribution metadata to verify active years and accurate telemetry counts
+    const fetchActiveYears = async () => {
+      try {
+        const res = await fetch("https://github-contributions-api.jogruber.de/v4/0xriyoru", {
+          cache: "no-store",
+          headers: {
+            "Cache-Control": "no-cache",
+          },
+        });
+        if (!res.ok) return;
+        const data = await res.json();
+
+        // Extract active years with verified contributions (> 0)
+        const totals: Record<string, number> = {};
+        if (data.total && typeof data.total === "object") {
+          Object.entries(data.total).forEach(([yr, cnt]) => {
+            if (typeof cnt === "number") {
+              totals[yr] = cnt;
+            }
+          });
+        }
+
+        // Calculate past 365 days contribution total
+        if (Array.isArray(data.contributions)) {
+          totals["last"] = data.contributions.reduce(
+            (acc: number, cur: { count?: number }) => acc + (cur.count || 0),
+            0
+          );
+        }
+
+        setContributionTotals(totals);
+
+        const verifiedYears = Object.keys(totals)
+          .filter((yr) => yr !== "last" && totals[yr] > 0)
+          .sort((a, b) => Number(b) - Number(a));
+
+        if (verifiedYears.length > 0) {
+          setAvailableYears(["last", ...verifiedYears]);
+        }
+      } catch (err) {
+        console.warn("Unable to fetch dynamic GitHub contribution metadata:", err);
+      }
+    };
+
+    fetchActiveYears();
+
     return () => {
       observer.disconnect();
       window.removeEventListener("theme-change", checkTheme);
     };
   }, []);
+
+  const currentCount = contributionTotals[selectedYear];
 
   return (
     <div className="w-full">
@@ -38,7 +89,7 @@ export default function Activity() {
         className="glass-card p-6 relative overflow-hidden group"
       >
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 border-b border-border-subtle pb-4">
-          <div className="flex items-center gap-2.5">
+          <div className="flex flex-wrap items-center gap-2.5">
             <span className="w-2 h-2 rounded-full bg-accent-emerald animate-pulse shadow-[0_0_8px_rgba(16,185,129,0.8)]" />
             <span className="text-[11px] font-mono text-accent-cyan font-semibold">Live Telemetry</span>
             <a
@@ -49,9 +100,14 @@ export default function Activity() {
             >
               github.com/0xriyoru ↗
             </a>
+            {currentCount !== undefined && (
+              <span className="text-[10px] font-mono text-accent-emerald border border-accent-emerald/30 bg-accent-emerald/10 px-2 py-0.5 rounded font-medium">
+                {currentCount} {currentCount === 1 ? "contribution" : "contributions"}
+              </span>
+            )}
           </div>
 
-          {/* Year selector buttons */}
+          {/* Dynamic Year selector buttons */}
           <div className="flex items-center gap-1.5 text-xs">
             {availableYears.map((yr) => {
               const isSelected = selectedYear === yr;

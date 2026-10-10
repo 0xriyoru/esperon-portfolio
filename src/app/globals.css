@@ -190,6 +190,105 @@ body {
   transition: background-color 0.2s ease, color 0.2s ease;
 }
 
+/* =========================================================================
+   Theme Wipe Transition (Inspired by yestinguarin.com & View Transitions API)
+   ========================================================================= */
+
+:root {
+  --theme-transition-duration: 440ms;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+::view-transition-old(root) {
+  z-index: 1;
+}
+
+::view-transition-new(root) {
+  z-index: 2;
+  animation: theme-reveal-down var(--theme-transition-duration, 440ms) cubic-bezier(0.32, 0.72, 0, 1) both;
+}
+
+@keyframes theme-reveal-down {
+  0% {
+    clip-path: inset(0 0 100% 0);
+  }
+  100% {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+/* Avoid jarring font/color transitions while view-transition snapshot is rendering */
+html.theme-view-transitioning body,
+html.theme-view-transitioning body * {
+  transition: none !important;
+}
+
+/* Fallback curtain wipe for browsers without startViewTransition */
+.theme-curtain-fallback {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 99999;
+  background: var(--theme-main);
+  animation: theme-curtain-swipe 440ms cubic-bezier(0.32, 0.72, 0, 1) forwards;
+}
+
+@keyframes theme-curtain-swipe {
+  0% {
+    clip-path: inset(0 0 100% 0);
+    opacity: 0.95;
+  }
+  50% {
+    clip-path: inset(0 0 0 0);
+    opacity: 1;
+  }
+  100% {
+    clip-path: inset(100% 0 0 0);
+    opacity: 0;
+  }
+}
+
+/* Avatar vertical cyber scanline animation (Inspired by Bryl Lim's reactive avatar) */
+@keyframes cyber-avatar-scan {
+  0% {
+    top: -5%;
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  85% {
+    opacity: 1;
+  }
+  100% {
+    top: 105%;
+    opacity: 0;
+  }
+}
+
+.animate-avatar-scan {
+  animation: cyber-avatar-scan 650ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(root),
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none !important;
+  }
+  .theme-curtain-fallback {
+    display: none !important;
+  }
+  .animate-avatar-scan {
+    animation: none !important;
+  }
+}
+
 ::selection {
   background: rgba(0, 240, 255, 0.2);
   color: var(--theme-primary);

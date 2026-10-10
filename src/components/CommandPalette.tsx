@@ -44,15 +44,42 @@ export default function CommandPalette() {
   const setTheme = (mode: "auto" | "light" | "dark") => {
     localStorage.setItem("theme", mode);
     const root = document.documentElement;
-    if (mode === "auto") {
-      const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-      root.classList.toggle("dark", isDark);
-      root.classList.toggle("light", !isDark);
+
+    const executeThemeChange = () => {
+      if (mode === "auto") {
+        const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        root.classList.toggle("dark", isDark);
+        root.classList.toggle("light", !isDark);
+      } else {
+        root.classList.toggle("dark", mode === "dark");
+        root.classList.toggle("light", mode === "light");
+      }
+      window.dispatchEvent(
+        new CustomEvent("theme-change", { detail: { theme: mode } })
+      );
+    };
+
+    const doc = typeof document !== "undefined" ? document : null;
+    const hasViewTransition =
+      Boolean(
+        doc &&
+        "startViewTransition" in doc &&
+        typeof (doc as unknown as { startViewTransition?: unknown }).startViewTransition === "function" &&
+        !window.matchMedia("(prefers-reduced-motion: reduce)").matches
+      );
+
+    if (hasViewTransition && doc) {
+      doc.documentElement.classList.add("theme-view-transitioning");
+      const transition = (doc as unknown as { startViewTransition: (cb: () => void) => { finished: Promise<void> } }).startViewTransition(() => {
+        executeThemeChange();
+      });
+      transition.finished.finally(() => {
+        doc.documentElement.classList.remove("theme-view-transitioning");
+      });
     } else {
-      root.classList.toggle("dark", mode === "dark");
-      root.classList.toggle("light", mode === "light");
+      executeThemeChange();
     }
-    window.dispatchEvent(new Event("theme-change"));
+
     setIsOpen(false);
   };
 
