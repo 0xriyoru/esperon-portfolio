@@ -1,13 +1,27 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { ArrowUpRight, CaretDown } from "@phosphor-icons/react";
 import { supabase } from "@/lib/supabase";
-import { motion } from "framer-motion";
 import { staticProjects, Project } from "@/data/projectsData";
+
+const statusLabel: Record<Project["status"], string> = {
+  DEPLOYED: "Live",
+  DEVELOPMENT: "In progress",
+  ARCHIVED: "Archived",
+};
+
+function StatusMark({ status }: { status: Project["status"] }) {
+  const base = "inline-block h-2 w-2 rounded-full";
+  if (status === "DEPLOYED") return <span className={`${base} bg-accent`} aria-hidden="true" />;
+  if (status === "DEVELOPMENT")
+    return <span className={`${base} border border-accent`} aria-hidden="true" />;
+  return <span className={`${base} bg-rule-strong`} aria-hidden="true" />;
+}
 
 export default function Projects() {
   const [projects, setProjects] = useState<Project[]>(staticProjects);
-  const [activeFilter, setActiveFilter] = useState<string>("ALL");
+  const [openId, setOpenId] = useState<string | null>(staticProjects[0]?.id ?? null);
 
   useEffect(() => {
     const fetchProjects = async () => {
@@ -29,25 +43,11 @@ export default function Projects() {
               if (existingIndex >= 0) {
                 merged[existingIndex] = {
                   ...merged[existingIndex],
-                  ...remote,
-                  architecture:
-                    merged[existingIndex].architecture || remote.type || "Full-Stack System",
-                  highlights:
-                    merged[existingIndex].highlights || remote.highlights || [],
+                  status: merged[existingIndex].status,
+                  link: merged[existingIndex].link || remote.link,
+                  github: merged[existingIndex].github || remote.github,
+                  domain: merged[existingIndex].domain || remote.domain,
                 };
-              } else {
-                merged.push({
-                  id: remote.id,
-                  title: remote.title,
-                  type: remote.type || "Web System",
-                  architecture: remote.type || "System Architecture",
-                  description: remote.description || "",
-                  highlights: remote.highlights || [],
-                  tags: remote.tags || [],
-                  status: (remote.status?.toUpperCase() as Project["status"]) || "DEVELOPMENT",
-                  link: remote.link,
-                  domain: remote.domain,
-                });
               }
             });
             return merged;
@@ -76,173 +76,111 @@ export default function Projects() {
     };
   }, []);
 
-  const filterOptions = [
-    { id: "ALL", label: "All Projects" },
-    { id: "DEPLOYED", label: "Deployed" },
-    { id: "DEVELOPMENT", label: "In Progress" },
-    { id: "ARCHIVED", label: "Archived" },
-  ];
-
-  const filteredProjects = projects.filter((project) => {
-    if (activeFilter === "ALL") return true;
-    return project.status?.toUpperCase() === activeFilter;
-  });
-
   return (
-    <div className="w-full">
-      {/* Filter controls with Cyber HUD styling */}
-      <div className="flex items-center gap-2 mb-8 overflow-x-auto pb-1">
-        {filterOptions.map((f) => {
-          const isSelected = activeFilter === f.id;
-          return (
-            <button
-              key={f.id}
-              onClick={() => setActiveFilter(f.id)}
-              className={`px-3.5 py-1.5 rounded-md text-xs font-mono transition-all whitespace-nowrap cursor-pointer ${
-                isSelected
-                  ? "bg-accent-cyan text-black font-bold shadow-[0_0_12px_rgba(0,240,255,0.4)]"
-                  : "bg-secondary text-muted hover:text-primary hover:bg-secondary/80 border border-border-subtle"
-              }`}
-            >
-              {f.label}
-            </button>
-          );
-        })}
-      </div>
+    <ul className="border-t border-rule-strong">
+      {projects.map((project) => {
+        const isOpen = openId === project.id;
+        const panelId = `project-panel-${project.id}`;
+        const status = project.status?.toUpperCase() as Project["status"];
+        return (
+          <li key={project.id} className="border-b border-rule">
+            <h3>
+              <button
+                type="button"
+                aria-expanded={isOpen}
+                aria-controls={panelId}
+                onClick={() => setOpenId(isOpen ? null : project.id)}
+                className="group grid w-full cursor-pointer grid-cols-[1fr_auto] items-baseline gap-x-6 gap-y-1 py-6 text-left md:grid-cols-12 md:py-8"
+              >
+                <span
+                  className={`font-display text-4xl font-light leading-none tracking-tight transition-[transform,color] duration-500 [transition-timing-function:var(--ease-out-expo)] group-hover:translate-x-2 md:col-span-6 md:text-6xl ${
+                    isOpen ? "text-accent" : "text-ink"
+                  }`}
+                >
+                  {project.title}
+                </span>
+                <span className="order-3 col-span-2 text-sm text-ink-soft md:order-none md:col-span-4 md:text-base">
+                  {project.type}
+                </span>
+                <span className="order-2 inline-flex items-center gap-2 justify-self-end text-sm text-ink-soft md:order-none md:col-span-2 md:justify-self-start">
+                  <StatusMark status={status} />
+                  {statusLabel[status] ?? "In progress"}
+                  <CaretDown
+                    size={16}
+                    aria-hidden="true"
+                    className={`ml-1 transition-transform duration-500 [transition-timing-function:var(--ease-out-expo)] md:ml-auto ${
+                      isOpen ? "rotate-180" : ""
+                    }`}
+                  />
+                </span>
+              </button>
+            </h3>
 
-      {filteredProjects.length === 0 ? (
-        <div className="p-12 border border-border-subtle bg-secondary/50 rounded-xl text-center text-muted text-sm font-sans">
-          No projects found matching this filter.
-        </div>
-      ) : (
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          {filteredProjects.map((project, i) => (
-            <motion.div
-              key={project.id}
-              initial={{ opacity: 0, y: 15 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-40px" }}
-              transition={{ duration: 0.3, delay: i * 0.05 }}
-              className="glass-card flex flex-col justify-between overflow-hidden group hover:-translate-y-1 transition-all duration-200 relative"
+            <div
+              id={panelId}
+              role="region"
+              aria-label={`${project.title} details`}
+              className="row-panel"
+              data-open={isOpen}
+              inert={!isOpen}
             >
               <div>
-                {/* Header - Domain / Status */}
-                <div className="flex justify-between items-center px-6 py-3 border-b border-border-subtle bg-main/50 text-xs">
-                  <span className="truncate max-w-[220px] font-mono text-[10px] text-muted tracking-wide">
-                    {project.domain || project.type || "SYSTEM ARCHITECTURE"}
-                  </span>
-                  <div className="flex items-center gap-1.5 text-[10px] font-mono shrink-0">
-                    <span
-                      className={`w-1.5 h-1.5 rounded-full ${
-                        project.status === "DEPLOYED"
-                          ? "bg-accent-emerald shadow-[0_0_8px_rgba(16,185,129,0.8)]"
-                          : project.status === "DEVELOPMENT"
-                          ? "bg-accent-amber shadow-[0_0_8px_rgba(245,158,11,0.8)]"
-                          : "bg-muted"
-                      }`}
-                    />
-                    <span
-                      className={
-                        project.status === "DEPLOYED"
-                          ? "text-accent-emerald font-semibold"
-                          : project.status === "DEVELOPMENT"
-                          ? "text-accent-amber font-semibold"
-                          : "text-muted"
-                      }
-                    >
-                      {project.status === "DEPLOYED"
-                        ? "PRODUCTION"
-                        : project.status === "DEVELOPMENT"
-                        ? "IN PROGRESS"
-                        : "ARCHIVED"}
-                    </span>
+                <div className="grid gap-8 pb-10 md:grid-cols-12 md:gap-10">
+                  <div className="md:col-span-6">
+                    <p className="max-w-[62ch] text-base leading-relaxed">{project.description}</p>
+                    <p className="mt-5 font-mono text-[13px] leading-relaxed text-ink-soft">
+                      {project.tags?.join(", ")}
+                    </p>
                   </div>
-                </div>
 
-                {/* Card Content */}
-                <div className="p-6">
-                  <div className="flex flex-col gap-2 mb-3">
-                    <h3 className="font-cyber font-bold text-lg sm:text-xl text-primary group-hover:text-accent-cyan transition-colors tracking-wide uppercase">
-                      {project.title}
-                    </h3>
-                    {project.architecture && (
-                      <div className="text-[10px] font-mono text-muted bg-main/80 border border-border-subtle px-2.5 py-1 rounded inline-flex items-center gap-1.5 w-fit">
-                        <span className="text-accent-cyan font-semibold">STACK:</span>
-                        <span>{project.architecture}</span>
-                      </div>
+                  <div className="md:col-span-6">
+                    {project.highlights && project.highlights.length > 0 && (
+                      <ul className="max-w-[62ch] space-y-3 text-[15px] leading-relaxed text-ink-soft">
+                        {project.highlights.map((item, hIdx) => (
+                          <li key={hIdx}>{item}</li>
+                        ))}
+                      </ul>
                     )}
-                  </div>
 
-                  <p className="text-muted text-xs sm:text-sm leading-relaxed mb-4 font-sans">
-                    {project.description}
-                  </p>
-
-                  {/* Highlights */}
-                  {project.highlights && project.highlights.length > 0 && (
-                    <div className="space-y-1.5 mb-2 pt-3 border-t border-border-subtle/50">
-                      {project.highlights.map((item, hIdx) => (
-                        <div key={hIdx} className="flex items-start gap-2 text-xs text-muted font-sans">
-                          <span className="text-accent-cyan text-[10px] select-none mt-0.5 font-mono">▸</span>
-                          <span className="leading-snug">{item}</span>
-                        </div>
-                      ))}
+                    <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm">
+                      {project.confidential ? (
+                        <span className="text-ink-soft">
+                          Internal government system. No public link.
+                        </span>
+                      ) : (
+                        <>
+                          {project.link && (
+                            <a
+                              href={project.link}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center gap-1 text-accent link-draw"
+                            >
+                              {project.link.includes("github.com") ? "View on GitHub" : "Open site"}
+                              <ArrowUpRight size={14} aria-hidden="true" />
+                            </a>
+                          )}
+                          {project.github && project.github !== project.link && (
+                            <a
+                              href={project.github}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center gap-1 link-draw"
+                            >
+                              Source
+                              <ArrowUpRight size={14} aria-hidden="true" />
+                            </a>
+                          )}
+                        </>
+                      )}
                     </div>
-                  )}
+                  </div>
                 </div>
               </div>
-
-              {/* Bottom Footer - Tech Tags & Action Buttons */}
-              <div className="px-6 pb-6 pt-3 border-t border-border-subtle bg-main/30 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-                <div className="flex flex-wrap gap-1.5">
-                  {project.tags?.map((tag, idx) => (
-                    <span
-                      key={idx}
-                      className="px-2 py-0.5 text-[10px] font-mono border border-border-subtle bg-secondary text-muted rounded"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-
-                {/* Action Links */}
-                <div className="flex items-center gap-2 text-xs shrink-0 w-full sm:w-auto justify-end">
-                  {project.confidential ? (
-                    <span className="text-[10px] font-mono text-accent-amber bg-accent-amber/10 border border-accent-amber/30 px-2.5 py-1 rounded flex items-center gap-1.5 font-semibold">
-                      <span>RESTRICTED GOV ACCESS 🔒</span>
-                    </span>
-                  ) : (
-                    <>
-                      {project.link && (
-                        <a
-                          href={project.link}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="cyber-chamfer-btn px-3.5 py-1.5 bg-primary text-main text-xs font-cyber font-bold hover:bg-accent-cyan hover:text-black transition-all flex items-center gap-1 active:scale-95 shadow-[0_0_10px_rgba(0,240,255,0.2)]"
-                        >
-                          <span>Live Demo ↗</span>
-                        </a>
-                      )}
-                      {project.github && project.github !== project.link && (
-                        <a
-                          href={project.github}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="cyber-chamfer-btn px-3.5 py-1.5 border border-border-subtle bg-secondary text-primary text-xs font-cyber font-medium hover:border-accent-cyan/50 hover:text-accent-cyan transition-colors flex items-center gap-1 active:scale-95"
-                        >
-                          <span>Source ↗</span>
-                        </a>
-                      )}
-                    </>
-                  )}
-                </div>
-              </div>
-
-              {/* Bottom Laser Trace on Hover */}
-              <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-accent-cyan to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
-            </motion.div>
-          ))}
-        </div>
-      )}
-    </div>
+            </div>
+          </li>
+        );
+      })}
+    </ul>
   );
 }

@@ -1,108 +1,56 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
-import { supabase } from "@/lib/supabase";
-
-type Skill = {
-  id: string;
-  category: string;
-  skill_list: string[];
-};
+import { ArrowUpRight } from "@phosphor-icons/react";
+import { staticSkills, getSkillMeta } from "@/data/skillsData";
 
 export default function Skills() {
-  const [skills, setSkills] = useState<Skill[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    async function fetchSkills() {
-      try {
-        const { data, error } = await supabase
-          .from("skills")
-          .select("*")
-          .order("created_at", { ascending: true });
-
-        if (error) throw error;
-        if (data) setSkills(data);
-      } catch (error) {
-        console.error("Error fetching skills:", error);
-      } finally {
-        setLoading(false);
-      }
-    }
-
-    fetchSkills();
-
-    const channel = supabase
-      .channel("skills-realtime")
-      .on(
-        "postgres_changes",
-        { event: "*", schema: "public", table: "skills" },
-        () => {
-          fetchSkills();
-        }
-      )
-      .subscribe();
-
-    return () => {
-      supabase.removeChannel(channel);
-    };
-  }, []);
+  const skills = staticSkills;
 
   return (
-    <div className="w-full">
-      {loading ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-          {[1, 2, 3, 4].map((n) => (
-            <div
-              key={n}
-              className="p-6 rounded-xl border border-border-subtle bg-secondary/40 animate-pulse h-40"
-            />
-          ))}
-        </div>
-      ) : skills.length === 0 ? (
-        <div className="p-12 border border-border-subtle bg-secondary/50 rounded-xl text-center text-muted text-sm font-sans">
-          No skills inventory records found.
-        </div>
-      ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-      {skills.map((group, i) => (
-        <motion.div
-          key={group.id}
-          initial={{ opacity: 0, y: 15 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.3, delay: i * 0.06 }}
-          className="glass-card p-6 group hover:-translate-y-1 transition-all duration-200 relative overflow-hidden"
-        >
-          {/* Category Header */}
-          <div className="flex items-center justify-between border-b border-border-subtle pb-3 mb-4">
-            <h3 className="font-cyber font-bold text-sm sm:text-base text-primary group-hover:text-accent-cyan transition-colors tracking-wide uppercase">
+    <div className="grid grid-cols-1 gap-x-12 gap-y-12 md:grid-cols-2 lg:gap-x-16 lg:gap-y-14">
+      {skills.map((group) => (
+        <section key={group.id} className="border-t border-rule-strong pt-5">
+          <div className="flex items-baseline justify-between gap-4 mb-4">
+            <h3 className="font-display text-xl sm:text-2xl font-light tracking-tight text-ink">
               {group.category}
             </h3>
-            <span className="text-[10px] font-mono text-muted bg-main/80 border border-border-subtle px-2.5 py-0.5 rounded">
-              {group.skill_list.length} technologies
+            <span className="font-mono text-xs text-ink-soft shrink-0">
+              {group.skill_list.length} items
             </span>
           </div>
 
-          {/* Skills Tags Grid */}
-          <div className="flex flex-wrap gap-2">
-            {group.skill_list.map((skill, j) => (
-              <span
-                key={j}
-                className="text-xs font-mono border border-border-subtle/80 bg-main/90 px-2.5 py-1 text-muted rounded hover:border-accent-cyan/50 hover:text-accent-cyan hover:bg-accent-cyan/10 hover:shadow-[0_0_8px_rgba(0,240,255,0.2)] transition-all cursor-default"
-              >
-                {skill}
-              </span>
-            ))}
-          </div>
+          <div className="flex flex-wrap gap-2.5">
+            {group.skill_list.map((skillName) => {
+              const meta = getSkillMeta(skillName);
+              const Icon = meta.icon;
 
-          {/* Bottom Laser Trace on Hover */}
-          <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-accent-cyan to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
-        </motion.div>
+              return (
+                <a
+                  key={skillName}
+                  href={meta.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${meta.name} (official website, opens in new tab)`}
+                  className="group inline-flex items-center gap-2 rounded-note border border-rule bg-paper px-3 py-1.5 text-sm text-ink-soft transition-all duration-200 hover:border-accent hover:bg-paper-deep hover:text-ink hover:-translate-y-0.5 active:translate-y-0 shadow-xs focus-visible:outline-2 focus-visible:outline-accent"
+                >
+                  <span className="flex items-center justify-center text-ink-soft transition-colors group-hover:text-accent shrink-0">
+                    <Icon size={15} aria-hidden="true" />
+                  </span>
+                  <span className="text-[13.5px] font-medium leading-none text-ink transition-colors group-hover:text-accent">
+                    {meta.name}
+                  </span>
+                  <ArrowUpRight
+                    size={12}
+                    weight="bold"
+                    className="text-ink-soft/40 transition-all group-hover:text-accent group-hover:translate-x-0.5 group-hover:-translate-y-0.5 shrink-0"
+                    aria-hidden="true"
+                  />
+                </a>
+              );
+            })}
+          </div>
+        </section>
       ))}
-        </div>
-      )}
     </div>
   );
 }

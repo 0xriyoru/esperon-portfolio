@@ -1,96 +1,99 @@
-# RHODGE ELLIO D. ESPERON
-**AI & Full-Stack Developer**  
-Olongapo City, Philippines • +63 949 428 1875 • rhodgesperon@gmail.com  
-[LinkedIn: linkedin.com/in/rhodge-esperon](https://linkedin.com/in/rhodge-esperon) • [GitHub: github.com/0xriyoru](https://github.com/0xriyoru) • [Portfolio: esperonrhodge.vercel.app](https://esperonrhodge.vercel.app)
+# Rhodge Ellio D. Esperon
 
----
-
-## PROFESSIONAL SUMMARY
-Forward-thinking **AI & Full-Stack Developer** and 4th-year BS Information Technology student specializing in agentic AI workflows, backend system architecture, and UI/UX engineering. Proven track record delivering production web applications—from internal government asset and job order systems at **Subic Bay Metropolitan Authority (SBMA)** to OCR-powered reading platforms (**Mekai**) and low-latency audio applications (**Rebeat**). Adept at building scalable web solutions with **Next.js, TypeScript, Node.js, Python, PostgreSQL (RLS), Supabase**, and **Figma**.
-
----
-
-## TECHNICAL SKILLS
-
-- **Languages:** TypeScript, JavaScript, Python, Java, PHP, HTML5, CSS3, SQL
-- **Frontend & Frameworks:** Next.js, React.js, Tailwind CSS, Bootstrap, Progressive Web Apps (PWA)
-- **Backend & Databases:** Node.js, PostgreSQL (Row-Level Security), Supabase, MySQL, AWS DynamoDB, Laravel, REST APIs
-- **AI & Specialized Engineering:** Agentic AI Workflows, LLM Deployment & Prompting, OCR Translation Engines, Web Audio API, RLS Policies
-- **Developer Tools & Cloud:** Git, GitHub, VS Code, Vercel, Supabase Realtime, Postman, Docker
-- **UI/UX & System Design:** Figma (High-Fidelity Prototyping & Design Systems), Wireframing, ERD Schema Design, Technical Documentation
-
----
-
-## WORK & INTERNSHIP EXPERIENCE
-
-### **Subic Bay Metropolitan Authority (SBMA)** | *Subic Bay Freeport Zone, Philippines*
-**IT Intern – Procurement & Property Management** | *May 2026 – September 2026*
-- Engineered and deployed **SBMA-JO**, a secure internal property and job order management web system built with **Next.js** and **Supabase**, streamlining departmental equipment requests and asset tracking.
-- Automated inventory cycle counting and property disposition workflows, significantly reducing manual record discrepancies and accelerating processing turnaround times.
-- Configured role-based access control and strict data integrity constraints to safeguard confidential government records and support compliance reporting.
-
----
-
-## FEATURED & ACADEMIC PROJECTS
-
-### **Mekai – OCR-Assisted Manga Reading & Translation Platform**
-*Full-Stack Developer & Designer* | *February 2026 – March 2026* | [mekaiscans.vercel.app](https://mekaiscans.vercel.app)
-- Engineered a full-stack reading and translation application utilizing **Next.js**, **TypeScript**, and OCR-powered processing to automate text extraction from untranslated comic media.
-- Implemented secure multi-tier user authentication and authorization using custom **PostgreSQL Row Level Security (RLS)** policies.
-- Designed a modern, accessible interface in **Figma** and deployed to **Vercel**, optimizing asset loading and mobile reading performance.
-
-### **ArtNest – Creative Showcase Progressive Web App**
-*Collaborator & Frontend Architect* | *2026* | [artnest-hub.vercel.app](https://artnest-hub.vercel.app)
-- Architected responsive Progressive Web App (PWA) features and modular UI components using **Next.js** and **React**, enabling smooth offline caching and cross-device responsiveness.
-- Collaborated on platform navigation, media caching strategies, and high-performance interactive galleries.
-
-### **Rebeat – Low-Latency Live Music Web Launchpad**
-*UI/UX Designer & Frontend Developer* | *December 2025 – March 2026*
-- Developed an interactive web-based sampler and music launchpad utilizing the **Web Audio API** and React state management, democratizing live music performance without expensive physical hardware.
-- Achieved a consistent **60 FPS** user interface target with low-latency audio playback through buffer caching and audio pipeline optimizations.
-- Reduced initial project load times to **under 2 seconds** via lazy-loading audio banks and modular component rendering.
-
-### **MaUlam – AI-Driven Meal Planning Engine**
-*AI & Mobile Developer* | *2026* | [github.com/0xriyoru/MaUlam](https://github.com/0xriyoru/MaUlam)
-- Designed an intelligent meal planning and ingredient recommendation system leveraging **Python** and LLM prompting pipelines to generate localized culinary solutions based on available pantry items.
-
-### **Gakumon – Gamified Pet-Based E-Learning Platform**
-*Technical Documenter & Systems Analyst* | *November 2024 – March 2025*
-- Formulated system mechanics for a virtual pet e-learning platform incorporating health decay algorithms, coin multiplier economies, and knowledge retention benchmarks.
-- Documented comprehensive admin dashboard specifications for student engagement analytics and platform moderation.
-
-### **JobLink – Skill-Based Centralized Employment Platform**
-*Technical Lead Documenter & UI/UX Designer* | *December 2022 – March 2023*
-- Coordinated cross-functional development through detailed ERD architecture, data flow diagrams, and technical manuals for a full-stack job matching platform.
-- Designed an intuitive end-to-end Figma UI/UX prototype focused on non-technical user onboarding and accessibility.
+**IT Student - Applicant**  
+Olongapo City, Philippines | +63 949 428 1875  
+rhodgesperon@gmail.com | [linkedin.com/in/rhodge-esperon](https://linkedin.com/in/rhodge-esperon) | [github.com/0xriyoru](https://github.com/0xriyoru)
 
 ---
 
 ## EDUCATION
 
-### **Lyceum of Subic Bay** | *Subic Bay Freeport Zone, Philippines*
-**Bachelor of Science in Information Technology (BSIT)** | *2023 – Present (4th Year / Expected 2027)*
+**Lyceum Of Subic Bay** | *Bachelor of Science in Information Technology*  
+*2023 – Present*
 
-### **Columban College, Inc.** | *Olongapo City, Philippines*
-**Senior High School – STEM Strand (Science, Technology, Engineering, and Mathematics)** | *2021 – 2023*
+**Columban College, Inc.** | *Science, Technology, Engineering, and Mathematics*  
+*2021 – 2023*  
+*Senior High School Graduate*
 
 ---
 
-## CERTIFICATIONS, SEMINARS & CONFERENCES
+## TECHNICAL SKILLS
 
-- **AWS Community Day Philippines** – *Attendee* | AWS User Group Philippines, Taguig City, Metro Manila *(Aug 2026)*  
-  *Covered enterprise cloud architecture, serverless systems, and scalable AWS deployment models.*
-- **Convergence III: From Policy to People: The Governance & Human Side of Cyber Risk** – *Attendee (Certificate of Recognition)* | DEVCON Pampanga, Angeles City *(Jul 2026)*  
-  *Engaged in sessions on cyber risk governance, agentic AI workflows, LLM safety, and human-centric security operations.*
-- **SparkCon: The Next Wave of Innovation** – *Attendee* | Campus DevCon x Zellense *(2025)*
-- **Skydevs Hack, Play, & Learn Summit 2025 "Masterclass"** – *Attendee* | Skydev Solutions, Inc. *(2025)*
-- **C# Scripting for Unity: Core Concepts & Best Practices** – *Attendee* | Lyceum of Subic Bay *(2025)*
-- **Exploring Angular Frameworks for UI Development** – *Attendee* | Lyceum of Subic Bay *(2024)*
-- **Data Privacy & IT/CS Career Development** – *Attendee* | Lyceum of Subic Bay *(2023)*
+- **UI/UX Design:** Figma, Wireframing, High-Fidelity Prototyping
+- **Front-End:** HTML, CSS, Javascript, Typescript
+- **Back-End & Database:** Node.js, Java, PHP, MySQL, PostgreSQL
+- **Frameworks:** Bootstrap, React.js, Tailwind CSS, Laravel
+- **Developer Tools:** GitHub, VS Code, Vercel, Supabase, AWS DynamoDB
+- **Other Technical Skills:** Technical Research, Documentation, Technical Writing
+
+---
+
+## WORK EXPERIENCE
+
+### **IT Intern / Systems Developer (OJT)** | *May 2026 – Sept. 2026*  
+**Asset Management Department (AMD, Formerly Procurement and Property Management Department - PPMD) at SBMA**  
+- **SBMA-JO System Development** (*July 2026 – August 2026*): Engineered and deployed a modern, cloud-based Job Order Management System with an interactive analytics dashboard featuring reactive Power BI-style KPI cards to replace an outdated, corrupted local server setup.
+- Transitioned the department from a vulnerable, local-host architecture to a secure, cloud-deployed web application, eliminating data corruption risks and ensuring high availability.
+- Streamlined department workflow tracking and operational visibility by centralizing data management and implementing real-time data metrics.
+
+---
+
+## FEATURED & ACADEMIC PROJECTS
+
+### **Mekai: OCR-Assisted Manga Reading Platform**  
+*System Developer & Designer* | *February, 2026 – March, 2026* | [mekaiscans.vercel.app](https://mekaiscans.vercel.app)
+- Streamlined the untranslated manga reading process by engineering a full-stack application with OCR-powered translation tools.
+- Accomplished secure multi-tier user management by implementing custom PostgreSQL Row Level Security (RLS) policies.
+- Improved platform performance and readability by designing a modern Figma aesthetic and deploying to Vercel.
+
+### **ArtNest: Creative Showcase Progressive Web App**  
+*Collaborator & Frontend Architect* | *January, 2026 – February, 2026* | [artnest-hub.vercel.app](https://artnest-hub.vercel.app)
+- Architected responsive Progressive Web App (PWA) features and modular UI components using Next.js and React, enabling seamless offline caching and cross-device responsiveness.
+- Collaborated on platform navigation, media caching strategies, and high-performance interactive galleries.
+
+### **Rebeat: User-Centered Live Music Interface**  
+*UI/UX Designer & Front-end Developer* | *December, 2025 – March, 2026* | [github.com/0xriyoru](https://github.com/0xriyoru)
+- Democratized live music performance by developing a web-based launchpad to replace expensive physical gear.
+- Accomplished a 60 FPS UI target by implementing a low-latency web audio engine and React.js state management.
+- Reduced initial project load times to under 2 seconds by executing lazy-loading strategies and audio buffer caching.
+
+### **MaUlam: AI Mobile Companion App (Android APK)**  
+*AI & Mobile Developer* | *2026* | [github.com/0xriyoru/MaUlam](https://github.com/0xriyoru/MaUlam)
+- Shipped an intelligent kitchen companion and pantry manager as an installable Android APK, utilizing camera capture and Google Gemini Vision for automated ingredient scanning.
+- Deployed serverless Supabase Edge Functions orchestrating multimodal Gemini AI pipelines for localized Filipino recipe recommendations.
+- Implemented proactive push notifications for shelf-life expiration alerts and AsyncStorage offline caching.
+
+### **Gakumon: Pet-Based Gamified E-Learning Platform**  
+*Technical Documenter* | *November, 2024 – March, 2025*  
+- Enhanced student engagement and knowledge retention by documenting a gamified platform with virtual pet mechanics.
+- Increased daily user participation by defining a virtual economy featuring pet health decay and coin multipliers.
+- Streamlined system scalability and moderation by formulating a comprehensive admin dashboard for analytics.
+
+### **JobLink: Skill-Based Job Matching Web Platform**  
+*Technical Lead Documenter & UI/UX Designer* | *December, 2022 – March, 2023*  
+- Accomplished a centralized employment web platform connecting local job seekers and employers by developing a full-stack solution.
+- Achieved 100% architectural alignment by coordinating cross-functional design and development efforts through ERDs and manuals.
+- Optimized user onboarding accessibility for non-technical users by designing an end-to-end Figma interface.
+
+---
+
+## CERTIFICATIONS & SEMINARS
+
+- **Competitor, RAITE 2026 Regional Programming Challenge** | PSITE Central Luzon | [2026]
+- **Attendee, Educational Field Trip** | Norde International Distributors | [2026]
+- **Attendee, Educational Field Trip** | Hytec Power, Inc. | [2026]
+- **Attendee, Lenovo Legion Campus Quest** | Lenovo Legion | [2026]
+- **Attendee, AWS Community Day Philippines** | AWS | [2026]
+- **Attendee, Convergence III: From Policy to People: The Governance & Human Side of Cyber Risk** | DEVCON | [2026]
+- **Attendee, SparkCon: The Next Wave of Innovation** | Campus DevCon x Zellense | [2025]
+- **Attendee, Skydevs Hack, Play, & Learn Summit 2025 “Masterclass”** | Skydev Solutions, Inc. | [2025]
+- **Attendee, C# Scripting for Unity: Core Concepts and Best Practices** | Lyceum of Subic Bay | [2025]
+- **Attendee, Exploring the Angular Frameworks for UI Development: Enhancing your Web Application** | Lyceum of Subic Bay | [2024]
+- **Attendee, Data Privacy & IT/CS Career Development** | Lyceum of Subic Bay | [2023]
 
 ---
 
 *I hereby certify that all information contained in this document is true and accurate to the best of my knowledge.*
 
 **Rhodge Ellio D. Esperon**  
-*AI & Full-Stack Developer*
+*IT Student - Applicant*

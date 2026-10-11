@@ -25,11 +25,8 @@ export default function PageViews() {
   if (views === null) return null;
 
   return (
-    <div className="fixed bottom-5 right-5 font-mono text-[11px] text-muted bg-secondary/90 backdrop-blur-md border border-border-subtle px-3 py-1.5 rounded-full z-30 shadow-lg flex items-center gap-2">
-      <span className="w-1.5 h-1.5 rounded-full bg-accent-emerald animate-pulse" />
-      <span>
-        <span className="text-primary font-semibold">{views.toLocaleString()}</span> visits
-      </span>
-    </div>
+    <span className="font-mono text-[13px]">
+      {views.toLocaleString()} {views === 1 ? "visit" : "visits"}
+    </span>
   );
 }
