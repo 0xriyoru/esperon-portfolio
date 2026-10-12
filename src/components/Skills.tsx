@@ -31,7 +31,7 @@ export default function Skills() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={`${meta.name} (official website, opens in new tab)`}
-                  className="group inline-flex items-center gap-2 rounded-note border border-rule bg-paper px-3 py-1.5 text-sm text-ink-soft transition-all duration-200 hover:border-accent hover:bg-paper-deep hover:text-ink hover:-translate-y-0.5 active:translate-y-0 shadow-xs focus-visible:outline-2 focus-visible:outline-accent"
+                  className="group inline-flex items-center gap-2 rounded-note border border-rule bg-paper px-3 py-1.5 text-sm text-ink-soft transition-all duration-200 hover:border-accent hover:bg-paper-deep hover:text-ink hover:-translate-y-0.5 active:translate-y-0 focus-visible:outline-2 focus-visible:outline-accent"
                 >
                   <span className="flex items-center justify-center text-ink-soft transition-colors group-hover:text-accent shrink-0">
                     <Icon size={15} aria-hidden="true" />

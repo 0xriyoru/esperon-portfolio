@@ -30,9 +30,9 @@ export default function SiteHeader() {
             href="/cv.pdf"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1 rounded-note border border-rule-strong px-3 py-1.5 text-sm transition-colors hover:border-accent hover:text-accent"
+            className="inline-flex items-center gap-1.5 rounded-note border border-rule-strong px-3 py-1.5 text-sm transition-colors hover:border-accent hover:text-accent"
           >
-            CV
+            View CV
             <ArrowUpRight size={14} weight="regular" aria-hidden="true" />
           </a>
         </nav>

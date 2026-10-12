@@ -18,11 +18,11 @@ export const staticProjects: Project[] = [
     id: "sbma-jo",
     title: "SBMA-JO",
     type: "Internal Government Enterprise System",
-    architecture: "React 19 • Vite 8 • Supabase RBAC • Atomic PL/pgSQL Numbering",
+    architecture: "React 19 / Vite 8 / Supabase RBAC / Atomic PL/pgSQL Numbering",
     description:
       "Secure internal property and job order management web system engineered between July and August 2026 for the Subic Bay Metropolitan Authority (SBMA) Asset Management Division, digitizing hauling requests and Form PPD-CF-36 printing.",
     highlights: [
-      "Engineered atomic job order sequencing (709-MMYY-CCCC) using PostgreSQL stored procedures with row-level locks to eliminate duplicate numbering (developed July–August 2026)",
+      "Engineered atomic job order sequencing (709-MMYY-CCCC) using PostgreSQL stored procedures with row-level locks to eliminate duplicate numbering (developed July to August 2026)",
       "Transitioned department from vulnerable local-host architecture to cloud web application with strict role-based access control (RBAC) and Cloudflare Turnstile",
       "Built high-fidelity printable paper slip layouts (Form PPD-CF-36) and serial tracking for accountable form booklets complying with COA audits",
     ],
@@ -35,13 +35,13 @@ export const staticProjects: Project[] = [
     id: "artnest",
     title: "ARTNEST",
     type: "Art Platform & PWA Marketplace",
-    architecture: "React 19 • Vite 8 • Supabase RLS • PayMongo Gateway • Vision AI Microservice",
+    architecture: "React 19 / Vite 8 / Supabase RLS / PayMongo Gateway / Vision AI Microservice",
     description:
       "All-in-one web platform and progressive web app for independent Filipino artists, collectors, and gallery curators, centralizing portfolio showcases, exhibition coordination, and localized art sales.",
     highlights: [
       "Engineered localized checkout and webhook payment processing via PayMongo supporting GCash, Maya, QR Ph, and credit/debit cards",
-      "Architected Python FastAPI microservice utilizing Google Cloud Vision for artwork reverse search and automated dynamic watermarking",
-      "Implemented Vite PWA with offline caching, interactive media galleries, and role-scoped dashboards for artists, collectors, and gallery owners",
+      "Built a Python FastAPI service with Google Cloud Vision for reverse image search and dynamic watermark generation",
+      "Implemented Vite PWA with offline caching, interactive media galleries, and role-scoped dashboards for artists, collectors, and gallery curators",
     ],
     tags: ["React 19", "Vite", "TypeScript", "Tailwind CSS", "Supabase", "PayMongo", "FastAPI", "PWA"],
     status: "DEPLOYED",
@@ -52,12 +52,12 @@ export const staticProjects: Project[] = [
     id: "mekai",
     title: "MEKAI",
     type: "Full-Stack OCR Reader Platform",
-    architecture: "React 19 • Vite 7 • PaddleOCR Microservice • Supabase RLS • Gemini AI",
+    architecture: "React 19 / Vite 7 / PaddleOCR Microservice / Supabase RLS / Gemini AI",
     description:
       "OCR-assisted manga reading and translation web application that automates selective text extraction from untranslated comic media via custom user bounding boxes, paired with a persistent Word Vault.",
     highlights: [
       "Engineered selective bounding-box OCR with HTML5 Canvas ink pre-flight checks and dual-layer extraction (Railway PaddleOCR microservice & client-side Tesseract.js fallback)",
-      "Built contextual Japanese-to-English translation pipeline utilizing OPUS-MT on Railway and Google Gemini generative assistance",
+      "Built a Japanese-to-English translation pipeline pairing OPUS-MT on Railway with Google Gemini API",
       "Secured multi-tier authentication, chapter storage, and reader state using PostgreSQL Row Level Security (RLS) policies and TanStack Query",
     ],
     tags: ["React 19", "Vite", "TypeScript", "Tailwind CSS", "Supabase", "FastAPI", "PaddleOCR", "Gemini AI"],
@@ -70,7 +70,7 @@ export const staticProjects: Project[] = [
     id: "maulam",
     title: "MAULAM",
     type: "AI Mobile Companion App",
-    architecture: "Expo React Native • Supabase Edge Functions • Gemini Multimodal AI • Android APK",
+    architecture: "Expo React Native / Supabase Edge Functions / Gemini Multimodal AI / Android APK",
     description:
       "Cross-platform mobile kitchen companion and pantry manager that uses on-device camera capture and Gemini Vision to scan ingredients, track food expiration, and generate localized Filipino recipes, deployed with a production Android APK build.",
     highlights: [
@@ -88,7 +88,7 @@ export const staticProjects: Project[] = [
     id: "rebeat",
     title: "REBEAT",
     type: "Web Audio Sampler & Live Launchpad",
-    architecture: "Tone.js Audio Engine • 1-Bar Musical Quantization • React 18 • Vite",
+    architecture: "Tone.js Audio Engine / 1-Bar Musical Quantization / React 18 / Vite",
     description:
       "Browser-based audio clip launcher and sampler inspired by Novation Launchpad Arcade, featuring sample-accurate loop scheduling, polyphonic layered playback, and an interactive memory game.",
     highlights: [
@@ -106,12 +106,12 @@ export const staticProjects: Project[] = [
     id: "uma-helper",
     title: "UMA COMMAND CENTER",
     type: "Game Analytics & Team Builder",
-    architecture: "Next.js 14 App Router • Zustand Persistence • Supabase RLS",
+    architecture: "Next.js 14 App Router / Zustand Persistence / Supabase RLS",
     description:
       "Analytical companion and deck builder for Uma Musume Pretty Derby, featuring optimistic local state management, inheritance parent tracking, and offline game database indexing.",
     highlights: [
       "Built with Next.js 14 (App Router) and Tailwind CSS with sub-50ms optimistic UI updates for deck inventory manipulation",
-      "Architected hybrid data model separating dynamic user decks in Supabase from large static game reference datasets via dynamic imports",
+      "Separated dynamic user decks in Supabase from static game reference datasets loaded through dynamic imports",
       "Implemented Zustand state management with persistent storage for multi-session training deck compositions",
     ],
     tags: ["Next.js", "TypeScript", "React", "Tailwind CSS", "Zustand", "Supabase", "Analytics"],
@@ -124,13 +124,13 @@ export const staticProjects: Project[] = [
     id: "gakumon",
     title: "GAKUMON",
     type: "Pet-Based Gamified E-Learning Platform",
-    architecture: "Virtual Pet Mechanics • Virtual Economy • Admin Analytics Dashboard",
+    architecture: "Virtual Pet Mechanics / Virtual Economy / Analytics Dashboard",
     description:
-      "Gamified e-learning platform with virtual pet mechanics to enhance student engagement and knowledge retention, featuring health decay algorithms and a comprehensive admin dashboard.",
+      "E-learning web application with virtual pet mechanics. Students keep a pet alive by completing daily quiz modules, with a 24-hour health decay algorithm and an instructor dashboard.",
     highlights: [
-      "Enhanced student engagement and knowledge retention by designing a gamified platform with virtual pet mechanics",
-      "Increased daily user participation models by defining a virtual economy featuring pet health decay and coin multipliers",
-      "Streamlined system scalability and moderation by formulating a comprehensive admin dashboard for engagement analytics",
+      "Designed pet care mechanics where daily quiz scores replenish pet health points and unlock cosmetic badges",
+      "Programmed time-based health decay formulas (24-hour cycle) and quiz reward coin multipliers",
+      "Built the instructor dashboard to view class quiz completion rates, student activity logs, and pet health stats",
     ],
     tags: ["Systems Design", "Gamification", "System Architecture", "Admin Analytics"],
     status: "ARCHIVED",
@@ -140,13 +140,13 @@ export const staticProjects: Project[] = [
     id: "joblink",
     title: "JOBLINK",
     type: "Skill-Based Job Matching Web Platform",
-    architecture: "Full-Stack Architecture • Relational ERD Modeling • Accessible UI/UX",
+    architecture: "Full-Stack Architecture / Relational ERD Modeling / Accessible UI/UX",
     description:
       "Centralized employment web platform connecting local job seekers and employers through structured relational database modeling, cross-functional ERD alignment, and accessible UI/UX.",
     highlights: [
-      "Architected relational database schema (ERD) and data flow diagrams aligning job matching criteria and applicant tracking",
+      "Designed the 12-table relational database schema and data flow diagrams for applicant tracking and job category matching",
       "Designed end-to-end Figma UI/UX prototype focused on non-technical user onboarding and accessible mobile interaction",
-      "Authored comprehensive technical documentation and system specification manuals for cross-functional engineering teams",
+      "Wrote the 45-page system manual and API endpoint specification for the development team",
     ],
     tags: ["Figma UI/UX", "Database Design", "ERD Architecture", "Systems Design"],
     status: "ARCHIVED",

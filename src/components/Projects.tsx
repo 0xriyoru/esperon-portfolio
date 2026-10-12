@@ -128,24 +128,50 @@ export default function Projects() {
                 <div className="grid gap-8 pb-10 md:grid-cols-12 md:gap-10">
                   <div className="md:col-span-6">
                     <p className="max-w-[62ch] text-base leading-relaxed">{project.description}</p>
-                    <p className="mt-5 font-mono text-[13px] leading-relaxed text-ink-soft">
-                      {project.tags?.join(", ")}
-                    </p>
+
+                    {project.architecture && (
+                      <div className="mt-5">
+                        <span className="block font-mono text-[11px] uppercase tracking-wider text-ink-soft">
+                          Architecture
+                        </span>
+                        <span className="mt-1 block font-mono text-[13px] leading-relaxed text-ink">
+                          {project.architecture}
+                        </span>
+                      </div>
+                    )}
+
+                    {project.tags && project.tags.length > 0 && (
+                      <div className="mt-5 flex flex-wrap gap-1.5">
+                        {project.tags.map((tag) => (
+                          <span
+                            key={tag}
+                            className="rounded-note border border-rule bg-paper px-2 py-0.5 font-mono text-[12px] text-ink-soft"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    )}
                   </div>
 
                   <div className="md:col-span-6">
                     {project.highlights && project.highlights.length > 0 && (
-                      <ul className="max-w-[62ch] space-y-3 text-[15px] leading-relaxed text-ink-soft">
+                      <ul className="max-w-[62ch] space-y-2.5 text-[15px] leading-relaxed text-ink-soft">
                         {project.highlights.map((item, hIdx) => (
-                          <li key={hIdx}>{item}</li>
+                          <li
+                            key={hIdx}
+                            className="relative pl-3.5 before:absolute before:left-0 before:top-[0.65em] before:h-1 before:w-1 before:rounded-full before:bg-rule-strong"
+                          >
+                            {item}
+                          </li>
                         ))}
                       </ul>
                     )}
 
                     <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm">
                       {project.confidential ? (
-                        <span className="text-ink-soft">
-                          Internal government system. No public link.
+                        <span className="font-mono text-xs text-ink-soft">
+                          Internal government deployment (SBMA AMD). Confidential access.
                         </span>
                       ) : (
                         <>
@@ -167,7 +193,7 @@ export default function Projects() {
                               rel="noopener noreferrer"
                               className="inline-flex items-center gap-1 link-draw"
                             >
-                              Source
+                              Source code
                               <ArrowUpRight size={14} aria-hidden="true" />
                             </a>
                           )}

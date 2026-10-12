@@ -31,7 +31,7 @@ export default function Home() {
             <div className="hero-rule mt-10 h-px w-full max-w-xl bg-rule-strong" />
 
             <p className="hero-fade mt-8 max-w-[44ch] text-lg leading-relaxed text-ink-soft md:text-xl">
-              Systems and front-end developer, and UI/UX designer in Olongapo. I engineered SBMA&apos;s cloud-based Job Order Management System and build scalable web applications.
+              Systems and front-end developer and UI/UX designer in Olongapo. Built the SBMA Job Order Management System (AMD) and production web tools.
             </p>
 
             <div className="hero-fade mt-10 flex flex-wrap items-center gap-x-8 gap-y-4">
@@ -105,10 +105,10 @@ export default function Home() {
               IT intern and systems developer at SBMA
             </h2>
             <p className="mt-6 text-lg text-on-accent-soft">
-              Asset Management Department (AMD, formerly PPMD) • System built July – August 2026 (Internship: May – September 2026)
+              Asset Management Department (AMD, formerly PPMD) / System built July to August 2026 (Internship: May to September 2026)
             </p>
             <p className="mt-10 max-w-[62ch] text-lg leading-relaxed">
-              Engineered and deployed a modern, cloud-based Job Order Management System with an interactive analytics dashboard featuring reactive Power BI-style KPI cards to replace an outdated local server setup. Centralized department data management, implemented real-time metrics, and ensured high availability.
+              Replaced a vulnerable local server with a cloud Supabase and PostgreSQL web system for the SBMA Asset Management Division. Built automated Form PPD-CF-36 job order slip printing with atomic sequential numbering, COA-compliant accountable form tracking, and real-time hauling analytics cards.
             </p>
             <a
               href="#work"
@@ -142,7 +142,7 @@ export default function Home() {
       <section id="activity" className="border-t border-rule">
         <div className={`${shell} py-20 md:py-24`}>
           <h2 className="mb-8 font-display text-3xl font-light tracking-tight md:text-4xl">
-            Recent code
+            Open source code
           </h2>
           <Reveal><Activity /></Reveal>
         </div>

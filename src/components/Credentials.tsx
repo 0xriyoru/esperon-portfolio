@@ -26,7 +26,14 @@ export default function Credentials() {
               <span className="font-mono text-[13px] text-ink-soft">{cred.date_range}</span>
               <div>
                 <h3 className="text-base font-medium leading-snug">{cred.title}</h3>
-                <p className="mt-0.5 text-[15px] text-ink-soft">{cred.organization}</p>
+                <div className="mt-0.5 flex flex-wrap items-baseline gap-2 text-[15px] text-ink-soft">
+                  <span>{cred.organization}</span>
+                  {cred.type && (
+                    <span className="font-mono text-[11px] uppercase tracking-wider text-ink-soft/70">
+                      ({cred.type.replace(/_/g, " ").toLowerCase()})
+                    </span>
+                  )}
+                </div>
                 {cred.description && (
                   <p className="mt-2 max-w-[62ch] text-[15px] leading-relaxed text-ink-soft">
                     {cred.description}
@@ -40,7 +47,7 @@ export default function Credentials() {
                   rel="noopener noreferrer"
                   className="mt-2 inline-flex items-center gap-1 self-start text-sm text-accent link-draw md:mt-0"
                 >
-                  Certificate
+                  {cred.certificate_url ? "View certificate" : "View details"}
                   <ArrowUpRight size={14} aria-hidden="true" />
                 </a>
               )}

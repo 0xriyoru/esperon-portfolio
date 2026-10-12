@@ -11,8 +11,8 @@ One theme (light), one accent, one radius. Built for recruiters and hiring manag
 
 ## Type
 - Display: Bricolage Grotesque, weights 300 to 500. Headlines are light, never bold. Max 6rem, tracking -0.03em.
-- Body: Geist.
-- Mono: Geist Mono, only for data (dates, tag lists, counts).
+- Body: IBM Plex Sans.
+- Mono: IBM Plex Mono, for technical data (dates, tag lists, counts, code).
 
 ## Shape and depth
 - One radius: 3px (`rounded-note`). Buttons and the CV chip only.

@@ -85,9 +85,10 @@ export const staticSkills: SkillCategoryGroup[] = [
     id: "cat-frameworks",
     category: "Frameworks",
     skill_list: [
-      "Bootstrap",
+      "Next.js",
       "React.js",
       "Tailwind CSS",
+      "Bootstrap",
       "Laravel",
     ],
   },

@@ -1,71 +1,99 @@
-"use client";
+import { ArrowUpRight } from "@phosphor-icons/react/dist/ssr";
 
-import { useState, useEffect, useSyncExternalStore } from "react";
-import { GitHubCalendar } from "react-github-calendar";
+interface RepoItem {
+  name: string;
+  url: string;
+  description: string;
+  tech: string[];
+}
 
-const YEAR = 2026;
-const noopSubscribe = () => () => {};
+const recentRepos: RepoItem[] = [
+  {
+    name: "0xriyoru/Mekai",
+    url: "https://github.com/0xriyoru/Mekai",
+    description:
+      "OCR-assisted manga translation reader with selective canvas bounding boxes and PaddleOCR pipeline.",
+    tech: ["TypeScript", "Canvas API", "PaddleOCR", "FastAPI"],
+  },
+  {
+    name: "0xriyoru/MaUlam",
+    url: "https://github.com/0xriyoru/MaUlam",
+    description:
+      "Android mobile companion app with camera ingredient scanning and Gemini Vision recipe generation.",
+    tech: ["React Native", "Expo", "Gemini AI", "Android APK"],
+  },
+  {
+    name: "0xriyoru/rebeat",
+    url: "https://github.com/0xriyoru/rebeat",
+    description:
+      "Low-latency browser audio launchpad with sample-accurate loop scheduling and polyphonic layered playback.",
+    tech: ["React", "Tone.js", "Web Audio API"],
+  },
+  {
+    name: "0xriyoru/uma-helper",
+    url: "https://github.com/0xriyoru/uma-helper",
+    description:
+      "Game analytical companion and deck builder with sub-50ms optimistic state updates and dynamic dataset loading.",
+    tech: ["Next.js", "TypeScript", "Zustand", "Supabase"],
+  },
+];
 
 export default function Activity() {
-  const [count, setCount] = useState<number | null>(null);
-  // false during SSR/hydration, true on the client
-  const mounted = useSyncExternalStore(noopSubscribe, () => true, () => false);
-
-  useEffect(() => {
-    const fetchCount = async () => {
-      try {
-        const res = await fetch("https://github-contributions-api.jogruber.de/v4/0xriyoru", {
-          cache: "no-store",
-        });
-        if (!res.ok) return;
-        const data = await res.json();
-        const total = data?.total?.[YEAR];
-        if (typeof total === "number") setCount(total);
-      } catch (err) {
-        console.warn("Unable to fetch GitHub contribution total:", err);
-      }
-    };
-
-    fetchCount();
-  }, []);
-
   return (
     <div>
-      <p className="text-[15px] text-ink-soft">
-        {count !== null && (
-          <>
-            <span className="font-mono text-ink">{count}</span>{" "}
-            {count === 1 ? "contribution" : "contributions"} in {YEAR} on{" "}
-          </>
-        )}
-        {count === null && <>{YEAR} activity on </>}
+      <ul className="divide-y divide-rule border-y border-rule-strong">
+        {recentRepos.map((repo) => (
+          <li
+            key={repo.name}
+            className="group py-5 transition-colors hover:bg-paper-deep/40"
+          >
+            <div className="grid gap-2 md:grid-cols-12 md:items-baseline md:gap-6">
+              <div className="md:col-span-5">
+                <a
+                  href={repo.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 font-mono text-[15px] font-medium text-ink transition-colors group-hover:text-accent link-draw"
+                >
+                  {repo.name}
+                  <ArrowUpRight
+                    size={14}
+                    className="text-ink-soft transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-accent"
+                    aria-hidden="true"
+                  />
+                </a>
+              </div>
+              <div className="md:col-span-7">
+                <p className="text-[14.5px] leading-relaxed text-ink-soft">
+                  {repo.description}
+                </p>
+                <div className="mt-2.5 flex flex-wrap gap-1.5">
+                  {repo.tech.map((t) => (
+                    <span
+                      key={t}
+                      className="rounded-note border border-rule bg-paper px-2 py-0.5 font-mono text-[11.5px] text-ink-soft"
+                    >
+                      {t}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </li>
+        ))}
+      </ul>
+
+      <div className="mt-6 flex flex-wrap items-center justify-between gap-3 text-sm text-ink-soft">
+        <span>Public source repositories on GitHub</span>
         <a
-          href="https://github.com/0xriyoru"
+          href="https://github.com/0xriyoru?tab=repositories"
           target="_blank"
           rel="noopener noreferrer"
-          className="text-ink underline decoration-rule-strong hover:decoration-accent"
+          className="inline-flex items-center gap-1 text-accent link-draw"
         >
-          github.com/0xriyoru
+          View all repositories
+          <ArrowUpRight size={14} aria-hidden="true" />
         </a>
-      </p>
-
-      <div className="mt-6 flex min-h-[140px] w-full items-center overflow-x-auto">
-        {mounted ? (
-          <GitHubCalendar
-            username="0xriyoru"
-            year={YEAR}
-            colorScheme="light"
-            theme={{
-              light: ["#dde1e8", "#b7c1f2", "#7f93ea", "#2340d9", "#182ea3"],
-            }}
-            blockSize={11}
-            blockMargin={3}
-            fontSize={12}
-            blockRadius={1}
-          />
-        ) : (
-          <div className="h-[140px] w-full animate-pulse bg-paper-deep" aria-hidden="true" />
-        )}
       </div>
     </div>
   );
