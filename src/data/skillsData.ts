@@ -35,7 +35,7 @@ import {
   BookOpenText,
   Code,
   Globe,
-} from "@phosphor-icons/react";
+} from "@phosphor-icons/react/dist/ssr";
 
 export interface SkillMeta {
   name: string;

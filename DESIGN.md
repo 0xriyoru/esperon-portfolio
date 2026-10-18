@@ -25,6 +25,7 @@ One theme (light), one accent, one radius. Built for recruiters and hiring manag
 ## Motion
 - One authored moment: hero name lines rise out of a mask once, then the rule draws.
 - Project rows open with a grid-rows transition. Links draw an underline on hover.
+- Paper-engineering 3D: tactile, physics-driven depth (`perspective: 1200px`, `rotateX`, `rotateY`, `translateZ`) for key focal specimens (hero badge, project hinge cards, experience slab). No WebGL or Three.js.
 - All of it is disabled under `prefers-reduced-motion`.
 
 ## Copy rules

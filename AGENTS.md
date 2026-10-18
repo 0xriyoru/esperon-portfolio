@@ -21,3 +21,10 @@ Using canonical triage labels (`needs-triage`, `needs-info`, `ready-for-agent`, 
 ### Domain docs
 
 Single-context layout (`CONTEXT.md` and `docs/adr/` at repo root). See `docs/agents/domain.md`.
+
+## Active Skills & Coding Standards
+
+Every agent operating in this repository must adhere to:
+- **Skills**: `caveman` (terse, answer-first), `unslop` (clean prose), `chisel` (minimal token edits), `ponytail` (minimal complete diffs, YAGNI), `impeccable` & `design-taste-frontend` (strict adherence to `DESIGN.md`).
+- **Motion**: `motion/react` with hardware-accelerated CSS 3D (`perspective: 1200px`, `rotateX/Y`). No Three.js/WebGL bloat.
+- **Rules**: Field notebook design system (`#edeff2` paper, `#12151a` ink, `#2340d9` accent, 1px rules, 3px radius). No dark mode.

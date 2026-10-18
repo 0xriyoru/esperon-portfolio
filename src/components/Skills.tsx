@@ -1,6 +1,4 @@
-"use client";
-
-import { ArrowUpRight } from "@phosphor-icons/react";
+import { ArrowUpRight } from "@phosphor-icons/react/dist/ssr";
 import { staticSkills, getSkillMeta } from "@/data/skillsData";
 
 export default function Skills() {

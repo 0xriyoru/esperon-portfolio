@@ -1,11 +1,11 @@
-import Image from "next/image";
 import { ArrowUpRight, GithubLogo, LinkedinLogo } from "@phosphor-icons/react/dist/ssr";
 import Projects from "@/components/Projects";
 import Skills from "@/components/Skills";
 import Credentials from "@/components/Credentials";
 import Activity from "@/components/Activity";
 import PageViews from "@/components/PageViews";
-import Reveal from "@/components/Reveal";
+import HeroSpecimen from "@/components/HeroSpecimen";
+import ExperienceSlab from "@/components/ExperienceSlab";
 
 const shell = "mx-auto max-w-[1280px] px-5 md:px-10";
 const h2 = "font-display text-4xl font-light tracking-tight md:text-6xl";
@@ -53,23 +53,13 @@ export default function Home() {
             </div>
           </div>
 
-          <figure className="hero-fade lg:col-span-4 lg:justify-self-end">
-            <Image
-              src="/profile.png"
-              alt="Portrait of Rhodge Esperon"
-              width={288}
-              height={288}
-              priority
-              className="h-56 w-56 object-cover mix-blend-multiply grayscale-[0.15] md:h-72 md:w-72"
-            />
-            <figcaption className="mt-3 text-sm text-ink-soft">Olongapo City, Philippines</figcaption>
-          </figure>
+          <HeroSpecimen />
         </div>
       </section>
 
       {/* Facts */}
       <section aria-label="Background" className="border-b border-rule">
-        <Reveal><dl className={`${shell} grid gap-8 py-10 md:grid-cols-3 md:gap-10`}>
+        <dl className={`${shell} grid gap-8 py-10 md:grid-cols-3 md:gap-10`}>
           <div>
             <dt className="text-sm text-ink-soft">Studying</dt>
             <dd className="mt-1 text-base">
@@ -88,19 +78,19 @@ export default function Home() {
               React, Next.js, TypeScript, PostgreSQL, Supabase, Tailwind CSS, Figma.
             </dd>
           </div>
-        </dl></Reveal>
+        </dl>
       </section>
 
       {/* Work */}
       <section id="work" className={`${shell} py-24 md:py-32`}>
-        <Reveal><h2 className={`${h2} mb-12 md:mb-16`}>Selected work</h2></Reveal>
-        <Reveal delay={0.1}><Projects /></Reveal>
+        <h2 className={`${h2} mb-12 md:mb-16`}>Selected work</h2>
+        <Projects />
       </section>
 
       {/* Experience */}
       <section id="experience">
-        <div className="bg-accent text-on-accent">
-          <Reveal className={`${shell} py-20 md:py-28`}>
+        <ExperienceSlab>
+          <div className={`${shell} py-20 md:py-28`}>
             <h2 className="max-w-[18ch] font-display text-4xl font-light leading-[1.05] tracking-tight md:text-7xl">
               IT intern and systems developer at SBMA
             </h2>
@@ -117,15 +107,15 @@ export default function Home() {
               See SBMA-JO under Selected work
               <ArrowUpRight size={14} aria-hidden="true" />
             </a>
-          </Reveal>
-        </div>
+          </div>
+        </ExperienceSlab>
 
         <div className={`${shell} grid gap-10 py-24 md:py-32 lg:grid-cols-12 lg:gap-16`}>
           <div className="lg:col-span-4">
             <h2 className={`${h2} lg:sticky lg:top-24`}>Events and seminars</h2>
           </div>
           <div className="lg:col-span-8">
-            <Reveal delay={0.1}><Credentials /></Reveal>
+            <Credentials />
           </div>
         </div>
       </section>
@@ -133,8 +123,8 @@ export default function Home() {
       {/* Skills */}
       <section id="skills" className="border-t border-rule">
         <div className={`${shell} py-24 md:py-32`}>
-          <Reveal><h2 className={`${h2} mb-12 md:mb-16`}>Tools I work with</h2></Reveal>
-          <Reveal delay={0.1}><Skills /></Reveal>
+          <h2 className={`${h2} mb-12 md:mb-16`}>Tools I work with</h2>
+          <Skills />
         </div>
       </section>
 
@@ -144,7 +134,7 @@ export default function Home() {
           <h2 className="mb-8 font-display text-3xl font-light tracking-tight md:text-4xl">
             Open source code
           </h2>
-          <Reveal><Activity /></Reveal>
+          <Activity />
         </div>
       </section>
 
