@@ -56,8 +56,22 @@ function ProjectRow({
   const rotateX = useTransform(springY, [-0.5, 0.5], [3, -3]);
   const rotateY = useTransform(springX, [-0.5, 0.5], [-3, 3]);
 
+  useEffect(() => {
+    if (isOpen) {
+      rawX.set(0);
+      rawY.set(0);
+      onLeave();
+    }
+  }, [isOpen, onLeave, rawX, rawY]);
+
+  const handleMouseEnter = () => {
+    if (!isOpen) {
+      onHover();
+    }
+  };
+
   const handlePointerMove = (e: React.PointerEvent<HTMLLIElement>) => {
-    if (reduce || !rowRef.current) return;
+    if (reduce || !rowRef.current || isOpen) return;
     const rect = rowRef.current.getBoundingClientRect();
     rawX.set((e.clientX - rect.left) / rect.width - 0.5);
     rawY.set((e.clientY - rect.top) / rect.height - 0.5);
@@ -75,7 +89,7 @@ function ProjectRow({
   return (
     <li
       ref={rowRef}
-      onMouseEnter={onHover}
+      onMouseEnter={handleMouseEnter}
       onPointerMove={handlePointerMove}
       onPointerLeave={handlePointerLeave}
       style={{ perspective: "1200px" }}
@@ -327,8 +341,18 @@ export default function Projects() {
             key={project.id}
             project={project}
             isOpen={openId === project.id}
-            onToggle={() => setOpenId(openId === project.id ? null : project.id)}
-            onHover={() => setHoveredProject(project)}
+            onToggle={() => {
+              setOpenId((prev) => {
+                const next = prev === project.id ? null : project.id;
+                if (next) setHoveredProject(null);
+                return next;
+              });
+            }}
+            onHover={() => {
+              if (openId !== project.id) {
+                setHoveredProject(project);
+              }
+            }}
             onLeave={() => {
               setHoveredProject((prev) => (prev?.id === project.id ? null : prev));
             }}
@@ -339,7 +363,7 @@ export default function Projects() {
 
       {/* Floating 3D Cursor Preview Portal */}
       <AnimatePresence>
-        {hoveredProject?.preview && !reduce && (
+        {hoveredProject?.preview && hoveredProject.id !== openId && !reduce && (
           <motion.div
             aria-hidden="true"
             initial={{ opacity: 0, scale: 0.88, rotateY: 8, rotateX: -4 }}
