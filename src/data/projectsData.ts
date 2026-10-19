@@ -19,7 +19,7 @@ export const staticProjects: Project[] = [
     id: "sbma-jo",
     title: "SBMA-JO",
     type: "Internal Government Enterprise System",
-    architecture: "React 19 / Vite 8 / Supabase RBAC / Atomic PL/pgSQL Numbering",
+    architecture: "Supabase RBAC / Atomic PL/pgSQL Numbering / Row-Level Locks",
     description:
       "Secure internal property and job order management web system engineered between July and August 2026 for the Subic Bay Metropolitan Authority (SBMA) Asset Management Division, digitizing hauling requests and Form PPD-CF-36 printing.",
     highlights: [
@@ -27,7 +27,7 @@ export const staticProjects: Project[] = [
       "Transitioned department from vulnerable local-host architecture to cloud web application with strict role-based access control (RBAC) and Cloudflare Turnstile",
       "Built high-fidelity printable paper slip layouts (Form PPD-CF-36) and serial tracking for accountable form booklets complying with COA audits",
     ],
-    tags: ["React 19", "Vite", "TypeScript", "Tailwind CSS", "Supabase", "PostgreSQL", "Zod", "Government"],
+    tags: ["React 19", "TypeScript", "Tailwind CSS", "PostgreSQL", "Supabase", "Zod", "Vite"],
     status: "DEPLOYED",
     domain: "RESTRICTED // SBMA AMD",
     confidential: true,
@@ -37,7 +37,7 @@ export const staticProjects: Project[] = [
     id: "artnest",
     title: "ARTNEST",
     type: "Art Platform & PWA Marketplace",
-    architecture: "React 19 / Vite 8 / Supabase RLS / PayMongo Gateway / Vision AI Microservice",
+    architecture: "Supabase RLS / PayMongo Webhook Gateway / Vision AI Reverse Search / Offline PWA Caching",
     description:
       "All-in-one web platform and progressive web app for independent Filipino artists, collectors, and gallery curators, centralizing portfolio showcases, exhibition coordination, and localized art sales.",
     highlights: [
@@ -45,7 +45,7 @@ export const staticProjects: Project[] = [
       "Built a Python FastAPI service with Google Cloud Vision for reverse image search and dynamic watermark generation",
       "Implemented Vite PWA with offline caching, interactive media galleries, and role-scoped dashboards for artists, collectors, and gallery curators",
     ],
-    tags: ["React 19", "Vite", "TypeScript", "Tailwind CSS", "Supabase", "PayMongo", "FastAPI", "PWA"],
+    tags: ["React 19", "TypeScript", "Tailwind CSS", "Python", "FastAPI", "Supabase", "PayMongo", "PWA", "Vite"],
     status: "DEPLOYED",
     link: "https://artnest-hub.vercel.app",
     domain: "ARTNEST-HUB.VERCEL.APP",
@@ -55,7 +55,7 @@ export const staticProjects: Project[] = [
     id: "mekai",
     title: "MEKAI",
     type: "Full-Stack OCR Reader Platform",
-    architecture: "React 19 / Vite 7 / PaddleOCR Microservice / Supabase RLS / Gemini AI",
+    architecture: "Dual-Layer OCR Pipeline / OPUS-MT Translation / Canvas Coordinate Mapping / Supabase RLS",
     description:
       "OCR-assisted manga reading and translation web application that automates selective text extraction from untranslated comic media via custom user bounding boxes, paired with a persistent Word Vault.",
     highlights: [
@@ -63,7 +63,7 @@ export const staticProjects: Project[] = [
       "Built a Japanese-to-English translation pipeline pairing OPUS-MT on Railway with Google Gemini API",
       "Secured multi-tier authentication, chapter storage, and reader state using PostgreSQL Row Level Security (RLS) policies and TanStack Query",
     ],
-    tags: ["React 19", "Vite", "TypeScript", "Tailwind CSS", "Supabase", "FastAPI", "PaddleOCR", "Gemini AI"],
+    tags: ["React 19", "TypeScript", "Python", "FastAPI", "Supabase", "Gemini AI", "PaddleOCR", "Tailwind CSS", "Vite"],
     status: "DEPLOYED",
     link: "https://mekaiscans.vercel.app",
     github: "https://github.com/0xriyoru/Mekai",
@@ -74,7 +74,7 @@ export const staticProjects: Project[] = [
     id: "maulam",
     title: "MAULAM",
     type: "AI Mobile Companion App",
-    architecture: "Expo React Native / Supabase Edge Functions / Gemini Multimodal AI / Android APK",
+    architecture: "Serverless Deno Edge Functions / Gemini Multimodal Vision / Offline AsyncStorage Caching / Notification Scheduling",
     description:
       "Cross-platform mobile kitchen companion and pantry manager that uses on-device camera capture and Gemini Vision to scan ingredients, track food expiration, and generate localized Filipino recipes, deployed with a production Android APK build.",
     highlights: [
@@ -82,7 +82,7 @@ export const staticProjects: Project[] = [
       "Deployed serverless Supabase Edge Functions (Deno / TypeScript) orchestrating Google Gemini Vision for ingredient photo recognition and AI Chef chat",
       "Integrated Expo Notifications for proactive ingredient shelf-life reminders and AsyncStorage for offline-first pantry caching",
     ],
-    tags: ["React Native", "Expo", "Android APK", "TypeScript", "Supabase", "Gemini AI", "Mobile"],
+    tags: ["React Native", "Expo", "TypeScript", "Deno", "Supabase", "Gemini AI", "Android"],
     status: "DEPLOYED",
     link: "https://github.com/0xriyoru/MaUlam",
     github: "https://github.com/0xriyoru/MaUlam",
@@ -92,7 +92,7 @@ export const staticProjects: Project[] = [
     id: "rebeat",
     title: "REBEAT",
     type: "Web Audio Sampler & Live Launchpad",
-    architecture: "Tone.js Audio Engine / 1-Bar Musical Quantization / React 18 / Vite",
+    architecture: "Sample-Accurate 1-Bar Quantization / Buffer Preload Engine / Polyphonic Scheduler / Anti-Click Fades",
     description:
       "Browser-based audio clip launcher and sampler inspired by Novation Launchpad Arcade, featuring sample-accurate loop scheduling, polyphonic layered playback, and an interactive memory game.",
     highlights: [
@@ -100,7 +100,7 @@ export const staticProjects: Project[] = [
       "Implemented preloaded ToneAudioBuffer caching for instant zero-latency pad triggers and polyphonic layering",
       "Created dual-mode architecture: Brazilian Funk freestyle loop sequencing and Simon Says audio memory game",
     ],
-    tags: ["React.js", "Tone.js", "Web Audio API", "Vite", "Supabase", "Audio Engineering"],
+    tags: ["React", "TypeScript", "Tone.js", "Web Audio API", "Tailwind CSS", "Vite"],
     status: "DEPLOYED",
     preview: "/projects/preview-rebeat.png",
     link: "https://rebeat-launchpad.vercel.app",
@@ -111,7 +111,7 @@ export const staticProjects: Project[] = [
     id: "uma-helper",
     title: "UMA COMMAND CENTER",
     type: "Game Analytics & Team Builder",
-    architecture: "Next.js 14 App Router / Zustand Persistence / Supabase RLS",
+    architecture: "Sub-50ms Optimistic UI / Dynamic Import Splitting / Zustand Multi-Session Persistence / Supabase RLS",
     description:
       "Analytical companion and deck builder for Uma Musume Pretty Derby, featuring optimistic local state management, inheritance parent tracking, and offline game database indexing.",
     highlights: [
@@ -119,7 +119,7 @@ export const staticProjects: Project[] = [
       "Separated dynamic user decks in Supabase from static game reference datasets loaded through dynamic imports",
       "Implemented Zustand state management with persistent storage for multi-session training deck compositions",
     ],
-    tags: ["Next.js", "TypeScript", "React", "Tailwind CSS", "Zustand", "Supabase", "Analytics"],
+    tags: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Zustand", "Supabase"],
     status: "DEPLOYED",
     link: "https://github.com/0xriyoru/uma-helper",
     github: "https://github.com/0xriyoru/uma-helper",
@@ -129,7 +129,7 @@ export const staticProjects: Project[] = [
     id: "gakumon",
     title: "GAKUMON",
     type: "Pet-Based Gamified E-Learning Platform",
-    architecture: "Virtual Pet Mechanics / Virtual Economy / Analytics Dashboard",
+    architecture: "24-Hour Decay Algorithm / Multiplier Economy Engine / Instructor Telemetry Dashboard",
     description:
       "E-learning web application with virtual pet mechanics. Students keep a pet alive by completing daily quiz modules, with a 24-hour health decay algorithm and an instructor dashboard.",
     highlights: [
@@ -137,7 +137,7 @@ export const staticProjects: Project[] = [
       "Programmed time-based health decay formulas (24-hour cycle) and quiz reward coin multipliers",
       "Built the instructor dashboard to view class quiz completion rates, student activity logs, and pet health stats",
     ],
-    tags: ["Systems Design", "Gamification", "System Architecture", "Admin Analytics"],
+    tags: ["Systems Design", "Gamification", "State Modeling", "Analytics"],
     status: "ARCHIVED",
     domain: "ACADEMIC ARCHIVE",
   },
@@ -145,7 +145,7 @@ export const staticProjects: Project[] = [
     id: "joblink",
     title: "JOBLINK",
     type: "Skill-Based Job Matching Web Platform",
-    architecture: "Full-Stack Architecture / Relational ERD Modeling / Accessible UI/UX",
+    architecture: "12-Table Relational Schema / Data Flow Architecture / Cross-Functional ERD Alignment",
     description:
       "Centralized employment web platform connecting local job seekers and employers through structured relational database modeling, cross-functional ERD alignment, and accessible UI/UX.",
     highlights: [
@@ -153,7 +153,7 @@ export const staticProjects: Project[] = [
       "Designed end-to-end Figma UI/UX prototype focused on non-technical user onboarding and accessible mobile interaction",
       "Wrote the 45-page system manual and API endpoint specification for the development team",
     ],
-    tags: ["Figma UI/UX", "Database Design", "ERD Architecture", "Systems Design"],
+    tags: ["Figma UI/UX", "Database Design", "ERD Modeling", "Systems Architecture", "API Design"],
     status: "ARCHIVED",
     domain: "ACADEMIC ARCHIVE",
   },

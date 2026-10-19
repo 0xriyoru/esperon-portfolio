@@ -80,16 +80,16 @@ rhodgesperon@gmail.com | [linkedin.com/in/rhodge-esperon](https://linkedin.com/i
 ## CERTIFICATIONS & SEMINARS
 
 - **Competitor, RAITE 2026 Regional Programming Challenge** | PSITE Central Luzon | [2026]
-- **Attendee, Educational Field Trip** | Norde International Distributors | [2026]
-- **Attendee, Educational Field Trip** | Hytec Power, Inc. | [2026]
+- **Attendee, Educational Tour** | Norde International Distributors | [2026]
+- **Attendee, Educational Tour** | Hytec Power, Inc. | [2026]
 - **Attendee, Lenovo Legion Campus Quest** | Lenovo Legion | [2026]
 - **Attendee, AWS Community Day Philippines** | AWS | [2026]
 - **Attendee, Convergence III: From Policy to People: The Governance & Human Side of Cyber Risk** | DEVCON | [2026]
 - **Attendee, SparkCon: The Next Wave of Innovation** | Campus DevCon x Zellense | [2025]
 - **Attendee, Skydevs Hack, Play, & Learn Summit 2025 “Masterclass”** | Skydev Solutions, Inc. | [2025]
 - **Attendee, C# Scripting for Unity: Core Concepts and Best Practices** | Lyceum of Subic Bay | [2025]
-- **Attendee, Exploring the Angular Frameworks for UI Development: Enhancing your Web Application** | Lyceum of Subic Bay | [2024]
-- **Attendee, Data Privacy & IT/CS Career Development** | Lyceum of Subic Bay | [2023]
+- **Attendee, Exploring the Angular Frameworks for UI Development: Enhancing Your Web Applications** | Lyceum of Subic Bay | [2024]
+- **Attendee, Data Privacy & IT/CS Career Development and Introduction to Dart Programming Language Seminar** | Lyceum of Subic Bay | [2023]
 
 ---
 

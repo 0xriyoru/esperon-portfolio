@@ -2,7 +2,6 @@ import { ArrowUpRight, GithubLogo, LinkedinLogo } from "@phosphor-icons/react/di
 import Projects from "@/components/Projects";
 import Skills from "@/components/Skills";
 import Credentials from "@/components/Credentials";
-import PageViews from "@/components/PageViews";
 import HeroSpecimen from "@/components/HeroSpecimen";
 import FactTicker from "@/components/FactTicker";
 
@@ -185,8 +184,8 @@ export default function Home() {
           <div
             className={`${shell} flex flex-wrap items-center justify-between gap-3 py-6 text-[13px] text-ink-soft`}
           >
-            <span>Rhodge Esperon, Olongapo City, Philippines</span>
-            <PageViews />
+            <span>Olongapo City, Philippines</span>
+            <span>Designed and developed by Rhodge Esperon &copy; 2026</span>
           </div>
         </div>
       </footer>

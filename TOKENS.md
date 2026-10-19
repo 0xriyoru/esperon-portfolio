@@ -73,7 +73,6 @@ Frosted glass effects are applied systematically across overlay, card, and float
 - **Mobile Header & Drawer (`MobileNav.tsx`)**: `bg-secondary/90 backdrop-blur-md` with `bg-black/60 backdrop-blur-sm` backdrop
 - **Telemetry HUD Radar (`CyberHudRadar.tsx`)**: `bg-secondary/80 backdrop-blur-md border border-border-subtle/90`
 - **Telemetry Stats Grid (`AnimatedStatsGrid.tsx`)**: `bg-secondary/80 backdrop-blur-sm border border-border-subtle`
-- **Floating Page Views Pill (`PageViews.tsx`)**: `bg-secondary/90 backdrop-blur-md border border-border-subtle`
 - **Bottom CTA Banner (`page.tsx`)**: `bg-secondary/80 backdrop-blur-md border border-border-subtle`
 
 ---

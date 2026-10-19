@@ -29,6 +29,6 @@ One theme (light), one accent, one radius. Built for recruiters and hiring manag
 - All of it is disabled under `prefers-reduced-motion`.
 
 ## Copy rules
-- No invented numbers. Every figure comes from CV.md or live data (Supabase, GitHub, visit counter).
+- No invented numbers. Every figure comes from CV.md or live data (Supabase, GitHub).
 - No em dashes, no emoji, no arrow glyphs as icons. Icons are Phosphor.
 - One label per intent: "Email me" (mailto), "View CV".

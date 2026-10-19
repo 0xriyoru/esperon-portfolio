@@ -85,9 +85,8 @@ Under the hood, the frontend compiles to a zero-server static export (`output: '
 - Live GitHub contribution calendar integration powered by `react-github-calendar` and the contributions API for `@0xriyoru`.
 - Custom-calibrated color palette harmonized with the notebook blue accent scale.
 
-### 9. Contact & Atomic Visitor Counter (`src/components/PageViews.tsx`, `src/app/page.tsx`)
+### 9. Contact & Social Profiles (`src/app/page.tsx`)
 - Oversized headline email trigger (`rhodgesperon@gmail.com`) with external GitHub and LinkedIn profiles.
-- Atomic visitor count powered by PostgreSQL stored procedure `increment_page_view()`.
 
 ---
 
@@ -153,7 +152,6 @@ esperon-portfolio/
 │   ├── components/                       # Modular UI components
 │   │   ├── Activity.tsx                  # Live GitHub contribution calendar
 │   │   ├── Credentials.tsx               # Events, summits, and certification timeline
-│   │   ├── PageViews.tsx                 # Atomic visitor counter pill
 │   │   ├── Projects.tsx                  # Expandable project index with Supabase sync and fallback
 │   │   ├── Reveal.tsx                    # Viewport reveal animation wrapper
 │   │   ├── ScrollProgress.tsx            # Spring-based scroll progress line
