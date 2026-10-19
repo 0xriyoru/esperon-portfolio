@@ -39,7 +39,7 @@ import {
 
 export interface SkillMeta {
   name: string;
-  url: string;
+  url?: string;
   icon: ComponentType<{ size?: number; className?: string }>;
   tag?: string;
 }
@@ -279,37 +279,30 @@ export const skillMetaRegistry: Record<string, SkillMeta> = {
   },
   "high-fidelity prototyping": {
     name: "High-Fidelity Prototyping",
-    url: "https://www.figma.com/prototyping/",
     icon: DeviceMobile,
   },
   "wireframing": {
     name: "Wireframing",
-    url: "https://www.figma.com/wireframe-tool/",
     icon: SquaresFour,
   },
   "erd schema architecture": {
     name: "ERD Schema Architecture",
-    url: "https://drawsql.app",
     icon: Database,
   },
   "technical documentation": {
     name: "Technical Documentation",
-    url: "https://diataxis.fr",
     icon: BookOpenText,
   },
   "technical research": {
     name: "Technical Research",
-    url: "https://en.wikipedia.org/wiki/Scientific_method",
     icon: BookOpenText,
   },
   "documentation": {
     name: "Documentation",
-    url: "https://diataxis.fr",
     icon: BookOpenText,
   },
   "technical writing": {
     name: "Technical Writing",
-    url: "https://developers.google.com/tech-writing",
     icon: BookOpenText,
   },
 
@@ -377,7 +370,6 @@ export function getSkillMeta(skillName: string): SkillMeta {
   // Generic fallback if unknown skill arrives
   return {
     name: skillName,
-    url: `https://www.google.com/search?q=${encodeURIComponent(skillName)}`,
     icon: Globe,
   };
 }
