@@ -2,10 +2,10 @@ import { ArrowUpRight, GithubLogo, LinkedinLogo } from "@phosphor-icons/react/di
 import Projects from "@/components/Projects";
 import Skills from "@/components/Skills";
 import Credentials from "@/components/Credentials";
-import Activity from "@/components/Activity";
 import PageViews from "@/components/PageViews";
 import HeroSpecimen from "@/components/HeroSpecimen";
 import ExperienceSlab from "@/components/ExperienceSlab";
+import FactTicker from "@/components/FactTicker";
 
 const shell = "mx-auto max-w-[1280px] px-5 md:px-10";
 const h2 = "font-display text-4xl font-light tracking-tight md:text-6xl";
@@ -19,12 +19,9 @@ export default function Home() {
           className={`${shell} grid min-h-[calc(100dvh-3.5rem)] items-center gap-12 py-14 md:py-20 lg:grid-cols-12 lg:gap-10`}
         >
           <div className="lg:col-span-8">
-            <h1 className="font-display text-[clamp(3.5rem,11vw,6rem)] font-light leading-[0.95] tracking-[-0.03em]">
+            <h1 className="font-display text-[clamp(2.75rem,6.5vw,5.5rem)] font-light leading-[0.98] tracking-[-0.03em]">
               <span className="hero-line">
-                <span>Rhodge</span>
-              </span>
-              <span className="hero-line">
-                <span>Esperon</span>
+                <span>Rhodge Esperon</span>
               </span>
             </h1>
 
@@ -59,31 +56,12 @@ export default function Home() {
 
       {/* Facts */}
       <section aria-label="Background" className="border-b border-rule">
-        <dl className={`${shell} grid gap-8 py-10 md:grid-cols-3 md:gap-10`}>
-          <div>
-            <dt className="text-sm text-ink-soft">Studying</dt>
-            <dd className="mt-1 text-base">
-              BS Information Technology, Lyceum of Subic Bay. 2023 to present.
-            </dd>
-          </div>
-          <div>
-            <dt className="text-sm text-ink-soft">Internship</dt>
-            <dd className="mt-1 text-base">
-              Asset Management Department (AMD) at SBMA, May to September 2026.
-            </dd>
-          </div>
-          <div>
-            <dt className="text-sm text-ink-soft">Works with</dt>
-            <dd className="mt-1 text-base">
-              React, Next.js, TypeScript, PostgreSQL, Supabase, Tailwind CSS, Figma.
-            </dd>
-          </div>
-        </dl>
+        <FactTicker />
       </section>
 
       {/* Work */}
       <section id="work" className={`${shell} py-24 md:py-32`}>
-        <h2 className={`${h2} mb-12 md:mb-16`}>Selected work</h2>
+        <h2 className={`${h2} mb-12 md:mb-16`}>Systems built</h2>
         <Projects />
       </section>
 
@@ -91,22 +69,15 @@ export default function Home() {
       <section id="experience">
         <ExperienceSlab>
           <div className={`${shell} py-20 md:py-28`}>
-            <h2 className="max-w-[18ch] font-display text-4xl font-light leading-[1.05] tracking-tight md:text-7xl">
-              IT intern and systems developer at SBMA
+            <h2 className="max-w-[20ch] font-display text-4xl font-light leading-[1.05] tracking-tight md:text-7xl">
+              OJT Trainee at Subic Bay Metropolitan Authority
             </h2>
             <p className="mt-6 text-lg text-on-accent-soft">
-              Asset Management Department (AMD, formerly PPMD) / System built July to August 2026 (Internship: May to September 2026)
+              Asset Management Department (AMD) · May to September 2026
             </p>
             <p className="mt-10 max-w-[62ch] text-lg leading-relaxed">
-              Replaced a vulnerable local server with a cloud Supabase and PostgreSQL web system for the SBMA Asset Management Division. Built automated Form PPD-CF-36 job order slip printing with atomic sequential numbering, COA-compliant accountable form tracking, and real-time hauling analytics cards.
+              Built between July and August 2026, replaced a vulnerable local server with a cloud Supabase and PostgreSQL web system for the SBMA Asset Management Division. Built automated Form PPD-CF-36 job order slip printing with atomic sequential numbering, COA-compliant accountable form tracking, and real-time hauling analytics cards.
             </p>
-            <a
-              href="#work"
-              className="link-draw mt-8 inline-flex items-center gap-1 py-1 text-[15px]"
-            >
-              See SBMA-JO under Selected work
-              <ArrowUpRight size={14} aria-hidden="true" />
-            </a>
           </div>
         </ExperienceSlab>
 
@@ -125,16 +96,6 @@ export default function Home() {
         <div className={`${shell} py-24 md:py-32`}>
           <h2 className={`${h2} mb-12 md:mb-16`}>Tools I work with</h2>
           <Skills />
-        </div>
-      </section>
-
-      {/* Activity */}
-      <section id="activity" className="border-t border-rule">
-        <div className={`${shell} py-20 md:py-24`}>
-          <h2 className="mb-8 font-display text-3xl font-light tracking-tight md:text-4xl">
-            Open source code
-          </h2>
-          <Activity />
         </div>
       </section>
 

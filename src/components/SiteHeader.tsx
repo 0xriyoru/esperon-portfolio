@@ -2,7 +2,7 @@ import { ArrowUpRight } from "@phosphor-icons/react/dist/ssr";
 import ScrollProgress from "./ScrollProgress";
 
 const links = [
-  { href: "#work", label: "Work", mobile: true },
+  { href: "#work", label: "Systems", mobile: true },
   { href: "#experience", label: "Experience", mobile: false },
   { href: "#skills", label: "Skills", mobile: false },
   { href: "#contact", label: "Contact", mobile: true },
