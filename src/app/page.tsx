@@ -4,7 +4,6 @@ import Skills from "@/components/Skills";
 import Credentials from "@/components/Credentials";
 import PageViews from "@/components/PageViews";
 import HeroSpecimen from "@/components/HeroSpecimen";
-import ExperienceSlab from "@/components/ExperienceSlab";
 import FactTicker from "@/components/FactTicker";
 
 const shell = "mx-auto max-w-[1280px] px-5 md:px-10";
@@ -67,19 +66,67 @@ export default function Home() {
 
       {/* Experience */}
       <section id="experience">
-        <ExperienceSlab>
-          <div className={`${shell} py-20 md:py-28`}>
-            <h2 className="max-w-[20ch] font-display text-4xl font-light leading-[1.05] tracking-tight md:text-7xl">
-              OJT Trainee at Subic Bay Metropolitan Authority
-            </h2>
-            <p className="mt-6 text-lg text-on-accent-soft">
-              Asset Management Department (AMD) · May to September 2026
-            </p>
-            <p className="mt-10 max-w-[62ch] text-lg leading-relaxed">
-              Built between July and August 2026, replaced a vulnerable local server with a cloud Supabase and PostgreSQL web system for the SBMA Asset Management Division. Built automated Form PPD-CF-36 job order slip printing with atomic sequential numbering, COA-compliant accountable form tracking, and real-time hauling analytics cards.
-            </p>
+        <div className="border-y border-rule-strong bg-accent text-on-accent">
+          <div className={`${shell} grid gap-12 py-20 md:py-28 lg:grid-cols-12 lg:items-center lg:gap-16`}>
+            <div className="lg:col-span-7">
+              <h2 className="max-w-[18ch] font-display text-4xl font-light leading-[1.05] tracking-tight md:text-6xl lg:text-7xl">
+                OJT Trainee at Subic Bay Metropolitan Authority
+              </h2>
+              <p className="mt-6 text-lg text-on-accent-soft">
+                Asset Management Department (AMD) · May to September 2026
+              </p>
+              <p className="mt-8 max-w-[56ch] text-lg leading-relaxed text-on-accent/90">
+                Built between July and August 2026, replaced a vulnerable local server with a cloud Supabase and PostgreSQL web system for the SBMA Asset Management Division. Built automated Form PPD-CF-36 job order slip printing with atomic sequential numbering, COA-compliant accountable form tracking, and real-time hauling analytics cards.
+              </p>
+            </div>
+
+            <div className="lg:col-span-5">
+              <div className="rounded-note border border-white/20 bg-white/5 p-6 md:p-8">
+                <div className="flex items-center justify-between border-b border-white/15 pb-4">
+                  <span className="font-mono text-[11px] uppercase tracking-wider text-on-accent-soft">
+                    Technical Dispatch
+                  </span>
+                  <span className="rounded-note border border-white/25 px-2 py-0.5 font-mono text-[11px] uppercase tracking-wider text-on-accent">
+                    SBMA AMD
+                  </span>
+                </div>
+
+                <dl className="mt-5 space-y-4 font-mono text-xs">
+                  <div>
+                    <dt className="text-on-accent-soft">Agency & Division</dt>
+                    <dd className="mt-1 font-sans text-sm font-medium text-white">
+                      Subic Bay Metropolitan Authority (AMD)
+                    </dd>
+                  </div>
+                  <div>
+                    <dt className="text-on-accent-soft">Role & Period</dt>
+                    <dd className="mt-1 font-sans text-sm font-medium text-white">
+                      IT OJT Trainee & Systems Developer (May – Sept 2026)
+                    </dd>
+                  </div>
+                  <div>
+                    <dt className="text-on-accent-soft">Core Deliverables</dt>
+                    <dd className="mt-1 font-sans text-sm font-medium text-white">
+                      Automated Form PPD-CF-36 Printing · COA Accountable Tracking
+                    </dd>
+                  </div>
+                  <div>
+                    <dt className="text-on-accent-soft">Architecture Stack</dt>
+                    <dd className="mt-1 font-sans text-sm font-medium text-white">
+                      Supabase, PostgreSQL (RLS), React, Next.js, Tailwind CSS
+                    </dd>
+                  </div>
+                  <div className="border-t border-white/15 pt-3">
+                    <dt className="text-on-accent-soft">Deployment Status</dt>
+                    <dd className="mt-1 font-sans text-xs text-on-accent-soft">
+                      Internal government deployment. Confidential access.
+                    </dd>
+                  </div>
+                </dl>
+              </div>
+            </div>
           </div>
-        </ExperienceSlab>
+        </div>
 
         <div className={`${shell} grid gap-10 py-24 md:py-32 lg:grid-cols-12 lg:gap-16`}>
           <div className="lg:col-span-4">

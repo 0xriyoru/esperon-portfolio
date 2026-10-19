@@ -11,6 +11,7 @@ export interface Project {
   github?: string;
   domain?: string;
   confidential?: boolean;
+  preview?: string;
 }
 
 export const staticProjects: Project[] = [
@@ -30,6 +31,7 @@ export const staticProjects: Project[] = [
     status: "DEPLOYED",
     domain: "RESTRICTED // SBMA AMD",
     confidential: true,
+    preview: "/projects/preview-sbma-jo.png",
   },
   {
     id: "artnest",
@@ -47,6 +49,7 @@ export const staticProjects: Project[] = [
     status: "DEPLOYED",
     link: "https://artnest-hub.vercel.app",
     domain: "ARTNEST-HUB.VERCEL.APP",
+    preview: "/projects/preview-artnest.png",
   },
   {
     id: "mekai",
@@ -65,6 +68,7 @@ export const staticProjects: Project[] = [
     link: "https://mekaiscans.vercel.app",
     github: "https://github.com/0xriyoru/Mekai",
     domain: "MEKAISCANS.VERCEL.APP",
+    preview: "/projects/preview-mekai.png",
   },
   {
     id: "maulam",
@@ -98,6 +102,7 @@ export const staticProjects: Project[] = [
     ],
     tags: ["React.js", "Tone.js", "Web Audio API", "Vite", "Supabase", "Audio Engineering"],
     status: "DEPLOYED",
+    preview: "/projects/preview-rebeat.png",
     link: "https://github.com/0xriyoru/rebeat",
     github: "https://github.com/0xriyoru/rebeat",
     domain: "GITHUB.COM/0XRIYORU/REBEAT",

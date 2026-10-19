@@ -1,8 +1,10 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import { ArrowUpRight, CaretDown } from "@phosphor-icons/react";
 import {
+  AnimatePresence,
   motion,
   useMotionValue,
   useReducedMotion,
@@ -33,11 +35,15 @@ function ProjectRow({
   project,
   isOpen,
   onToggle,
+  onHover,
+  onLeave,
   reduce,
 }: {
   project: Project;
   isOpen: boolean;
   onToggle: () => void;
+  onHover: () => void;
+  onLeave: () => void;
   reduce: boolean | null;
 }) {
   const rowRef = useRef<HTMLLIElement>(null);
@@ -47,8 +53,8 @@ function ProjectRow({
   const springX = useSpring(rawX, ROW_SPRING);
   const springY = useSpring(rawY, ROW_SPRING);
 
-  const rotateX = useTransform(springY, [-0.5, 0.5], [3.5, -3.5]);
-  const rotateY = useTransform(springX, [-0.5, 0.5], [-3.5, 3.5]);
+  const rotateX = useTransform(springY, [-0.5, 0.5], [3, -3]);
+  const rotateY = useTransform(springX, [-0.5, 0.5], [-3, 3]);
 
   const handlePointerMove = (e: React.PointerEvent<HTMLLIElement>) => {
     if (reduce || !rowRef.current) return;
@@ -60,6 +66,7 @@ function ProjectRow({
   const handlePointerLeave = () => {
     rawX.set(0);
     rawY.set(0);
+    onLeave();
   };
 
   const panelId = `project-panel-${project.id}`;
@@ -68,6 +75,7 @@ function ProjectRow({
   return (
     <li
       ref={rowRef}
+      onMouseEnter={onHover}
       onPointerMove={handlePointerMove}
       onPointerLeave={handlePointerLeave}
       style={{ perspective: "1200px" }}
@@ -177,6 +185,46 @@ function ProjectRow({
             </div>
 
             <div className="md:col-span-6">
+              {project.preview && (
+                project.link ? (
+                  <a
+                    href={project.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`Open ${project.title} website in new tab`}
+                    className="group/preview mb-5 block overflow-hidden rounded-note border border-rule-strong bg-paper p-1.5 transition-all duration-200 hover:-translate-y-0.5 hover:border-accent active:translate-y-0"
+                  >
+                    <div className="relative overflow-hidden rounded-[2px] border border-rule bg-paper-deep">
+                      <Image
+                        src={project.preview}
+                        alt={`${project.title} interface preview`}
+                        width={640}
+                        height={380}
+                        className="aspect-16/10 w-full object-cover object-top transition-transform duration-500 [transition-timing-function:var(--ease-out-expo)] group-hover/preview:scale-[1.02]"
+                      />
+                      <div className="absolute inset-0 flex items-center justify-center bg-ink/25 opacity-0 backdrop-blur-[1px] transition-opacity duration-200 group-hover/preview:opacity-100">
+                        <span className="inline-flex items-center gap-1.5 rounded-note border border-rule bg-paper px-3 py-1.5 font-mono text-[12px] font-medium text-ink shadow-sm">
+                          {project.link.includes("github.com") ? "View on GitHub" : "Open site"}
+                          <ArrowUpRight size={13} weight="bold" />
+                        </span>
+                      </div>
+                    </div>
+                  </a>
+                ) : (
+                  <div className="mb-5 overflow-hidden rounded-note border border-rule-strong bg-paper p-1.5">
+                    <div className="overflow-hidden rounded-[2px] border border-rule bg-paper-deep">
+                      <Image
+                        src={project.preview}
+                        alt={`${project.title} interface preview`}
+                        width={640}
+                        height={380}
+                        className="aspect-16/10 w-full object-cover object-top"
+                      />
+                    </div>
+                  </div>
+                )
+              )}
+
               {project.highlights && project.highlights.length > 0 && (
                 <ul className="max-w-[62ch] space-y-2.5 text-[15px] leading-relaxed text-ink-soft">
                   {project.highlights.map((item, hIdx) => (
@@ -190,38 +238,13 @@ function ProjectRow({
                 </ul>
               )}
 
-              <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm">
-                {project.confidential ? (
+              {project.confidential && (
+                <div className="mt-6">
                   <span className="font-mono text-xs text-ink-soft">
                     Internal government deployment (SBMA AMD). Confidential access.
                   </span>
-                ) : (
-                  <>
-                    {project.link && (
-                      <a
-                        href={project.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1 text-accent link-draw"
-                      >
-                        {project.link.includes("github.com") ? "View on GitHub" : "Open site"}
-                        <ArrowUpRight size={14} aria-hidden="true" />
-                      </a>
-                    )}
-                    {project.github && project.github !== project.link && (
-                      <a
-                        href={project.github}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1 link-draw"
-                      >
-                        Source code
-                        <ArrowUpRight size={14} aria-hidden="true" />
-                      </a>
-                    )}
-                  </>
-                )}
-              </div>
+                </div>
+              )}
             </div>
           </motion.div>
         </div>
@@ -232,8 +255,21 @@ function ProjectRow({
 
 export default function Projects() {
   const [projects, setProjects] = useState<Project[]>(staticProjects);
-  const [openId, setOpenId] = useState<string | null>(staticProjects[0]?.id ?? null);
+  const [openId, setOpenId] = useState<string | null>(null);
+  const [hoveredProject, setHoveredProject] = useState<Project | null>(null);
   const reduce = useReducedMotion();
+
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  const springX = useSpring(mouseX, { stiffness: 300, damping: 28, mass: 0.3 });
+  const springY = useSpring(mouseY, { stiffness: 300, damping: 28, mass: 0.3 });
+
+  const handleListMouseMove = (e: React.MouseEvent<HTMLUListElement>) => {
+    if (reduce) return;
+    mouseX.set(e.clientX);
+    mouseY.set(e.clientY);
+  };
 
   useEffect(() => {
     let active = true;
@@ -280,16 +316,67 @@ export default function Projects() {
   }, []);
 
   return (
-    <ul className="border-t border-rule-strong">
-      {projects.map((project) => (
-        <ProjectRow
-          key={project.id}
-          project={project}
-          isOpen={openId === project.id}
-          onToggle={() => setOpenId(openId === project.id ? null : project.id)}
-          reduce={reduce}
-        />
-      ))}
-    </ul>
+    <>
+      <ul
+        onMouseMove={handleListMouseMove}
+        onMouseLeave={() => setHoveredProject(null)}
+        className="border-t border-rule-strong"
+      >
+        {projects.map((project) => (
+          <ProjectRow
+            key={project.id}
+            project={project}
+            isOpen={openId === project.id}
+            onToggle={() => setOpenId(openId === project.id ? null : project.id)}
+            onHover={() => setHoveredProject(project)}
+            onLeave={() => {
+              setHoveredProject((prev) => (prev?.id === project.id ? null : prev));
+            }}
+            reduce={reduce}
+          />
+        ))}
+      </ul>
+
+      {/* Floating 3D Cursor Preview Portal */}
+      <AnimatePresence>
+        {hoveredProject?.preview && !reduce && (
+          <motion.div
+            aria-hidden="true"
+            initial={{ opacity: 0, scale: 0.88, rotateY: 8, rotateX: -4 }}
+            animate={{ opacity: 1, scale: 1, rotateY: 0, rotateX: 0 }}
+            exit={{ opacity: 0, scale: 0.9, transition: { duration: 0.15 } }}
+            transition={{ type: "spring", stiffness: 320, damping: 28 }}
+            style={{
+              position: "fixed",
+              top: 0,
+              left: 0,
+              x: springX,
+              y: springY,
+              translateX: "32px",
+              translateY: "-50%",
+              transformPerspective: 1000,
+              pointerEvents: "none",
+              zIndex: 50,
+            }}
+            className="hidden lg:block w-84 md:w-96 rounded-note border border-rule-strong bg-paper p-2 shadow-2xl"
+          >
+            <div className="overflow-hidden rounded-[2px] border border-rule bg-paper-deep">
+              <Image
+                src={hoveredProject.preview}
+                alt=""
+                width={640}
+                height={380}
+                priority
+                className="aspect-16/10 w-full object-cover object-top"
+              />
+            </div>
+            <div className="mt-2 flex items-center justify-between px-1 font-mono text-[11px] text-ink-soft">
+              <span className="font-sans font-medium text-ink">{hoveredProject.title}</span>
+              <span>{hoveredProject.confidential ? "RESTRICTED // AMD" : hoveredProject.domain || "WEB INTERFACE"}</span>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   );
 }

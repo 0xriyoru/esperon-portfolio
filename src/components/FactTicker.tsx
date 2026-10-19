@@ -1,7 +1,14 @@
 "use client";
 
 import Image from "next/image";
-import { motion, useReducedMotion } from "motion/react";
+import { useEffect, useRef } from "react";
+import {
+  motion,
+  useAnimationFrame,
+  useMotionValue,
+  useReducedMotion,
+  wrap,
+} from "motion/react";
 import {
   SiFigma,
   SiNextdotjs,
@@ -22,11 +29,18 @@ const stackIcons = [
   { Icon: SiFigma, name: "Figma" },
 ];
 
-function FactItems({ ariaHidden = false }: { ariaHidden?: boolean }) {
+function FactGroup({
+  measureRef,
+  ariaHidden = false,
+}: {
+  measureRef?: React.Ref<HTMLDivElement>;
+  ariaHidden?: boolean;
+}) {
   return (
     <div
+      ref={measureRef}
       aria-hidden={ariaHidden || undefined}
-      className="flex shrink-0 items-center gap-14 pr-14 md:gap-20 md:pr-20"
+      className="flex shrink-0 items-center gap-16 pr-16 md:gap-24 md:pr-24"
     >
       {/* Studying */}
       <div className="flex shrink-0 items-center gap-4">
@@ -35,11 +49,12 @@ function FactItems({ ariaHidden = false }: { ariaHidden?: boolean }) {
           alt="Lyceum of Subic Bay College of Computer Studies crest"
           width={44}
           height={52}
-          className="h-12 w-auto shrink-0 object-contain"
+          draggable={false}
+          className="h-11 w-auto shrink-0 select-none object-contain pointer-events-none"
         />
         <div>
           <div className="text-xs text-ink-soft">Studying</div>
-          <div className="mt-0.5 text-[15px] text-ink">
+          <div className="mt-0.5 whitespace-nowrap text-[15px] text-ink">
             BS Information Technology, Lyceum of Subic Bay. 2023 to present.
           </div>
         </div>
@@ -54,11 +69,12 @@ function FactItems({ ariaHidden = false }: { ariaHidden?: boolean }) {
           alt="Subic Bay Metropolitan Authority logo"
           width={126}
           height={44}
-          className="h-10 w-auto shrink-0 object-contain"
+          draggable={false}
+          className="h-9 w-auto shrink-0 select-none object-contain pointer-events-none"
         />
         <div>
           <div className="text-xs text-ink-soft">On-The-Job Training</div>
-          <div className="mt-0.5 text-[15px] text-ink">
+          <div className="mt-0.5 whitespace-nowrap text-[15px] text-ink">
             Asset Management Department (AMD) at SBMA, May to September 2026.
           </div>
         </div>
@@ -70,15 +86,15 @@ function FactItems({ ariaHidden = false }: { ariaHidden?: boolean }) {
       <div className="flex shrink-0 items-center gap-4">
         <div
           aria-hidden="true"
-          className="flex items-center gap-2 rounded-note border border-rule px-3 py-2 text-ink-soft"
+          className="flex items-center gap-1.5 rounded-note border border-rule bg-paper px-2.5 py-1.5 text-ink-soft pointer-events-none"
         >
           {stackIcons.map(({ Icon, name }) => (
-            <Icon key={name} size={16} />
+            <Icon key={name} size={15} />
           ))}
         </div>
         <div>
           <div className="text-xs text-ink-soft">Works with</div>
-          <div className="mt-0.5 text-[15px] text-ink">
+          <div className="mt-0.5 whitespace-nowrap text-[15px] text-ink">
             React, Next.js, TypeScript, PostgreSQL, Supabase, Tailwind CSS, Figma.
           </div>
         </div>
@@ -89,33 +105,74 @@ function FactItems({ ariaHidden = false }: { ariaHidden?: boolean }) {
   );
 }
 
+const BASE_VELOCITY = -45; // baseline pixels per second drift
+
 export default function FactTicker() {
   const reduce = useReducedMotion();
+  const setRef = useRef<HTMLDivElement>(null);
+  const setWidthRef = useRef(0);
+  const isPanningRef = useRef(false);
+  const velocityRef = useRef(BASE_VELOCITY);
+
+  const x = useMotionValue(0);
+
+  useEffect(() => {
+    const updateWidth = () => {
+      if (setRef.current) {
+        setWidthRef.current = setRef.current.offsetWidth;
+      }
+    };
+    updateWidth();
+    window.addEventListener("resize", updateWidth);
+    return () => window.removeEventListener("resize", updateWidth);
+  }, []);
+
+  useAnimationFrame((_, delta) => {
+    if (reduce || !setWidthRef.current) return;
+    const dt = delta / 1000;
+
+    if (isPanningRef.current) return;
+
+    // Decay any swipe flick velocity smoothly back to baseline drift
+    velocityRef.current += (BASE_VELOCITY - velocityRef.current) * Math.min(dt * 3.2, 1);
+
+    const nextX = x.get() + velocityRef.current * dt;
+    x.set(wrap(-setWidthRef.current, 0, nextX));
+  });
 
   if (reduce) {
     return (
-      <div className="mx-auto max-w-[1280px] overflow-x-auto px-5 py-8 mix-blend-multiply md:px-10">
-        <FactItems />
+      <div className="w-full overflow-x-auto py-8 mix-blend-multiply">
+        <div className="mx-auto flex max-w-[1280px] px-5 md:px-10">
+          <FactGroup />
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="mx-auto max-w-[1280px] px-5 py-8 mix-blend-multiply md:px-10">
-      <div className="overflow-hidden [mask-image:linear-gradient(to_right,transparent_0%,black_12%,black_88%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_right,transparent_0%,black_12%,black_88%,transparent_100%)]">
-        <motion.div
-          animate={{ x: ["0%", "-50%"] }}
-          transition={{
-            duration: 32,
-            ease: "linear",
-            repeat: Infinity,
-          }}
-          className="flex w-max items-center will-change-transform"
-        >
-          <FactItems />
-          <FactItems ariaHidden />
-        </motion.div>
-      </div>
+    <div className="relative w-full overflow-hidden py-8 mix-blend-multiply [mask-image:linear-gradient(to_right,transparent_0%,black_6%,black_94%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_right,transparent_0%,black_6%,black_94%,transparent_100%)]">
+      <motion.div
+        style={{ x }}
+        onPanStart={() => {
+          isPanningRef.current = true;
+        }}
+        onPan={(_, info) => {
+          if (!setWidthRef.current) return;
+          const nextX = x.get() + info.delta.x;
+          x.set(wrap(-setWidthRef.current, 0, nextX));
+        }}
+        onPanEnd={(_, info) => {
+          isPanningRef.current = false;
+          // Carry the user's swipe flick velocity with momentum
+          velocityRef.current = info.velocity.x;
+        }}
+        className="flex w-max items-center will-change-transform cursor-grab active:cursor-grabbing select-none"
+      >
+        <FactGroup measureRef={setRef} />
+        <FactGroup ariaHidden />
+        <FactGroup ariaHidden />
+      </motion.div>
     </div>
   );
 }
