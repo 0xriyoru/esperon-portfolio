@@ -47,8 +47,9 @@
    - **Highlights**: Web-based launchpad replacing expensive physical gear, 60 FPS UI target with low-latency web audio engine, sub-2s load time with lazy loading and audio buffer caching.
    - **Tech**: React.js, Web Audio API, TypeScript, Audio Buffer Caching
    - **Status**: `DEPLOYED`
-   - **Link**: `https://github.com/0xriyoru`
-   - **Domain**: `GITHUB.COM/0XRIYORU`
+   - **Link**: `https://rebeat-launchpad.vercel.app`
+   - **GitHub**: `https://github.com/riyod3v/rebeat`
+   - **Domain**: `REBEAT-LAUNCHPAD.VERCEL.APP`
 
 5. **`MAULAM`**
    - **Type**: AI Mobile Companion App (Android APK)

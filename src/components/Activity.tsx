@@ -23,8 +23,8 @@ const recentRepos: RepoItem[] = [
     tech: ["React Native", "Expo", "Gemini AI", "Android APK"],
   },
   {
-    name: "0xriyoru/rebeat",
-    url: "https://github.com/0xriyoru/rebeat",
+    name: "riyod3v/rebeat",
+    url: "https://github.com/riyod3v/rebeat",
     description:
       "Low-latency browser audio launchpad with sample-accurate loop scheduling and polyphonic layered playback.",
     tech: ["React", "Tone.js", "Web Audio API"],

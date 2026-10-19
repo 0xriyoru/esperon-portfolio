@@ -51,8 +51,8 @@ VALUES
     'User-Centered Live Music Interface',
     ARRAY['REACT.JS', 'WEB AUDIO API', 'TYPESCRIPT', 'AUDIO BUFFERING'],
     'DEPLOYED',
-    'https://github.com/0xriyoru',
-    'GITHUB.COM/0XRIYORU',
+    'https://rebeat-launchpad.vercel.app',
+    'REBEAT-LAUNCHPAD.VERCEL.APP',
     '/projects/rebeat.png',
     '2025-12-01 00:00:00+00'
 ),

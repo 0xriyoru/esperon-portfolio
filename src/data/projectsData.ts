@@ -103,9 +103,9 @@ export const staticProjects: Project[] = [
     tags: ["React.js", "Tone.js", "Web Audio API", "Vite", "Supabase", "Audio Engineering"],
     status: "DEPLOYED",
     preview: "/projects/preview-rebeat.png",
-    link: "https://github.com/0xriyoru/rebeat",
-    github: "https://github.com/0xriyoru/rebeat",
-    domain: "GITHUB.COM/0XRIYORU/REBEAT",
+    link: "https://rebeat-launchpad.vercel.app",
+    github: "https://github.com/riyod3v/rebeat",
+    domain: "REBEAT-LAUNCHPAD.VERCEL.APP",
   },
   {
     id: "uma-helper",
