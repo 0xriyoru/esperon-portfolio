@@ -58,6 +58,15 @@ export const staticCredentials: Credential[] = [
     credential_url: "https://devcon.ph",
   },
   {
+    id: "cred-topcit-2025",
+    title: "TOPCIT: Test of Practical Competency in ICT (Level 2)",
+    organization: "IITP (Institute for Information & Communications Technology Promotion)",
+    type: "CERTIFICATION",
+    date_range: "DEC 2025",
+    certificate_url: "/certificates/topcit-level-2-certification.pdf",
+    credential_url: "https://www.topcit.or.kr",
+  },
+  {
     id: "cred-sparkcon-2025",
     title: "SparkCon: The Next Wave of Innovation",
     organization: "Campus DevCon x Zellense",

@@ -200,6 +200,19 @@ VALUES
     '2026-07-15 00:00:00+00'
 ),
 (
+    '22222222-2222-2222-2222-222222222214',
+    'Certified Level 2, TOPCIT (Test of Practical Competency in ICT)',
+    'IITP (Institute for Information & Communications Technology Promotion)',
+    'CERTIFICATION',
+    'DEC 2025',
+    'Achieved Level 2 certification on the Test of Practical Competency in ICT jointly administered by IITP.',
+    '/certificates/topcit-level-2-certification.pdf',
+    'https://www.topcit.or.kr',
+    ARRAY['Software Engineering', 'Data Management', 'System Architecture', 'Information Security'],
+    true,
+    '2025-12-10 00:00:00+00'
+),
+(
     '22222222-2222-2222-2222-222222222204',
     'Attendee, SparkCon: The Next Wave of Innovation',
     'Campus DevCon x Zellense',

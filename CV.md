@@ -85,6 +85,7 @@ rhodgesperon@gmail.com | [linkedin.com/in/rhodge-esperon](https://linkedin.com/i
 - **Attendee, Lenovo Legion Campus Quest** | Lenovo Legion | [2026]
 - **Attendee, AWS Community Day Philippines** | AWS | [2026]
 - **Attendee, Convergence III: From Policy to People: The Governance & Human Side of Cyber Risk** | DEVCON | [2026]
+- **Certified Level 2, TOPCIT (Test of Practical Competency in ICT)** | IITP | [DEC 2025]
 - **Attendee, SparkCon: The Next Wave of Innovation** | Campus DevCon x Zellense | [2025]
 - **Attendee, Skydevs Hack, Play, & Learn Summit 2025 “Masterclass”** | Skydev Solutions, Inc. | [2025]
 - **Attendee, C# Scripting for Unity: Core Concepts and Best Practices** | Lyceum of Subic Bay | [2025]

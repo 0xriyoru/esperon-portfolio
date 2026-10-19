@@ -81,12 +81,9 @@ export default function Home() {
 
             <div className="lg:col-span-5">
               <div className="rounded-note border border-white/20 bg-white/5 p-6 md:p-8">
-                <div className="flex items-center justify-between border-b border-white/15 pb-4">
+                <div className="border-b border-white/15 pb-4">
                   <span className="font-mono text-[11px] uppercase tracking-wider text-on-accent-soft">
                     Technical Dispatch
-                  </span>
-                  <span className="rounded-note border border-white/25 px-2 py-0.5 font-mono text-[11px] uppercase tracking-wider text-on-accent">
-                    SBMA AMD
                   </span>
                 </div>
 
@@ -113,12 +110,6 @@ export default function Home() {
                     <dt className="text-on-accent-soft">Architecture Stack</dt>
                     <dd className="mt-1 font-sans text-sm font-medium text-white">
                       Supabase, PostgreSQL (RLS), React, Next.js, Tailwind CSS
-                    </dd>
-                  </div>
-                  <div className="border-t border-white/15 pt-3">
-                    <dt className="text-on-accent-soft">Deployment Status</dt>
-                    <dd className="mt-1 font-sans text-xs text-on-accent-soft">
-                      Internal government deployment. Confidential access.
                     </dd>
                   </div>
                 </dl>
