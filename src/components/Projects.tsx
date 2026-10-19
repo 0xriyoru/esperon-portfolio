@@ -216,8 +216,8 @@ function ProjectRow({
                         height={380}
                         className="aspect-16/10 w-full object-cover object-top transition-transform duration-500 [transition-timing-function:var(--ease-out-expo)] group-hover/preview:scale-[1.02]"
                       />
-                      <div className="absolute inset-0 flex items-center justify-center bg-ink/25 opacity-0 backdrop-blur-[1px] transition-opacity duration-200 group-hover/preview:opacity-100">
-                        <span className="inline-flex items-center gap-1.5 rounded-note border border-rule bg-paper px-3 py-1.5 font-mono text-[12px] font-medium text-ink shadow-sm">
+                      <div className="absolute inset-0 flex items-center justify-center bg-ink/25 opacity-0 transition-opacity duration-200 group-hover/preview:opacity-100">
+                        <span className="inline-flex items-center gap-1.5 rounded-note border border-rule bg-paper px-3 py-1.5 font-mono text-[12px] font-medium text-ink">
                           {project.link.includes("github.com") ? "View on GitHub" : "Open site"}
                           <ArrowUpRight size={13} weight="bold" />
                         </span>
