@@ -75,7 +75,7 @@ function FactGroup({
         <div>
           <div className="text-xs text-ink-soft">Industry Practicum</div>
           <div className="mt-0.5 whitespace-nowrap text-[15px] text-ink">
-            Asset Management Division at SBMA · 500-Hour OJT Completed
+            Asset Management Division at SBMA · 486-Hour OJT Completed
           </div>
         </div>
       </div>

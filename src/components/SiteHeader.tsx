@@ -1,9 +1,6 @@
-import ScrollProgress from "./ScrollProgress";
-
 const links = [
   { href: "#projects", label: "Projects", mobile: true },
-  { href: "#experience", label: "Experience", mobile: false },
-  { href: "#events", label: "Events", mobile: false },
+  { href: "#journey", label: "Journey", mobile: false },
   { href: "#skills", label: "Skills", mobile: false },
   { href: "#activity", label: "Activity", mobile: false },
   { href: "#contact", label: "Contact", mobile: true },
@@ -12,7 +9,6 @@ const links = [
 export default function SiteHeader() {
   return (
     <header className="sticky top-0 z-40 border-b border-rule bg-paper">
-      <ScrollProgress />
       <div className="mx-auto flex h-14 max-w-[1280px] items-center justify-between px-5 md:px-10">
         <a href="#top" className="font-display text-lg font-normal tracking-tight">
           Rhodge Esperon
