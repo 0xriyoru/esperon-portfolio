@@ -86,28 +86,6 @@ This repository powers [esperonrhodge.vercel.app](https://esperonrhodge.vercel.a
 
 ---
 
-## Local Development
-
-```bash
-# Install dependencies
-npm install
-
-# Start local development server (Turbopack)
-npm run dev
-
-# Build static production export
-npm run build
-```
-
-Optional environment variables in `.env.local` (falls back to static local data when omitted):
-
-```env
-NEXT_PUBLIC_SUPABASE_URL=
-NEXT_PUBLIC_SUPABASE_ANON_KEY=
-```
-
----
-
 ## Contact
 
 * **Portfolio:** [esperonrhodge.vercel.app](https://esperonrhodge.vercel.app)
