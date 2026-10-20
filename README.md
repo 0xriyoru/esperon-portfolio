@@ -1,4 +1,4 @@
-# Rhodge Esperon — Systems & Front-End Developer
+# Rhodge Esperon — Full-Stack Web & Defensive Cybersecurity Portfolio
 
 <p align="center">
   <a href="https://esperonrhodge.vercel.app">
@@ -16,7 +16,7 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Focus-Systems%20%26%20Front--End%20Development-edeff2?style=flat-square&color=2340D9&labelColor=12151A" alt="Role Focus" />
+  <img src="https://img.shields.io/badge/Focus-Full--Stack%20Web%20%26%20Defensive%20Cyber-edeff2?style=flat-square&color=2340D9&labelColor=12151A" alt="Role Focus" />
   <img src="https://img.shields.io/badge/Education-BSIT%20%40%20Lyceum%20of%20Subic%20Bay-edeff2?style=flat-square&color=2340D9&labelColor=12151A" alt="Education" />
   <img src="https://img.shields.io/badge/Location-Olongapo%20City%2C%20Philippines%20(UTC%2B8)-edeff2?style=flat-square&color=2340D9&labelColor=12151A" alt="Location" />
   <img src="https://img.shields.io/badge/Status-Open%20to%20Opportunities-brightgreen?style=flat-square" alt="Status" />
@@ -24,108 +24,94 @@
 
 ---
 
-## Executive Profile
+## Overview
 
-I am a **Systems and Front-End Developer** based in Olongapo City, Philippines, combining rigorous database architecture and systems engineering with precise, accessible UI craft.
+4th-year BS Information Technology student at Lyceum of Subic Bay College in Olongapo. Focused on full-stack web development and defensive cybersecurity, with an active interest in SOC operations and secure systems.
 
-My engineering work emphasizes verifiable production deliverables: transitioning mission-critical enterprise workflows to secure cloud environments, engineering performant static architectures with real-time hydration, and designing high-legibility, distraction-free software interfaces.
+This repository powers [esperonrhodge.vercel.app](https://esperonrhodge.vercel.app), built as a static Next.js 16 export paired with Supabase PostgREST/Realtime hydration and live GitHub contribution telemetry.
 
 ---
 
-## Featured Engineering Deliverables
+## Featured Engineering Work
 
-### 1. Enterprise Job Order Management System & Cloud Migration
-**Client / Organization:** Subic Bay Metropolitan Authority (SBMA) — Asset Management Department (AMD)  
+### 1. Enterprise Job Order Management System (486-Hour Practicum)
+**Organization:** Subic Bay Metropolitan Authority (SBMA) — Asset Management Department (AMD)  
 **Period:** May 2026 – September 2026
 
-* **Problem:** AMD operations relied on an unmaintained, vulnerable local-host application with data-loss risks, lack of audit trails, and fragmented maintenance requests across port facilities.
-* **Architecture & Solution:** Engineered a full-stack, cloud-based Job Order Management System featuring atomic serial tracking, role-based authorization, and real-time operational KPI dashboards.
-* **Impact:** Eliminated operational bottlenecks across equipment tracking, provided tamper-proof audit trails for government compliance, and safeguarded critical facility records through automated cloud backups and strict access governance.
+* **Problem:** AMD relied on an unmaintained local-host server with data-loss risks, no audit trail, and manual maintenance request tracking across port facilities.
+* **Solution:** Built and deployed a cloud PostgreSQL and Supabase Job Order Management System with PL/pgSQL atomic numbering (`709-MMYY-CCCC`), row-level locks, Role-Based Access Control (RBAC), and Cloudflare Turnstile verification.
+* **Outcome:** Digitized Commission on Audit (COA) accountable Form PPD-CF-36 serialization and completed a 486-hour industry practicum.
 
 ---
 
-### 2. Competitive Programming & Regional Tech Summit Recognition
-**Events:** RAITE 2026 Regional Programming Competition, DEVCON Convergence III, AWS Community Day PH
+### 2. Competitive Programming, Certifications & Summits
+**Milestones:** TOPCIT Level 2, RAITE 2026, DEVCON Convergence III, AWS Community Day PH
 
-* **Regional Programming Competition (RAITE 2026):** Represented Lyceum of Subic Bay in algorithmic problem-solving, data structures, and computational optimization against top university teams across Region III.
-* **Industry Summit Participation:** Active contributor across DEVCON Convergence III (Full-Stack & Cloud Architecture) and AWS Community Day Philippines, evaluating serverless scaling patterns and modern distributed cloud paradigms.
-* **Verified Credentials:** Official certificates and credentials cataloged and verifiable on the [live portfolio credentials ledger](https://esperonrhodge.vercel.app/#experience).
+* **TOPCIT Level 2 Certification (Dec 2025):** Certified Level 2 in the Test of Practical Competency in ICT (IITP Korea).
+* **RAITE 2026 Regional Programming Challenge (Oct 2026):** Represented Lyceum of Subic Bay in algorithmic problem-solving across Central Luzon (PSITE).
+* **Conferences & Seminars:** Participated in DEVCON Convergence III (Cyber Risk Governance), AWS Community Day Philippines (Taguig City), and the Skydevs Hack, Play & Learn Summit 2025.
+* **Journey Timeline:** Interactive horizontal center-axis Git branching timeline verifiable at [esperonrhodge.vercel.app/#journey](https://esperonrhodge.vercel.app/#journey).
 
 ---
 
 ### 3. Field Notebook Design System & Zero-Server Web Architecture
-**Implementation:** [`src/app/globals.css`](file:///c:/Users/Riyoru/Documents/rhodge-multiverse/projects/esperon-portfolio/src/app/globals.css), [`src/components/Projects.tsx`](file:///c:/Users/Riyoru/Documents/rhodge-multiverse/projects/esperon-portfolio/src/components/Projects.tsx), [`src/lib/supabase.ts`](file:///c:/Users/Riyoru/Documents/rhodge-multiverse/projects/esperon-portfolio/src/lib/supabase.ts)
+**Implementation:** [`src/app/globals.css`](src/app/globals.css), [`src/components/Projects.tsx`](src/components/Projects.tsx), [`src/components/Journey.tsx`](src/components/Journey.tsx), [`src/components/Activity.tsx`](src/components/Activity.tsx)
 
-* **Design Philosophy:** Rejects gamified web elements, dark-mode gimmicks, and bloated 3D shaders in favor of a disciplined paper-and-ink aesthetic (`#edeff2` paper, `#12151a` ink, `#2340d9` cobalt). Built for rapid recruiter scanning with high-legibility typefaces (Bricolage Grotesque and Geist) and crisp 1px structural boundaries.
-* **Static Edge Compilation:** Compiles to zero-server static HTML/CSS/JS (`output: 'export'`) distributed via Vercel Edge CDN for instant TTFB (<50ms) and zero server compute overhead.
-* **Resilient Supabase Hydration:** Hydrates client-side via Supabase PostgREST endpoints and WebSockets (`projects-realtime` channel) with seamless, zero-latency fallback to offline static TypeScript dictionaries ([`src/data/projectsData.ts`](file:///c:/Users/Riyoru/Documents/rhodge-multiverse/projects/esperon-portfolio/src/data/projectsData.ts)) if external networks fail.
+* **Field Notebook Aesthetic:** Light-mode paper-and-ink palette (`#edeff2` paper, `#12151a` ink, `#2340d9` cobalt accent, `1px` structural rules, `3px` radius). Typographic hierarchy pairs Bricolage Grotesque display headers with IBM Plex Sans body copy and IBM Plex Mono technical metadata.
+* **Static Export:** Compiles to static HTML/CSS/JS (`output: 'export'`) for fast edge delivery with zero server compute overhead.
+* **Supabase Hydration & Offline Fallback:** Queries Supabase PostgREST and subscribes to `projects-realtime` WebSocket updates while falling back immediately to local TypeScript dictionaries ([`src/data/projectsData.ts`](src/data/projectsData.ts) and [`src/data/githubContributions2026.json`](src/data/githubContributions2026.json)) when offline.
 
 ---
 
-## Technical Competencies
+## Technical Stack
 
-| Domain | Core Technologies & Practices |
+| Domain | Technologies |
 | :--- | :--- |
-| **Front-End Architecture** | React 19, Next.js 16 (App Router, Static Export), TypeScript 5, Tailwind CSS v4, Motion |
-| **Back-End & Systems** | PostgreSQL 15+, Supabase, PostgREST, REST API Design, Row-Level Security (RLS), Cloud Database Migrations |
-| **UI/UX Engineering** | Design Token Architecture, Responsive Layouts, Accessibility (a11y), High-Density Data Grids, Typography Systems |
-| **DevOps & Tooling** | Git, GitHub, Edge CDN Deployment (Vercel), ESLint, Supabase CLI, Atomic Stored Procedures (PL/pgSQL) |
+| **Frontend** | React 19, Next.js 16 (App Router, Static Export), TypeScript 5, Tailwind CSS v4, Motion (`motion/react`) |
+| **Backend & Database** | PostgreSQL 15+, Supabase, PostgREST, Row-Level Security (RLS), PL/pgSQL Stored Procedures |
+| **Design & Icons** | Field Notebook Token System, `@phosphor-icons/react`, `@icons-pack/react-simple-icons`, CSS 3D Transforms |
+| **Tooling & Deployment** | Git, GitHub Actions / Vercel Edge CDN, ESLint 9, Supabase CLI |
 
 ---
 
-## System Architecture
+## Repository Structure
 
-The portfolio pairs zero-server static hosting with reactive cloud data synchronization:
+* [`src/app/page.tsx`](src/app/page.tsx) — Main page assembly, hero line-mask reveals, and section layout.
+* [`src/components/Projects.tsx`](src/components/Projects.tsx) — Project ledger with 3D paper-hinge specimen cards, Supabase Realtime sync, and offline fallback.
+* [`src/components/Journey.tsx`](src/components/Journey.tsx) — Center-axis horizontal Git branching timeline covering academic milestones, the 486-hour SBMA practicum, competitions, and verifiable certificates.
+* [`src/components/Skills.tsx`](src/components/Skills.tsx) — Categorized technical tool taxonomy and ecosystem links.
+* [`src/components/Activity.tsx`](src/components/Activity.tsx) — Live SVG dot-matrix GitHub contribution visualizer (`@0xriyoru`) and Supabase view counter.
+* [`src/lib/supabase.ts`](src/lib/supabase.ts) — Supabase client initialization.
+* [`supabase/migrations/`](supabase/migrations/) — PostgreSQL table schemas, RLS policies, and RPC functions.
 
-```mermaid
-flowchart TD
-    subgraph Client["Edge Client (Next.js 16 / React 19 Static Export)"]
-        UI["Portfolio Interface<br/>(Hero, Work Ledger, Credentials, Skills, Telemetry)"]
-        Fallback["Static Offline Fallback<br/>(src/data/*.ts)"]
-    end
+---
 
-    subgraph Cloud["Supabase Cloud Infrastructure"]
-        PostgREST["PostgREST API<br/>(/rest/v1/projects)"]
-        Realtime["Realtime Engine (WebSockets)<br/>(Live Table Sync)"]
-        RPC["PostgreSQL RPC<br/>(Atomic Metrics Counter)"]
-        DB[("PostgreSQL 15+<br/>(RLS-Protected Tables)")]
-    end
+## Local Development
 
-    subgraph Telemetry["External Telemetry"]
-        GH["GitHub Contributions API<br/>(@0xriyoru)"]
-    end
+```bash
+# Install dependencies
+npm install
 
-    UI -->|1. Initial PostgREST Query| PostgREST
-    UI -->|2. Subscribe to Updates| Realtime
-    UI -->|3. Offline / Fail-Safe Fallback| Fallback
-    UI -->|4. Increment Page Views| RPC
-    UI -->|5. Fetch Contribution Matrix| GH
+# Start local development server (Turbopack)
+npm run dev
 
-    PostgREST --> DB
-    Realtime --> DB
-    RPC --> DB
+# Build static production export
+npm run build
+```
+
+Optional environment variables in `.env.local` (falls back to static local data when omitted):
+
+```env
+NEXT_PUBLIC_SUPABASE_URL=
+NEXT_PUBLIC_SUPABASE_ANON_KEY=
 ```
 
 ---
 
-## Key Codebase Navigation
+## Contact
 
-For technical recruiters and engineering leads reviewing the codebase:
-
-* [`src/app/page.tsx`](file:///c:/Users/Riyoru/Documents/rhodge-multiverse/projects/esperon-portfolio/src/app/page.tsx) — Main page assembly, hero line-mask reveals, and section orchestration.
-* [`src/components/Projects.tsx`](file:///c:/Users/Riyoru/Documents/rhodge-multiverse/projects/esperon-portfolio/src/components/Projects.tsx) — Expandable project index with Supabase Realtime synchronization and offline data fallbacks.
-* [`src/components/Credentials.tsx`](file:///c:/Users/Riyoru/Documents/rhodge-multiverse/projects/esperon-portfolio/src/components/Credentials.tsx) — Chronological competition, seminar, and certificate ledger with direct document links.
-* [`src/components/Skills.tsx`](file:///c:/Users/Riyoru/Documents/rhodge-multiverse/projects/esperon-portfolio/src/components/Skills.tsx) — Categorized technical skill taxonomy and ecosystem links.
-* [`src/lib/supabase.ts`](file:///c:/Users/Riyoru/Documents/rhodge-multiverse/projects/esperon-portfolio/src/lib/supabase.ts) — Client singleton initialization for Supabase PostgREST and Realtime channels.
-* [`supabase/migrations/`](file:///c:/Users/Riyoru/Documents/rhodge-multiverse/projects/esperon-portfolio/supabase/migrations/) — Declarative PostgreSQL table schemas, Row-Level Security policies, and stored procedures.
-
----
-
-## Contact & Professional Links
-
-* **Live Portfolio:** [esperonrhodge.vercel.app](https://esperonrhodge.vercel.app)
-* **Direct Curriculum Vitae:** [Download CV (PDF)](https://esperonrhodge.vercel.app/cv.pdf)
+* **Portfolio:** [esperonrhodge.vercel.app](https://esperonrhodge.vercel.app)
+* **Curriculum Vitae:** [Download CV (PDF)](https://esperonrhodge.vercel.app/cv.pdf)
 * **LinkedIn:** [linkedin.com/in/rhodge-esperon](https://www.linkedin.com/in/rhodge-esperon)
 * **GitHub:** [@0xriyoru](https://github.com/0xriyoru)
 * **Email:** [rhodgesperon@gmail.com](mailto:rhodgesperon@gmail.com)
-* **Location:** Olongapo City / Subic Bay Freeport Zone, Philippines (UTC+8)
