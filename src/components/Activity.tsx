@@ -124,16 +124,14 @@ export default function Activity() {
     return { cells, monthPositions };
   }, [data]);
 
-  // Dimensions
-  const CELL_SIZE = 14;
-  const GAP_X = 3.5;
-  const GAP_Y = 3.5;
-  const STEP_X = CELL_SIZE + GAP_X; // 17.5
-  const STEP_Y = CELL_SIZE + GAP_Y; // 17.5
-  const PADDING_LEFT = 38;
-  const PADDING_TOP = 28;
-  const TOTAL_WIDTH = PADDING_LEFT + 53 * STEP_X + 16; // ~980px
-  const TOTAL_HEIGHT = PADDING_TOP + 7 * STEP_Y + 12; // ~162px
+  // Dimensions - enlarged to fully occupy vertical and horizontal column space
+  const CELL_SIZE = 20;
+  const STEP_X = 25; // 20px cell + 5px gap
+  const STEP_Y = 36; // 20px cell + 16px vertical gap for generous breathing room
+  const PADDING_LEFT = 52;
+  const PADDING_TOP = 48;
+  const TOTAL_WIDTH = PADDING_LEFT + 53 * STEP_X + 28; // ~1405px
+  const TOTAL_HEIGHT = PADDING_TOP + 7 * STEP_Y + 28; // ~328px
 
   return (
     <div className="rounded-note border border-rule-strong bg-paper">
@@ -202,33 +200,33 @@ export default function Activity() {
           </div>
         </div>
 
-        {/* Right Matrix Column */}
-        <div className="relative flex flex-col justify-between p-5 sm:p-6 lg:col-span-8 lg:p-7">
-          <div className="relative overflow-x-auto pb-4">
+        {/* Right Matrix Column - enlarged to fill full container height and width */}
+        <div className="relative flex flex-col justify-center p-6 sm:p-8 lg:col-span-8 min-h-[360px] lg:min-h-[400px]">
+          <div className="relative w-full overflow-x-auto">
             <svg
               viewBox={`0 0 ${TOTAL_WIDTH} ${TOTAL_HEIGHT}`}
-              className="h-auto min-w-[760px] w-full max-w-full select-none"
+              className="h-[320px] sm:h-[350px] lg:h-[370px] min-w-[880px] w-full select-none"
               style={{ overflow: "visible" }}
             >
-              {/* Month Labels */}
+              {/* Month Labels - large & highly readable */}
               {matrix.monthPositions.map((m, idx) => (
                 <text
                   key={idx}
                   x={PADDING_LEFT + m.col * STEP_X}
-                  y={16}
-                  className="fill-ink-soft font-mono text-[10px] tracking-wider uppercase"
+                  y={24}
+                  className="fill-ink font-mono text-[13px] font-medium tracking-wider uppercase"
                 >
                   {m.label}
                 </text>
               ))}
 
-              {/* Day of Week Labels */}
+              {/* Day of Week Labels - large & highly readable */}
               {Object.entries(ROW_LABELS).map(([rowIdx, label]) => (
                 <text
                   key={rowIdx}
-                  x={1}
-                  y={PADDING_TOP + Number(rowIdx) * STEP_Y + 10}
-                  className="fill-ink-soft font-mono text-[10px] tracking-wider uppercase"
+                  x={2}
+                  y={PADDING_TOP + Number(rowIdx) * STEP_Y + 15}
+                  className="fill-ink font-mono text-[12px] font-medium tracking-wider uppercase"
                 >
                   {label}
                 </text>
@@ -240,11 +238,10 @@ export default function Activity() {
                 const cy = PADDING_TOP + cell.row * STEP_Y + CELL_SIZE / 2;
                 const hasContributions = cell.count > 0;
 
-                // Dynamic radius calculation based on count
-                // Scaled from ~3px up to ~7px
+                // Dynamic radius calculation scaled to fill vertical grid
                 const radius = hasContributions
-                  ? Math.min(6.5, Math.max(2.6, 2.4 + Math.sqrt(cell.count) * 0.95))
-                  : 1.25;
+                  ? Math.min(10.5, Math.max(4.2, 3.8 + Math.sqrt(cell.count) * 1.35))
+                  : 2.2;
 
                 return (
                   <g
@@ -263,10 +260,10 @@ export default function Activity() {
                   >
                     {/* Transparent Hit Area */}
                     <rect
-                      x={cx - CELL_SIZE / 2}
-                      y={cy - CELL_SIZE / 2}
-                      width={CELL_SIZE}
-                      height={CELL_SIZE}
+                      x={cx - CELL_SIZE / 2 - 2}
+                      y={cy - CELL_SIZE / 2 - 2}
+                      width={CELL_SIZE + 4}
+                      height={CELL_SIZE + 4}
                       fill="transparent"
                     />
 
@@ -276,10 +273,10 @@ export default function Activity() {
                         <circle
                           cx={cx}
                           cy={cy}
-                          r={radius + 1.8}
+                          r={radius + 2.8}
                           fill="none"
                           stroke="currentColor"
-                          strokeWidth={0.75}
+                          strokeWidth={1.0}
                           className="text-accent opacity-40 transition-transform duration-150 hover:scale-110"
                         />
                         {/* Solid Inner Dot */}
@@ -292,7 +289,7 @@ export default function Activity() {
                         />
                       </>
                     ) : (
-                      /* Minimal Pinpoint for Inactive Days */
+                      /* Pinpoint for Inactive Days */
                       <circle
                         cx={cx}
                         cy={cy}
@@ -328,11 +325,6 @@ export default function Activity() {
                 </span>
               </div>
             )}
-          </div>
-
-          {/* Legend */}
-          <div className="mt-4 flex justify-end border-t border-rule pt-4 font-mono text-[10.5px] uppercase tracking-wider text-ink-soft">
-            <span>Circle size = Daily contributions</span>
           </div>
         </div>
       </div>
