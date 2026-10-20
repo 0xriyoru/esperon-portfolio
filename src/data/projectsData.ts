@@ -145,16 +145,17 @@ export const staticProjects: Project[] = [
     id: "joblink",
     title: "JOBLINK",
     type: "Skill-Based Job Matching Web Platform",
-    architecture: "12-Table Relational Schema / Data Flow Architecture / Cross-Functional ERD Alignment",
+    architecture: "Multi-Param Skill Filtering / 12-Table Relational Schema / Role-Scoped Workflows",
     description:
-      "Centralized employment web platform connecting local job seekers and employers through structured relational database modeling, cross-functional ERD alignment, and accessible UI/UX.",
+      "Centralized employment web platform connecting job seekers and employers through dynamic keyword and tech-stack filtering (HTML, CSS, JS, Python) with structured relational database architecture.",
     highlights: [
-      "Designed the 12-table relational database schema and data flow diagrams for applicant tracking and job category matching",
-      "Designed end-to-end Figma UI/UX prototype focused on non-technical user onboarding and accessible mobile interaction",
-      "Wrote the 45-page system manual and API endpoint specification for the development team",
+      "Engineered multi-criteria search filtering enabling applicants to match job postings by keywords and specific technical skill sets (HTML, CSS, JS, Python)",
+      "Designed a normalized 12-table relational database schema and data flow architecture for applicant tracking and recruiter management",
+      "Built responsive, accessible web interfaces and user onboarding flows from custom Figma prototypes with strict client-side validation",
     ],
-    tags: ["Figma UI/UX", "Database Design", "ERD Modeling", "Systems Architecture", "API Design"],
+    tags: ["HTML5", "CSS3", "JavaScript", "Python", "Database Design", "UI/UX Design"],
     status: "ARCHIVED",
     domain: "ACADEMIC ARCHIVE",
+    preview: "/projects/preview-joblink.png",
   },
 ];

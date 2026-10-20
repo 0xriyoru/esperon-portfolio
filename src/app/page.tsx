@@ -4,6 +4,7 @@ import Skills from "@/components/Skills";
 import Credentials from "@/components/Credentials";
 import HeroSpecimen from "@/components/HeroSpecimen";
 import FactTicker from "@/components/FactTicker";
+import Activity from "@/components/Activity";
 
 const shell = "mx-auto max-w-[1280px] px-5 md:px-10";
 const h2 = "font-display text-4xl font-light tracking-tight md:text-6xl";
@@ -25,8 +26,8 @@ export default function Home() {
 
             <div className="hero-rule mt-10 h-px w-full max-w-xl bg-rule-strong" />
 
-            <p className="hero-fade mt-8 max-w-[44ch] text-lg leading-relaxed text-ink-soft md:text-xl">
-              Systems and front-end developer and UI/UX designer in Olongapo. Built the SBMA Job Order Management System (AMD) and production web tools.
+            <p className="hero-fade mt-8 max-w-[46ch] text-lg leading-relaxed text-ink-soft md:text-xl">
+              4th-year student at Lyceum of Subic Bay College in Olongapo. Focused on full-stack web development and defensive cybersecurity, with an active interest in SOC operations and secure systems.
             </p>
 
             <div className="hero-fade mt-10 flex flex-wrap items-center gap-x-8 gap-y-4">
@@ -57,9 +58,9 @@ export default function Home() {
         <FactTicker />
       </section>
 
-      {/* Work */}
-      <section id="work" className={`${shell} py-24 md:py-32`}>
-        <h2 className={`${h2} mb-12 md:mb-16`}>Systems built</h2>
+      {/* Projects */}
+      <section id="projects" className={`${shell} py-24 md:py-32`}>
+        <h2 className={`${h2} mb-12 md:mb-16`}>Projects built</h2>
         <Projects />
       </section>
 
@@ -83,33 +84,33 @@ export default function Home() {
               <div className="rounded-note border border-white/20 bg-white/5 p-6 md:p-8">
                 <div className="border-b border-white/15 pb-4">
                   <span className="font-mono text-[11px] uppercase tracking-wider text-on-accent-soft">
-                    Technical Dispatch
+                    System Architecture & Compliance
                   </span>
                 </div>
 
                 <dl className="mt-5 space-y-4 font-mono text-xs">
                   <div>
-                    <dt className="text-on-accent-soft">Agency & Division</dt>
+                    <dt className="text-on-accent-soft">Data Tier & Integrity</dt>
                     <dd className="mt-1 font-sans text-sm font-medium text-white">
-                      Subic Bay Metropolitan Authority (AMD)
+                      PostgreSQL with atomic PL/pgSQL sequential numbering & row locks
                     </dd>
                   </div>
                   <div>
-                    <dt className="text-on-accent-soft">Role & Period</dt>
+                    <dt className="text-on-accent-soft">Security Posture</dt>
                     <dd className="mt-1 font-sans text-sm font-medium text-white">
-                      IT OJT Trainee & Systems Developer (May – Sept 2026)
+                      Role-Based Access Control (RBAC) & Cloudflare Turnstile verification
                     </dd>
                   </div>
                   <div>
-                    <dt className="text-on-accent-soft">Core Deliverables</dt>
+                    <dt className="text-on-accent-soft">Audit Compliance</dt>
                     <dd className="mt-1 font-sans text-sm font-medium text-white">
-                      Automated Form PPD-CF-36 Printing · COA Accountable Tracking
+                      Commission on Audit (COA) accountable booklet serialization
                     </dd>
                   </div>
                   <div>
-                    <dt className="text-on-accent-soft">Architecture Stack</dt>
+                    <dt className="text-on-accent-soft">Production Impact</dt>
                     <dd className="mt-1 font-sans text-sm font-medium text-white">
-                      Supabase, PostgreSQL (RLS), React, Next.js, Tailwind CSS
+                      Zero-loss migration eliminating on-prem database corruptions
                     </dd>
                   </div>
                 </dl>
@@ -117,7 +118,10 @@ export default function Home() {
             </div>
           </div>
         </div>
+      </section>
 
+      {/* Events & Seminars */}
+      <section id="events" className="border-b border-rule">
         <div className={`${shell} grid gap-10 py-24 md:py-32 lg:grid-cols-12 lg:gap-16`}>
           <div className="lg:col-span-4">
             <h2 className={`${h2} lg:sticky lg:top-24`}>Events and seminars</h2>
@@ -133,6 +137,14 @@ export default function Home() {
         <div className={`${shell} py-24 md:py-32`}>
           <h2 className={`${h2} mb-12 md:mb-16`}>Tools I work with</h2>
           <Skills />
+        </div>
+      </section>
+
+      {/* Activity */}
+      <section id="activity" className="border-t border-rule">
+        <div className={`${shell} py-24 md:py-32`}>
+          <h2 className={`${h2} mb-12 md:mb-16`}>Activity</h2>
+          <Activity />
         </div>
       </section>
 

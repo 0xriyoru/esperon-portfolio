@@ -1,6 +1,6 @@
 # Rhodge Ellio D. Esperon
 
-**IT Student - Applicant**  
+**4th-Year IT Student | Aspiring Full Stack Developer & SOC Analyst**  
 Olongapo City, Philippines | +63 949 428 1875  
 rhodgesperon@gmail.com | [linkedin.com/in/rhodge-esperon](https://linkedin.com/in/rhodge-esperon) | [github.com/0xriyoru](https://github.com/0xriyoru)
 
@@ -8,7 +8,7 @@ rhodgesperon@gmail.com | [linkedin.com/in/rhodge-esperon](https://linkedin.com/i
 
 ## EDUCATION
 
-**Lyceum Of Subic Bay** | *Bachelor of Science in Information Technology*  
+**Lyceum Of Subic Bay** | *Bachelor of Science in Information Technology (4th Year)*  
 *2023 – Present*
 
 **Columban College, Inc.** | *Science, Technology, Engineering, and Mathematics*  
@@ -70,10 +70,10 @@ rhodgesperon@gmail.com | [linkedin.com/in/rhodge-esperon](https://linkedin.com/i
 - Streamlined system scalability and moderation by formulating a comprehensive admin dashboard for analytics.
 
 ### **JobLink: Skill-Based Job Matching Web Platform**  
-*Technical Lead Documenter & UI/UX Designer* | *December, 2022 – March, 2023*  
-- Accomplished a centralized employment web platform connecting local job seekers and employers by developing a full-stack solution.
-- Achieved 100% architectural alignment by coordinating cross-functional design and development efforts through ERDs and manuals.
-- Optimized user onboarding accessibility for non-technical users by designing an end-to-end Figma interface.
+*Full Stack Web Developer & UI/UX Designer* | *December, 2022 – March, 2023*  
+- Developed a skill-based employment matching web app enabling job seekers to cross-filter openings using dual-parameter keywords and language tags (HTML, CSS, JavaScript, Python).
+- Architected a 12-table normalized relational database schema and API specifications to support applicant tracking and recruiter management.
+- Implemented responsive, accessible client-side interfaces and onboarding flows from high-fidelity Figma prototypes.
 
 ---
 
@@ -97,4 +97,4 @@ rhodgesperon@gmail.com | [linkedin.com/in/rhodge-esperon](https://linkedin.com/i
 *I hereby certify that all information contained in this document is true and accurate to the best of my knowledge.*
 
 **Rhodge Ellio D. Esperon**  
-*IT Student - Applicant*
+*4th-Year BS Information Technology Student*

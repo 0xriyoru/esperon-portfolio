@@ -42,7 +42,7 @@ function FactGroup({
       aria-hidden={ariaHidden || undefined}
       className="flex shrink-0 items-center gap-16 pr-16 md:gap-24 md:pr-24"
     >
-      {/* Studying */}
+      {/* Academic Standing */}
       <div className="flex shrink-0 items-center gap-4">
         <Image
           src="/lsb-ccs-logo.png"
@@ -53,16 +53,16 @@ function FactGroup({
           className="h-11 w-auto shrink-0 select-none object-contain pointer-events-none"
         />
         <div>
-          <div className="text-xs text-ink-soft">Studying</div>
+          <div className="text-xs text-ink-soft">Academic Standing</div>
           <div className="mt-0.5 whitespace-nowrap text-[15px] text-ink">
-            BS Information Technology, Lyceum of Subic Bay. 2023 to present.
+            BSIT Senior · Class of 2027 · Defensive Security & Web Focus
           </div>
         </div>
       </div>
 
       <span aria-hidden="true" className="h-8 w-px shrink-0 bg-rule" />
 
-      {/* On-The-Job Training */}
+      {/* Industry Practicum */}
       <div className="flex shrink-0 items-center gap-4">
         <Image
           src="/sbma-logo.png"
@@ -73,16 +73,16 @@ function FactGroup({
           className="h-9 w-auto shrink-0 select-none object-contain pointer-events-none"
         />
         <div>
-          <div className="text-xs text-ink-soft">On-The-Job Training</div>
+          <div className="text-xs text-ink-soft">Industry Practicum</div>
           <div className="mt-0.5 whitespace-nowrap text-[15px] text-ink">
-            Asset Management Department (AMD) at SBMA, May to September 2026.
+            Asset Management Division at SBMA · 500-Hour OJT Completed
           </div>
         </div>
       </div>
 
       <span aria-hidden="true" className="h-8 w-px shrink-0 bg-rule" />
 
-      {/* Works with */}
+      {/* Target Trajectory */}
       <div className="flex shrink-0 items-center gap-4">
         <div
           aria-hidden="true"
@@ -93,9 +93,9 @@ function FactGroup({
           ))}
         </div>
         <div>
-          <div className="text-xs text-ink-soft">Works with</div>
+          <div className="text-xs text-ink-soft">Target Trajectory</div>
           <div className="mt-0.5 whitespace-nowrap text-[15px] text-ink">
-            React, Next.js, TypeScript, PostgreSQL, Supabase, Tailwind CSS, Figma.
+            Junior Full-Stack Developer · SOC Tier 1 Security Analyst
           </div>
         </div>
       </div>

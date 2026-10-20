@@ -232,7 +232,7 @@ VALUES
     'SEMINAR',
     '2025',
     'Hands-on technical masterclass focusing on full-stack application lifecycle, API engineering, and modern web application security practices.',
-    NULL,
+    '/certificates/skydevs-hack-play-learn-summit-2025.pdf',
     NULL,
     ARRAY['Full-Stack Development', 'API Security', 'Application Lifecycle'],
     false,

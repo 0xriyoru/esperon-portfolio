@@ -1,10 +1,11 @@
-import { ArrowUpRight } from "@phosphor-icons/react/dist/ssr";
 import ScrollProgress from "./ScrollProgress";
 
 const links = [
-  { href: "#work", label: "Systems", mobile: true },
+  { href: "#projects", label: "Projects", mobile: true },
   { href: "#experience", label: "Experience", mobile: false },
+  { href: "#events", label: "Events", mobile: false },
   { href: "#skills", label: "Skills", mobile: false },
+  { href: "#activity", label: "Activity", mobile: false },
   { href: "#contact", label: "Contact", mobile: true },
 ];
 
@@ -26,15 +27,6 @@ export default function SiteHeader() {
               {l.label}
             </a>
           ))}
-          <a
-            href="/cv.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 rounded-note border border-rule-strong px-3 py-1.5 text-sm transition-colors hover:border-accent hover:text-accent"
-          >
-            View CV
-            <ArrowUpRight size={14} weight="regular" aria-hidden="true" />
-          </a>
         </nav>
       </div>
     </header>

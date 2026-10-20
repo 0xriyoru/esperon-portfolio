@@ -79,6 +79,7 @@ export const staticCredentials: Credential[] = [
     organization: "Skydev Solutions, Inc.",
     type: "SEMINAR",
     date_range: "2025",
+    certificate_url: "/certificates/skydevs-hack-play-learn-summit-2025.pdf",
   },
   {
     id: "cred-unity-2025",

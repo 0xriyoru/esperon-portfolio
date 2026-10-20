@@ -22,17 +22,17 @@ const ibmPlexMono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Rhodge Esperon | Systems & Front-End Developer | UI/UX Designer",
+  title: "Rhodge Esperon | Full-Stack Developer & Aspiring SOC Analyst",
   description:
-    "Portfolio of Rhodge Esperon, systems and front-end developer and UI/UX designer in Olongapo, Philippines. SBMA Job Order Management System engineer, full-stack web systems, and accessible interfaces.",
+    "Portfolio of Rhodge Esperon, 4th-year student at Lyceum of Subic Bay College in Olongapo. Focused on full-stack web development, defensive cybersecurity, and SOC operations.",
   icons: {
     icon: "/icon.png",
     apple: "/icon.png",
   },
   openGraph: {
-    title: "Rhodge Esperon | Systems & Front-End Developer",
+    title: "Rhodge Esperon | Full-Stack Developer & Aspiring SOC Analyst",
     description:
-      "Systems and front-end developer and UI/UX designer in Olongapo, Philippines. Building dependable web systems and accessible interfaces.",
+      "4th-year student at Lyceum of Subic Bay College in Olongapo. Focused on full-stack web development and defensive cybersecurity.",
     type: "website",
     locale: "en_PH",
     siteName: "Rhodge Esperon Portfolio",

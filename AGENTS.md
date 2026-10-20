@@ -18,6 +18,7 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 - **Skill discovery**: Check for relevant local skills on every prompt and apply them before taking action.
 - **Prose & copy**: For any writing or editing task, always apply humanizer standards (`unslop`, `stop-slop`). Strip AI tells, formulaic framing, throat-clearing openers, and corporate filler. Keep prose direct, human, and rhythmically varied.
+- **Code Summary Report**: Provide a concise code summary report for human review at the end of each response whenever code or configurations are modified, or whenever a major feature/refactor is implemented (including files changed, key logic modifications, and verification evidence).
 
 ## Project Architecture & Tracking
 
