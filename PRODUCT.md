@@ -62,9 +62,9 @@
 
 4. **`GAKUMON`**
    - **Type**: Pet-Based Gamified E-Learning Platform
-   - **Role**: Technical Documenter | Nov 2024 – Mar 2025
-   - **Highlights**: Virtual pet mechanics, health decay algorithms, coin multiplier virtual economy, and comprehensive admin dashboard for analytics.
-   - **Tech**: Systems Architecture, Technical Documentation, Gamification, Admin Analytics
+   - **Role**: Technical Documenter & Developer | Nov 2024 – Mar 2025
+   - **Highlights**: Virtual pet mechanics with 24-hour health decay algorithm, DeepSeek R1 AI-driven quiz generation via OpenRouter, PHP & MySQL virtual currency economy, and instructor analytics dashboard.
+   - **Tech**: PHP, MySQL, DeepSeek R1 (OpenRouter), Bootstrap, JavaScript, HTML5/CSS3, phpMyAdmin, XAMPP, Figma, Illustrator
    - **Status**: `ARCHIVED`
 
 5. **`JOBLINK`**

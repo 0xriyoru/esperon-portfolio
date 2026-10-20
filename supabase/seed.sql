@@ -71,13 +71,13 @@ VALUES
 (
     '11111111-1111-1111-1111-111111111106',
     'GAKUMON',
-    'Enhanced student engagement and knowledge retention by documenting a gamified platform with virtual pet mechanics. Increased daily user participation by defining a virtual economy featuring pet health decay and coin multipliers, and formulated admin dashboard analytics.',
+    'Pet-based gamified e-learning web platform combining PHP, MySQL, and DeepSeek R1 AI via OpenRouter with client-side JavaScript and Bootstrap. Integrates virtual pet health mechanics, AI quiz generation, and instructor telemetry.',
     'Pet-Based Gamified E-Learning Platform',
-    ARRAY['TECHNICAL DOCUMENTATION', 'GAMIFICATION', 'SYSTEM ARCHITECTURE', 'ANALYTICS'],
+    ARRAY['PHP', 'MYSQL', 'DEEPSEEK R1', 'BOOTSTRAP', 'JAVASCRIPT', 'GAMIFICATION'],
     'ARCHIVED',
     NULL,
     'ACADEMIC ARCHIVE',
-    NULL,
+    '/projects/preview-gakumon.png',
     '2024-11-01 00:00:00+00'
 ),
 (
