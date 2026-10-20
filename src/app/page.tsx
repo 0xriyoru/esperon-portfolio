@@ -1,10 +1,10 @@
 import { ArrowUpRight, GithubLogo, LinkedinLogo } from "@phosphor-icons/react/dist/ssr";
 import Projects from "@/components/Projects";
 import Skills from "@/components/Skills";
-import Credentials from "@/components/Credentials";
 import HeroSpecimen from "@/components/HeroSpecimen";
 import FactTicker from "@/components/FactTicker";
 import Activity from "@/components/Activity";
+import Journey from "@/components/Journey";
 
 const shell = "mx-auto max-w-[1280px] px-5 md:px-10";
 const h2 = "font-display text-4xl font-light tracking-tight md:text-6xl";
@@ -64,72 +64,9 @@ export default function Home() {
         <Projects />
       </section>
 
-      {/* Experience */}
-      <section id="experience">
-        <div className="border-y border-rule-strong bg-accent text-on-accent">
-          <div className={`${shell} grid gap-12 py-20 md:py-28 lg:grid-cols-12 lg:items-center lg:gap-16`}>
-            <div className="lg:col-span-7">
-              <h2 className="max-w-[18ch] font-display text-4xl font-light leading-[1.05] tracking-tight md:text-6xl lg:text-7xl">
-                OJT Trainee at Subic Bay Metropolitan Authority
-              </h2>
-              <p className="mt-6 text-lg text-on-accent-soft">
-                Asset Management Department (AMD) · May to September 2026
-              </p>
-              <p className="mt-8 max-w-[56ch] text-lg leading-relaxed text-on-accent/90">
-                Built between July and August 2026, replaced a vulnerable local server with a cloud Supabase and PostgreSQL web system for the SBMA Asset Management Division. Built automated Form PPD-CF-36 job order slip printing with atomic sequential numbering, COA-compliant accountable form tracking, and real-time hauling analytics cards.
-              </p>
-            </div>
-
-            <div className="lg:col-span-5">
-              <div className="rounded-note border border-white/20 bg-white/5 p-6 md:p-8">
-                <div className="border-b border-white/15 pb-4">
-                  <span className="font-mono text-[11px] uppercase tracking-wider text-on-accent-soft">
-                    System Architecture & Compliance
-                  </span>
-                </div>
-
-                <dl className="mt-5 space-y-4 font-mono text-xs">
-                  <div>
-                    <dt className="text-on-accent-soft">Data Tier & Integrity</dt>
-                    <dd className="mt-1 font-sans text-sm font-medium text-white">
-                      PostgreSQL with atomic PL/pgSQL sequential numbering & row locks
-                    </dd>
-                  </div>
-                  <div>
-                    <dt className="text-on-accent-soft">Security Posture</dt>
-                    <dd className="mt-1 font-sans text-sm font-medium text-white">
-                      Role-Based Access Control (RBAC) & Cloudflare Turnstile verification
-                    </dd>
-                  </div>
-                  <div>
-                    <dt className="text-on-accent-soft">Audit Compliance</dt>
-                    <dd className="mt-1 font-sans text-sm font-medium text-white">
-                      Commission on Audit (COA) accountable booklet serialization
-                    </dd>
-                  </div>
-                  <div>
-                    <dt className="text-on-accent-soft">Production Impact</dt>
-                    <dd className="mt-1 font-sans text-sm font-medium text-white">
-                      Zero-loss migration eliminating on-prem database corruptions
-                    </dd>
-                  </div>
-                </dl>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Events & Seminars */}
-      <section id="events" className="border-b border-rule">
-        <div className={`${shell} grid gap-10 py-24 md:py-32 lg:grid-cols-12 lg:gap-16`}>
-          <div className="lg:col-span-4">
-            <h2 className={`${h2} lg:sticky lg:top-24`}>Events and seminars</h2>
-          </div>
-          <div className="lg:col-span-8">
-            <Credentials />
-          </div>
-        </div>
+      {/* Journey */}
+      <section id="journey" className="border-t border-b border-rule">
+        <Journey />
       </section>
 
       {/* Skills */}
